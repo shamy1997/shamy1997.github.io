@@ -2,14 +2,14 @@
 <html lang="zh">
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-<title>好乐无荒</title>
+<title>Tag: NLP,分词 - 好乐无荒</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
     <meta property="og:type" content="website">
 <meta property="og:title" content="好乐无荒">
-<meta property="og:url" content="http://shamy1997.github.io/index.html">
+<meta property="og:url" content="http://shamy1997.github.io/tags/NLP-分词/index.html">
 <meta property="og:site_name" content="好乐无荒">
 <meta property="og:locale" content="zh">
 <meta name="twitter:card" content="summary">
@@ -87,7 +87,7 @@
             
             <div class="navbar-start">
                 
-                <a class="navbar-item is-active" href="/">Home</a>
+                <a class="navbar-item" href="/">Home</a>
                 
                 <a class="navbar-item" href="/archives">Archives</a>
                 
@@ -115,107 +115,16 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-12-22T12:37:49.000Z">2018-12-22</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    2 minutes read (About 337 words)
-                </span>
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2018/12/22/about-terminal/">终端命令笔记</a>
-            
-        </h1>
-        <div class="content">
-            <h1 id="vi-常用命令"><a href="#vi-常用命令" class="headerlink" title="vi 常用命令"></a>vi 常用命令</h1><h2 id="1-进入-vi-编辑器"><a href="#1-进入-vi-编辑器" class="headerlink" title="1. 进入 vi 编辑器"></a>1. 进入 vi 编辑器</h2><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vi &lt;path&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="2-修改内容"><a href="#2-修改内容" class="headerlink" title="2. 修改内容"></a>2. 修改内容</h2><p>输入<code>i</code>，进入<code>insert</code>模式。<br>按<code>esc</code>，退出模式。</p>
-<h2 id="3-保存，退出"><a href="#3-保存，退出" class="headerlink" title="3. 保存，退出"></a>3. 保存，退出</h2><ul>
-<li><code>:w</code> 保存文件但不退出vi;</li>
-<li><code>:wq</code> 保存文件并退出vi;</li>
-<li><code>q:</code> 不保存文件，退出vi</li>
-<li><code>:e!</code> 放弃所有修改，从上次保存文件开始再编辑</li>
-</ul>
-<p><a href="https://www.cnblogs.com/mondol/p/vi-examples.html" target="_blank" rel="noopener">vi命令大全</a> </p>
-<h1 id="Jupyter-or-conda-not-found"><a href="#Jupyter-or-conda-not-found" class="headerlink" title="Jupyter or conda not found"></a>Jupyter or conda not found</h1><p>我安装好anaconda后，打算用命令行直接打开jupyter notebook，结果却没有成功，网上一般的解释是要把anaconda配置到环境变量里：<br>在终端中输入：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vi ~/.bash_profile</span><br></pre></td></tr></table></figure>
-<p>打开后在末尾加上：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">export PATH=&apos;~/anaconda/bin:$PATH&apos;</span><br><span class="line"></span><br><span class="line"># 这里的path要根据anaconda所在的位置定义</span><br><span class="line"></span><br><span class="line">source ~/.bash_profile</span><br><span class="line"></span><br><span class="line"># 表示修改立即生效</span><br></pre></td></tr></table></figure>
-<p>但是呢，我试了好几次都没有成功，事实上，是我配置了<code>oh-my-zsh</code>的原因。</p>
-<p>因此，正确的解决方法是，打开<code>~/.zshrc</code>，然后在文件最后一行添加：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export PATH=$PATH:$HOME/anaconda/bin</span><br></pre></td></tr></table></figure>
-<p>保存文件后，关闭窗口，重新开启窗口时，输入命令<code>conda --v</code>来检测是否成功。</p>
-<p><a href="https://stackoverflow.com/questions/18675907/how-to-run-conda" target="_blank" rel="noopener">参考链接🔗</a> </p>
-<h1 id="zsh-not-found"><a href="#zsh-not-found" class="headerlink" title="zsh not found"></a>zsh not found</h1><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exec /bin/zsh</span><br></pre></td></tr></table></figure>
-<p><a href="https://www.jiloc.com/43492.html" target="_blank" rel="noopener">参考资料🔗</a> </p>
-
-        </div>
-        
-        
-        
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    <div class="card-content">
+        <nav class="breadcrumb" aria-label="breadcrumbs">
+        <ul>
+            <li><a href="/tags">Tags</a></li>
+            <li class="is-active"><a href="#" aria-current="page">NLP,分词</a></li>
+        </ul>
+        </nav>
     </div>
 </div>
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-12-11T06:23:29.251Z">2018-12-11</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    a minute read (About 121 words)
-                </span>
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2018/12/11/hello-world/">Hello World</a>
-            
-        </h1>
-        <div class="content">
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="hljs-string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
 
     <div class="card">
     
