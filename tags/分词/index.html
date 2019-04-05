@@ -1,818 +1,306 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html>
+  
 <head><meta name="generator" content="Hexo 3.8.0">
-    <meta charset="utf-8">
-<title>Tag: 分词 - 好乐无荒</title>
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta charset="utf-8">
+  <meta name="author" content="Yuqiu Ji">
+  
+  
+  <title>标签: 分词 | 好乐无荒</title>
 
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
+  
+    <meta name="keywords" content="Hexo, Theme-AD">
+  
 
-    <meta property="og:type" content="website">
-<meta property="og:title" content="好乐无荒">
-<meta property="og:url" content="http://shamy1997.github.io/tags/分词/index.html">
-<meta property="og:site_name" content="好乐无荒">
-<meta property="og:locale" content="zh">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="好乐无荒">
+  
+  <meta name="description" content="">
 
+  
 
+  
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.11.1/dist/av-min.js" async></script>
+  
 
+  
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+  
 
+  
+    <script src="//unpkg.com/valine/dist/Valine.min.js" async></script>
+  
 
-<link rel="icon" href="/images/favicon.svg">
+  
 
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"GqgKOWYsq9ic42QAjcPaYffa-gzGzoHsz","appkey":"dfrV8qBWczqyiVj0DPsAzucB","comment":true,"count":true},
+    welcome: {"enable":false,"interval":30},
+    start_time: "2019-01-01",
+    passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
+    is_post: false,
+    lock: false,
+    author: "Yuqiu Ji",
+    share: {"twitter":false,"facebook":false,"weibo":false,"qq":false,"wechat":false},
+    mathjax: true,
+    page_type: "",
+    root: "/"
+  };
+</script>
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
 
+  
+    <link rel="icon" href="/images/favicon.svg">
+    <link rel="apple-touch-icon" href="/images/favicon.svg">
+  
 
-    
-    
-    
-    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
-    
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
-    
-    
-    
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
-    
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
 
-    
-    
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
-
-
-    
-    
-    
-    
-
-<link rel="stylesheet" href="/css/back-to-top.css">
-
-
-    
-    
-
-    
-    
-    
-    
-
-    
-    
-<link rel="stylesheet" href="/css/progressbar.css">
-<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
-
-    
-
-
-<link rel="stylesheet" href="/css/style.css">
+  
 </head>
-<body class="is-2-column">
-    <nav class="navbar navbar-main">
-    <div class="container">
-        <div class="navbar-brand is-flex-center">
-            <a class="navbar-item navbar-logo" href="/">
-            
-                <img src="/images/logoagain.png" alt="好乐无荒" height="28">
-            
-            </a>
-        </div>
-        <div class="navbar-menu">
-            
-            <div class="navbar-start">
-                
-                <a class="navbar-item" href="/">Home</a>
-                
-                <a class="navbar-item" href="/archives">Archives</a>
-                
-                <a class="navbar-item" href="/categories">Categories</a>
-                
-                <a class="navbar-item" href="/tags">Tags</a>
-                
-                <a class="navbar-item" href="/about">About</a>
-                
-            </div>
-            
-            <div class="navbar-end">
-                
-                
-                
-                <a class="navbar-item search" title="Search" href="javascript:;">
-                    <i class="fas fa-search"></i>
-                </a>
-                
-            </div>
-        </div>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">好乐无荒</a>
+      </span>
+    
+    
+      <span class="site-header-brand-motto"> | 良士休休</span>
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">首页</a>
+      
+        <a href="/archives/" target="_self">归档</a>
+      
+        <a href="/tags/" target="_self">标签</a>
+      
+        <a href="/categories/" target="_self">分类</a>
+      
+        <a href="/about/" target="_self">关于</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://github.com/shamy1997/" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
     </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/tags/" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/about/" target="_self">
+            关于
+          </a>
+        </li>
+      
+    </ol>
+  </div>
 </nav>
+<div id="site-process"></div>
+    <main>
+      <div class="timeline">
+  <h2 class="timeline-title">标签: 分词</h2>
+  
     
-    <section class="section">
-        <div class="container">
-            <div class="columns">
-                <div class="column is-4-tablet is-4-desktop is-9-widescreen has-order-2 column-main"><div class="card">
-    <div class="card-content">
-        <nav class="breadcrumb" aria-label="breadcrumbs">
-        <ul>
-            <li><a href="/tags">Tags</a></li>
-            <li class="is-active"><a href="#" aria-current="page">分词</a></li>
-        </ul>
-        </nav>
+      <h3 class="timeline-subtitle">2018</h3>
+    
+    <div class="timeline-item">
+      <time>2018-08-30</time>
+      <a target="_self" href="/passages/颗粒度分词调研/">北大分词方案解读及颗粒度分词方案</a>
     </div>
+  
 </div>
-
-    <div class="card">
+    </main>
     
-    <div class="card-content article ">
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">博客推荐</h5>
         
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-08-30T06:23:49.000Z">2018-08-30</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    42 minutes read (About 6255 words)
-                </span>
-                
-            </div>
-        </div>
+          <span class="site-footer-item">
+            <a href="https://liweinlp.com/" target="_blank">立委NLP频道</a>
+          </span>
         
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2018/08/30/颗粒度分词调研/">北大分词方案解读及颗粒度分词方案</a>
-            
-        </h1>
-        <div class="content">
-            <h1 id="一、调研资料"><a href="#一、调研资料" class="headerlink" title="一、调研资料"></a>一、调研资料</h1><ol>
-<li><a href="https://www.jianguoyun.com/p/DXc5BJwQhaz8Bhio1m4" target="_blank" rel="noopener">北大现代汉语语料库基本加工规范</a></li>
-<li><a href="https://www.jianguoyun.com/p/DQfbcd4Qhaz8BhjF1m4" target="_blank" rel="noopener">计算所汉语词性标注集</a></li>
-<li><a href="http://www.hankcs.com/nlp/corpus/several-revenue-segmentation-system-used-set-of-source-tagging.html" target="_blank" rel="noopener">几个开源分词系统所使用标注集的来源</a></li>
-<li><a href="https://www.jianguoyun.com/p/DT74b1kQhaz8Bhje1m4" target="_blank" rel="noopener">海量中文智能分词接口手册</a></li>
-<li><a href="https://patents.google.com/patent/CN102479191B" target="_blank" rel="noopener">阿里多粒度分词专利</a></li>
-<li><a href="https://patents.google.com/patent/CN101246472A/zh" target="_blank" rel="noopener">腾讯多粒度分词专利</a></li>
-<li><a href="https://patents.google.com/patent/CN103324626A/zh" target="_blank" rel="noopener">百度多粒度分词专利</a></li>
-<li><a href="http://www.cnblogs.com/eaglet/archive/2008/05/27/1208423.html" target="_blank" rel="noopener">KTDictSeg 分词组件1.3版本 部分算法讨论 – 分词粒度</a></li>
-</ol>
-<h1 id="二、调研目的"><a href="#二、调研目的" class="headerlink" title="二、调研目的"></a>二、调研目的</h1><p>分词单位不同于语言学中的“词”，不同的算法下的分词结果千差万别，有的分出的是语言学意义上的词，而有的分出的是语言学意义上的“短语”（或者说“词组”）因此，我们希望寻找一个可理解的统一的粒度标准，而这个粒度标准能够实现对不同分词任务的不同层次的分词。为证实多颗粒度的分词标注确实能提高特定的分词任务的准确率，我们进行了这样的前期调研。<br>通过搜集资料，我们以北大方案为蓝本，以一定的语言学知识为基础，对分词颗粒进行不同粒度的划分。<br>首先对北大分词方案进行解读，然后再阐释我对分词粒度初步的构建想法。</p>
-<p>注：颗粒度方案只考虑分词问题，不考虑词性标注。</p>
-<h1 id="三、北大分词方案讲解"><a href="#三、北大分词方案讲解" class="headerlink" title="三、北大分词方案讲解"></a>三、北大分词方案讲解</h1><h2 id="1-分词单位的概念界定"><a href="#1-分词单位的概念界定" class="headerlink" title="1. 分词单位的概念界定"></a>1. 分词单位的概念界定</h2><p><code>分词单位</code>，“指信息处理中使用的、具有确定的语义和语法功能的基本单位”，该概念明确了其使用的特定环境——“信息处理任务”，以及其语义和语法功能明确的特点。</p>
-<p>基于这样的概念划分，北大方案认定的分词单位里不仅包括了词，还“包括了一部分结合紧密、使用稳定的词组”，并且“在某些特殊情况孤立的语素或非语素字”。</p>
-<p>事实上，我们撇开北大方案来看词这个整体，根据朱德熙先生的划分，可以分为可穷尽的虚词类和不可穷尽的实词类。虚词类，举例来说，包括连词、语气词、介词等，这类词可以在语法词典中被枚举出来，因此在进行分词时难度较小。因此，分词的困难常常出现在实词的切分上。</p>
-<p>结合北大方案的划分，我认为对实词序列进行划分时，一般可以遵照以下原则：</p>
-<p>（1）依据语法词典来划分，如果语法词典中进行规定，那么就不做划分。语言是约定俗成的产物，当某个词语组合被广泛而稳定地使用时，那么社会团体便会接受这样的一个“新词”，因此这样的一个词语组合也可以被视作是一个分词单位。而判断社会团体是否已经接受这一语言现象很显性的一大标志便是词典收录了该词条。那么问题就转变为，什么样的词典可以成为可供划分的语法词典。</p>
-<p>（2）考虑切分序列的音节组合。汉语在发展过程中经历了一个从单音节向双音节的发展过程。虽然现代汉语以双音节为主要的成词单位，但是古代汉语中的一些单音节词依然残存在现代汉语中，并且在一些特殊语体中还广泛地存在着。因此，对于那些单音节成词的单位在标注时要格外注意标记出来，而处理多音节序列时，则要尽量保证分词结果以双音节为一个单位。</p>
-<p>（3）考虑到词义与语素结合义。我们所认定的分词单位，它的词义是凝合而成的，而不是两个语素的意义简单的相加。因此，如果一个切分单位的语义是其切分单位意义的简单相加，那么就要对其进行切分。而判定是否是词义简单的相加的方法主要有“的”插入法和替换法两种，这在后面具体的讲解中会进行阐释。</p>
-<p>（4）要考虑到切分的经济性。北大方案是切分和标注同时进行，为了保证标注符号使用的经济性，方案要求，要保证切分出来的单位尽量少的是无法独立成词的语素。因此，对于一个切分序列，如果我们切分后多出了无法独立成词的语素，比如说前接成分、后接成分等，我们尽可能地不去切分它。</p>
-<h2 id="2-分词实际情况中的应用"><a href="#2-分词实际情况中的应用" class="headerlink" title="2.分词实际情况中的应用"></a>2.分词实际情况中的应用</h2><p>接下来，我们将对分词方案的第四章、第五章结合我们总结出来的规则进行精简式的说明。</p>
-<p>（1）人名</p>
-<p>对于人名的切分，方案给出的切分标准是姓和名切分开。而对于其他称呼是否切分，可以用语义规则来解释。第二条规则：姓名后的职务、职称或称呼要分开。第四条规则：带明显排行的亲属称谓要切分开。这两条规则是因为组成的切分序列的意思即是各组成成分的组合义，因此要切分。而第三条规则：对人的简称、尊称若为两个字，则合为一个切分单位。不仅是因为这些切分序列的含义不是其组成成分的组合义，至少有表示尊敬的社会含义，还是因为如果切分，会多出无法独立成词的语素，因此把这些双音节作为一个切分单位。而对于外国人名和笔名、著名人名，我们不做切分，一是因为这种命名是随意的，切分下来的意义不大；二是因为著名人名是在语法词典中就规定了的内容。</p>
-<p>（2）地名</p>
-<p>大部分地名都是在语法词典中事先规定了的，除此以外的切分原则主要是和音节有关，如果地名后接的是单音节语素，则不切分；如果接的是双音节或多音节语素，则要进行切分。</p>
-<p>（3）团体、机构、组织的专有名称</p>
-<p>对于团体、机构、组织的专有名称，如果它们被语法词典收录，那么肯定不切分，如果没有，则要进行切分。（如果找不到这样合适的词典，一个PLAN B的建议：按照普通词组切分，再上游任务中再识别出来）</p>
-<p>（4）除人名、国名、地名、团体、机构、组织以外的其他专名</p>
-<p>首先，我们还是要考虑其是否被语法词典收录。然后要考虑其后接语素的音节，如果是单音节的，如“人”“族”这样的，不切分，如果是多音节的，则要进行切分。</p>
-<p>（5）数词与数量词组</p>
-<p>数词与数量词组的规定是另外的。详见方案。</p>
-<p>（6）时间词</p>
-<p>时间词中登录在语法词典中的，比如历史朝代的名称，特殊的年份“甲午年”等，不做切分，其他的要按照“年、月、日、时、分、秒”的层次进行切分。</p>
-<p>（7）单音节代词“本”、“每”、“各”、“诸</p>
-<p>若后接成分是单音节名词，则不做切分，若是双音节或多音节，则要切分开。</p>
-<p>（8）区别词</p>
-<p>首先，我们要明确何为区别词，区别词指的是成对的，有分类性质的一类词，它们只能够做定语，不能做谓语，所以又称为非谓形容词。</p>
-<p>举例来说，区别词包括：男、女、雌、雄、单、双、复、金、银、西式、中式、古代、近代、现代、当代、阴性、阳性、军用、民用、国有、私有、小型、中型、大型、微型、有期、无期、彩色、黑白、急性、慢性、小号、中号、大号、野生、家养、正式、非正式、人造（从动词过来的）、天然、冒牌、正牌、正版、盗版、下等、中等、上等、初级、中级、高级、中式、欧式等等。</p>
-<p>对于含有区别词的序列，我们的切分原则也是同样按照音节来进行，如果区别词后接一个单音节名词，则不切分，若接的是多音节名词，则要切分。</p>
-<p>（9）述补结构</p>
-<p>简单来说，述补结构指的是描述一个动词发生的情貌或结果，即对动词所代表的事件进行的补充。对于双音节的述补结构我们的切分原则是，如果进行切分后，会有无法独立成词的语素存在，则不切分，反之，则切分。</p>
-<p>述补结构中还有一类常见的多音节的“得”字补语，对于这类述补结构，我们可以将“得”字去掉，若去掉后依然能成词，则要将其切分；若不能成词，则“得”字补语整体作为一个分词单位，内部不做切分。</p>
-<p>（10）、（11）、（12）、（13）略</p>
-<p>（14）语素和非语素字的处理</p>
-<p>对于离合词的离析形式，要进行切分。所谓离合词，指的是可以在组合的两个语素中插入其他成分的词，比如“吃饭”，它的离析形式有，“吃了饭”“吃了一个饭”等。</p>
-<p>对于表示方位的双音节词，若切分出无法独立成词的语素，则不切分，否则则要进行切分。</p>
-<p>（15）文本中非汉字的字符串  略</p>
-<p>（16）重叠</p>
-<p> 重叠是汉语独特的语言现象之一。北大方案中对这类词的切分看似复杂，实质上是切分到能够独立使用的单位，并且要避免切分出不能单独成词的语素。</p>
-<p>比如，“甜甜的蜂蜜”，由于“甜甜”不能单独成词，因此要切分到“甜甜的”。</p>
-<p>而“试试看”由于“看”这里表示动作的尝试，作为这个意义并不能单独运用，因此不切分。</p>
-<p>（17）附加成分</p>
-<p>附加成分实质上指的是构词中的前缀和后缀。汉语构词法中有一类是依据词缀加词根进行的派生构词。对于这一类切分序列，除非其接入成分太多，会对其进行切分，否则不切分。比如“老师们”就不做切分，“苦苦追求而不得者”中的“者”由于统摄的成分太多，所以要单独切分开。</p>
-<p>（18）复合词构词</p>
-<p>在切分复合词的问题上，北大方案是存在讨论的余地的。由于复合词本身和短语之间的界限较为模糊，即使在语言学意义的界定上也会存在分歧，因此对于复合词类型的切分序列是否切分，实质上很难回答。北大方案给出的解决办法是，首先如果切分后会有无法独立成词的成分，那么就不切分；另外要判断这个复合词的意义是否只是组成成分的简单相加，如果是，那么就切分，如果不是，那就说明组成该词的两个成分之间意义是有相互渗透的联结的，就不能切分。但是如何判断复合词意义是否是组合成分的相加呢？</p>
-<p>这里的方法主要有两个，一个是加“的”法。这个方法主要针对的是定中结构的复合词，即一个语素修饰另一个语素。比如“白花”，和“白的花”意义一致，那么就要切分。</p>
-<p>第二个方法是替换法，将复合词“AB”的A语素拿出来进行组词，再将B语素拿出来进行组词，若单独组词后其词义都是一样的，那么就说明复合词AB的词义是A语素义和B语素义的相加，因此要切分；若有A语素或B语素有和其他组词情况中语义不同的，那么就不切分复合词AB。</p>
-<p>但是这两个方法并不能解决所有的复合词判断问题，因此到底是将问题简化还是对规则进一步细致，是值得思考的。</p>
-<h2 id="颗粒度方案（调整版）"><a href="#颗粒度方案（调整版）" class="headerlink" title="颗粒度方案（调整版）"></a>颗粒度方案（调整版）</h2><p>调整内容：</p>
-<ul>
-<li>将原来的第一粒度作为细粒度（非常细，存在语义不透明的词缀），将第二粒度和第三粒度合并成为粗粒度），针对专有名词的问题，划出粗粒度2级（这个可以讨论，是在分词中一下子划分出来，还是在上游任务中再处理。在参考资料的专利中，他们往往在分词中就解决了）。</li>
-<li>理清实体和专有名词的区别<h3 id="细粒度"><a href="#细粒度" class="headerlink" title="细粒度"></a>细粒度</h3></li>
-<li>单音词<ul>
-<li>单独一个语素即可成词的，如“火、书、水”</li>
-</ul>
-</li>
-<li>连绵词<ul>
-<li>必须和其他语素结合成词的，且结合的语素是固定的，如“葡萄”“乒乓”</li>
-</ul>
-</li>
-<li>音译词<ul>
-<li>包括了外国的专名（人名等）</li>
-</ul>
-</li>
-<li>数词</li>
-<li>量词<ul>
-<li>比如：条、串、张</li>
-<li>这里要注意一些从名词发展过来的量词，比如“碗”</li>
-<li>这里包括度量：3/cm，7/天</li>
-<li>另外细粒度中，时间数和时间单位也切分开，如：2018/年</li>
-</ul>
-</li>
-<li>不含行政区划的地名<ul>
-<li>比如：上海、北京、武汉</li>
-</ul>
-</li>
-<li>专有名词：机构、团体、组织<ul>
-<li>是一个封闭类，是不可类推的</li>
-<li>包含上下隶属关系的团体机构专有名词，切分到最小的团体机构。比如“中国/银行/北京/分行”。</li>
-</ul>
-</li>
-<li>简称略语</li>
-<li>方位词</li>
-<li>语气词</li>
-<li>叹词</li>
-<li>实语素<ul>
-<li>包括北大方案里的形语素、名语素、动语素、人名中的姓氏，比如：锦（形语素）</li>
-</ul>
-</li>
-<li>虚语素<ul>
-<li>前接成分<ul>
-<li>比如“阿”“老”“非”</li>
-<li>这类除了传统意义上的前缀，也要考虑一些网络流行语的临时构词产出的前缀</li>
-</ul>
-</li>
-<li>副语素<ul>
-<li>主要是否定副词，比如“不”“很”</li>
-</ul>
-</li>
-<li>后接成分<ul>
-<li>比如：们，儿（表亲昵的），子，头，化，者</li>
-<li>我认为，还应包括行政区划的单位，比如：省、市、区等；和表示尊称的“老”“总”</li>
-</ul>
-</li>
-<li>助词<ul>
-<li>助动词、助数词</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>习语<ul>
-<li>包括成语、四字格短语、歇后语</li>
-<li>但是如果歇后语有标点符号，要按照标点符号划分</li>
-<li>比如：“不管三七二十一”“百尺竿头/，/更进一步”</li>
-</ul>
-</li>
-</ul>
-<h3 id="粗粒度"><a href="#粗粒度" class="headerlink" title="粗粒度"></a>粗粒度</h3><p>简言之：切到词组层，且注意音节数，对双音节放宽。将细粒度中可成词的组合成词（派生词），另将可独立成词的词根结合成复合词。<br>粗粒度的切分目标是，使得每一个实词性的切分单位都是表义明确的分词单位，不存在语义不透明的分词单位。因此，我们也不能奢求实体识别等上游任务在分词任务中就得以解决。</p>
-<ul>
-<li>前接成分+名词<ul>
-<li>比如：阿牛</li>
-</ul>
-</li>
-<li>前接成分+数<ul>
-<li>比如：阿大</li>
-</ul>
-</li>
-<li>名词+后接成分<ul>
-<li>比如：学生们、老师们、拳头、高清版</li>
-</ul>
-</li>
-<li>动词+后接成分<ul>
-<li>比如：创新化（单独“创新”还是分到”创新“）</li>
-</ul>
-</li>
-<li>姓氏+名<ul>
-<li>比如：张伟</li>
-</ul>
-</li>
-<li>数+量+（助数词）<ul>
-<li>比如：四/人，五个/人</li>
-</ul>
-</li>
-<li>时间<ul>
-<li>按北大方案，不要合并</li>
-<li>比如：1997年/9月/3日，早/八点</li>
-</ul>
-</li>
-<li>复合词<ul>
-<li>双音节、三音节（切分原则详见对北大方案的讲解）</li>
-<li>注意，不要将联合构词的词组算作复合词。</li>
-</ul>
-</li>
-<li>地名+行政区划<ul>
-<li>比如：北京市、上海市</li>
-</ul>
-</li>
-<li>地名+自然地形<ul>
-<li>比如：华北平原、南沙群岛</li>
-</ul>
-</li>
-</ul>
-<h2 id="粗粒度下的切分难点"><a href="#粗粒度下的切分难点" class="headerlink" title="粗粒度下的切分难点"></a>粗粒度下的切分难点</h2><h3 id="1-专名和实体的切分"><a href="#1-专名和实体的切分" class="headerlink" title="1.专名和实体的切分"></a>1.专名和实体的切分</h3><p>专有名词指的是专指性的人名、地名、团体、机构、组织、民族、商标。</p>
-<p>人名、地名、民族、商标基本上没有异议，但是哪些团体、机构、组织能算专有名词，哪些不能算是不太明确的。</p>
-<p>另外，除上面指出的分类外，其他的具有专指性的实体，不能被当做专有名词来处理。具体来说，专有名词的切分难点有以下几点：</p>
-<p>（1） 专有名词的专指性是忽略文本语境。比如”校长办公室发布重要通知“，即使通过前文我们知道这里指的是北大的校长办公室，我们只将它作为普通名词的处理，而不是作为一个专指性的机构名来处理。 <strong>但是在国际或中国范围内的知名的唯一的团体、机构、组织 的名称我们依然将之处理为专名</strong>，比如“国务院”，它和“校长办公室”的区别在于“国务院”全国只有一个，而“校长办公室”有很多个，因此“国务院”作为专名不切分，而“校长办公室”要切分成“校长/办公室”。</p>
-<p> （2）专有名词的组合性。专有名词有时会和其他名词一起组合成词。对于分词任务而言，我们只需考虑将专有名词和这个词切开后这个词能否单独成词，如果不能，那么就不切分，如果能，那么就切分。（这里和北大方案不同，北大方案认为接单音节可以切分，也可以不切分。）比如”满人“，”哈萨克人“，”昌平/分行“，而对于一些多个名词组合成专名的情况，比如“全国/总/工会”“全国/人民/代表/大会“，在细粒度和粗粒度中，由于它们音节数较多，视为普通名词进行切分。是否可以设置一个<strong>粗粒度2级，在粗粒度2级中，作为组织类专有名词，不切分</strong>。</p>
-<p>（3）专有名词层次性。表示机构的专有名词中有些是前后相连，包含上下隶属关系的。<strong>下级机构的专指性</strong>有的是从由上级团体继承来的，比如“北京大学计算语言学研究所”是一个专指性的短语，它之所以有专指性，是因为“北京大学”这个专有名词的专指性，如果没有“北京大学”，则“计算语言学研究所”按照普通名词词组来切分（参照第一点）；有的是通过其他专有名词，如地名、人名获得的，比如“鲁迅研究院”，“北京分行”。在粗粒度中，对于获得专指性的专有名词不切分，如“鲁迅研究院”，“北京分行”<strong>是否可以设置粗粒度2级，表示上下级的专有名词全部纳入？</strong>比如“北京大学计算语言学研究所”，在粗粒度2级中就不做切分。</p>
-<p>（4）电视节目、文艺作品（书、文档、协议）标题、电视剧、战争名等，不作为专有名词，按照普通名词划分。举例：</p>
-<ul>
-<li>伊拉克/战争</li>
-<li>辛亥/革命</li>
-<li>平津/战役</li>
-<li>开心/词典</li>
-<li>新闻/30分</li>
-<li>新闻/早/8点</li>
-<li>中央电视台/-/1<br>（它们后期可以通过书名号和引号识别出来。）</li>
-</ul>
-<h3 id="2-政治话语是否算作习语？（可以讨论）"><a href="#2-政治话语是否算作习语？（可以讨论）" class="headerlink" title="2.政治话语是否算作习语？（可以讨论）"></a>2.政治话语是否算作习语？（可以讨论）</h3><p>政治口号和政治思想由于在一定的历史时期中频繁使用，因此，如果切分表意就不一样。比如“中国特色社会主义思想”和“习近平新时代中国特色社会主义思想”就是两个概念。</p>
-<p>有两个解决方案，一个是将音节较短的政治话语算作语法词典中的词，如“科技强国”“科教兴国”“绿色经济”，“科技创新”等等，然后遇到这样的词，细粒度、粗粒度里都不切分，而音节较长的，比如“中华民族伟大复兴”就作为普通名词进行切分；第二个解决方案是全部按照普通名词切分，到具体的任务需求时再处理。不过，我觉得这两个解决方案都会影响分词粒度整体的平衡度，因为政治口号构词有时非常非常长。</p>
-<h3 id="3-某某理论的名称算作专名吗？某某领域理论中的专业术语算作专名吗？"><a href="#3-某某理论的名称算作专名吗？某某领域理论中的专业术语算作专名吗？" class="headerlink" title="3.某某理论的名称算作专名吗？某某领域理论中的专业术语算作专名吗？"></a>3.某某理论的名称算作专名吗？某某领域理论中的专业术语算作专名吗？</h3><p>理论的命名同样是任意性的命名行为，和菜名一样，如果对“xxx理论”中的“xxx”进行切分后，“xxx”的意思有所改变，那么就不能切分，如果没有改变，则可以切分。比如“精神分析/理论”，如果切分成“精神/分析”，这个“精神”和“你今天精神不佳”中的“精神”并不是一个意思，因此不能切分。而“牛顿/第二/定律”切分后没问题，因为这个理论的命名本身是组合而成的。</p>
-<p>那么各个领域中的专业术语是否算作专名呢？我认为在通用型的分词中，只加入最为重要的一些专业术语；而在特定领域中，再在这方面进行拓展。因此，“社会生活”在社会学中应当算作一个专业术语，但是在通用型的分词中还是按照普通名词来进行切分，即“社会/生活”。</p>
-<h3 id="4-并列成分如何切分？"><a href="#4-并列成分如何切分？" class="headerlink" title="4.并列成分如何切分？"></a>4.并列成分如何切分？</h3><p>并列成分按照顿号进行切分，比如“平津/、/辽沈/战役”，”张/、/李家“（这里的”张“可以看做是”张家“的缩略形式）。</p>
-
-        </div>
+          <span class="site-footer-item">
+            <a href="https://yihui.name/cn/" target="_blank">谢益辉</a>
+          </span>
         
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">系列教程</h5>
         
+          <span class="site-footer-item">
+            <a href="https://machinelearningmastery.com/blog/" target="_blank">machinelearningmastery</a>
+          </span>
         
+          <span class="site-footer-item">
+            <a href="http://wuhuang.bitcron.com/lin-wiki/" target="_blank">lin-wiki</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">抓到我</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://www.douban.com/people/45130547/" target="_blank">豆瓣</a>
+          </span>
+        
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>
     </div>
-</div>
-
-
-
-
-
-</div>
-                
-
-
-
-
-<div class="column is-4-tablet is-4-desktop is-4-widescreen  has-order-1 column-left ">
     
-        
-<div class="card widget">
-    <div class="card-content">
-        <nav class="level">
-            <div class="level-item has-text-centered">
-                <div>
-                    <img class="image is-128x128 has-mb-6" src="/images/avatar.jpg" alt="好乐无荒">
-                    
-                    <p class="is-size-4 is-block">
-                        好乐无荒
-                    </p>
-                    
-                    
-                    
-                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
-                        <i class="fas fa-map-marker-alt has-mr-7"></i>
-                        <span>Shanghai,China</span>
-                    </p>
-                    
-                </div>
-            </div>
-        </nav>
-        <nav class="level is-mobile">
-            <div class="level-item has-text-centered is-marginless">
-                <div>
-                    <p class="heading">
-                        Posts
-                    </p>
-                    <p class="title has-text-weight-normal">
-                        5
-                    </p>
-                </div>
-            </div>
-            <div class="level-item has-text-centered is-marginless">
-                <div>
-                    <p class="heading">
-                        Categories
-                    </p>
-                    <p class="title has-text-weight-normal">
-                        0
-                    </p>
-                </div>
-            </div>
-            <div class="level-item has-text-centered is-marginless">
-                <div>
-                    <p class="heading">
-                        Tags
-                    </p>
-                    <p class="title has-text-weight-normal">
-                        7
-                    </p>
-                </div>
-            </div>
-        </nav>
-        <div class="level">
-            <a class="level-item button is-link is-rounded" href="http://github.com/shamy1997">
-                Follow</a>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            
-            <a class="level-item button is-white is-marginless" target="_blank" title="Github" href="http://github.com/shamy1997">
-                
-                <i class="fab fa-github"></i>
-                
-            </a>
-            
-            <a class="level-item button is-white is-marginless" target="_blank" title="Douban" href="http://douban.com/people/45130547/">
-                
-                <i class="fa fa-leaf"></i>
-                
-            </a>
-            
-            <a class="level-item button is-white is-marginless" target="_blank" title="Twitter" href="https://twitter.com/1067723814Shamy">
-                
-                <i class="fab fa-twitter"></i>
-                
-            </a>
-            
-            <a class="level-item button is-white is-marginless" target="_blank" title="Steam" href="https://steamcommunity.com/profiles/76561198287644232/">
-                
-                <i class="fab fa-steam"></i>
-                
-            </a>
-            
-            <a class="level-item button is-white is-marginless" target="_blank" title="RSS" href="/">
-                
-                <i class="fas fa-rss"></i>
-                
-            </a>
-            
-        </div>
-        
+      <div class="site-footer-info">
+        <i class="fa fa-paw"></i> 您是本站第 <span id="site-count"></span> 位访客
+      </div>
+    
+    
+      <div class="site-footer-info">
+        <i class="fa fa-at"></i> Email: fdujyq@gmail.com
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 <a href="https://github.com/dongyuanxin/theme-ad/" target="_blank">Theme-AD</a>.
+      Created by <a href="https://godbmw.com/" target="_blank">GodBMW</a>.
+      All rights reserved.
     </div>
+  </footer>
 </div>
-    
-        
-    
-        
-    
-        
-<div class="card widget">
-    <div class="card-content">
-        <div class="menu">
-            <h3 class="menu-label">
-                Categories
-            </h3>
-            <ul class="menu-list">
-            
-            </ul>
-        </div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
     </div>
-</div>
-    
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="site-layer-reward" id="site-layer-reward" style="display: none;">
         
-<div class="card widget">
-    <div class="card-content">
-        <h3 class="menu-label">
-            Tag Cloud
-        </h3>
-        <a href="/tags/NLP/" style="font-size: 20px;">NLP</a> <a href="/tags/RNN/" style="font-size: 10px;">RNN</a> <a href="/tags/keras/" style="font-size: 10px;">keras</a> <a href="/tags/tensorflow/" style="font-size: 10px;">tensorflow</a> <a href="/tags/分词/" style="font-size: 10px;">分词</a> <a href="/tags/命令行/" style="font-size: 10px;">命令行</a> <a href="/tags/深度学习/" style="font-size: 10px;">深度学习</a>
+          <div>
+            <img src="/images/wechat.png" alt="WeChat">
+            
+              <p>WeChat</p>
+            
+          </div>
+        
+          <div>
+            <img src="/images/alipay.png" alt="AliPay">
+            
+              <p>AliPay</p>
+            
+          </div>
+        
+      </div>
+      <div id="site-layer-welcome" style="display:none;"></div>
     </div>
-</div>
-
-    
-        
-    
-        
-<div class="card widget">
-    <div class="card-content">
-        <h3 class="menu-label">
-            Recent
-        </h3>
-        
-        <article class="media">
-            
-            <a href="/2018/12/22/about-terminal/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="终端命令笔记">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-12-22T12:37:49.000Z">2018-12-22</time></div>
-                    <a href="/2018/12/22/about-terminal/" class="has-link-black-ter is-size-6">终端命令笔记</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2018/09/10/slot-filling/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Slot Filling with SimpleRNN">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-09-10T02:20:20.000Z">2018-09-10</time></div>
-                    <a href="/2018/09/10/slot-filling/" class="has-link-black-ter is-size-6">Slot Filling with SimpleRNN</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2018/09/03/tf小试牛刀/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="TensorFlow小试牛刀">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-09-02T16:02:32.000Z">2018-09-03</time></div>
-                    <a href="/2018/09/03/tf小试牛刀/" class="has-link-black-ter is-size-6">TensorFlow小试牛刀</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2018/08/30/颗粒度分词调研/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="北大分词方案解读及颗粒度分词方案">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-08-30T06:23:49.000Z">2018-08-30</time></div>
-                    <a href="/2018/08/30/颗粒度分词调研/" class="has-link-black-ter is-size-6">北大分词方案解读及颗粒度分词方案</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2018/05/30/hello-world/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Hello World">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-05-30T06:23:49.000Z">2018-05-30</time></div>
-                    <a href="/2018/05/30/hello-world/" class="has-link-black-ter is-size-6">Hello World</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-    </div>
-</div>
-
-    
-        <div class="card widget">
-    <div class="card-content">
-        <div class="menu">
-        <h3 class="menu-label">
-            Archives
-        </h3>
-        <ul class="menu-list">
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/12/">
-                <span class="level-start">
-                    <span class="level-item">December 2018</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/09/">
-                <span class="level-start">
-                    <span class="level-item">September 2018</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">2</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/08/">
-                <span class="level-start">
-                    <span class="level-item">August 2018</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/05/">
-                <span class="level-start">
-                    <span class="level-item">May 2018</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        </ul>
-        </div>
-    </div>
+  </div>
 </div>
     
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="javascript:void(0);" data-enable="false">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="javascript:void(0);" data-enable="false">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="false" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
     
-        <div class="column-right-shadow is-hidden-widescreen ">
-        
-        </div>
+      <a href="javascript:void(0);" data-enable="false">
+        <i class="fa fa-commenting"></i>
+      </a>
     
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    <a href="javascript:void(0);" id="site-reward">
+      <i class="fa fa-thumbs-up"></i>
+    </a>
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
 </div>
-
-                
-            </div>
-        </div>
-    </section>
-    <footer class="footer">
-    <div class="container">
-        <div class="level">
-            <div class="level-start has-text-centered-mobile">
-                <a class="footer-logo is-block has-mb-6" href="/">
-                
-                    <img src="/images/logoagain.png" alt="好乐无荒" height="28">
-                
-                </a>
-                <p class="is-size-7">
-                &copy; 2019 Yuqiu Ji&nbsp;
-                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-icarus">Icarus</a>
-                </p>
-            </div>
-            <div class="level-end">
-            
-                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
-                
-                
-                <p class="control">
-                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
-                        
-                        <i class="fab fa-creative-commons"></i>
-                        
-                    </a>
-                </p>
-                
-                <p class="control">
-                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
-                        
-                        <i class="fab fa-creative-commons-by"></i>
-                        
-                    </a>
-                </p>
-                
-                </div>
-            
-            </div>
-        </div>
-    </div>
-</footer>
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
-<script>moment.locale("zh");</script>
-
-
-    
-    
-    
-    <script src="/js/animation.js"></script>
-    
-
-    
-    
-    
-    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
-    <script src="/js/gallery.js" defer></script>
-    
-
-    
-    
-
-<div id="outdated">
-    <h6>Your browser is out-of-date!</h6>
-    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
-            my browser now </a></p>
-    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+    <div id="share-btn">
+  
+  
+  
+  
+  
 </div>
-<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        outdatedBrowser({
-            bgColor: '#f25648',
-            color: '#ffffff',
-            lowerThan: 'flex'
-        });
-    });
-</script>
-
-
-    
-    
-<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    MathJax.Hub.Config({
-        'HTML-CSS': {matchFontHeight: false},
-        SVG: {matchFontHeight: false},
-        CommonHTML: {matchFontHeight: false}
-    });
-});
-</script>
-
-    
-    
-
-<a id="back-to-top" title="Back to Top" href="javascript:;">
-    <i class="fas fa-chevron-up"></i>
-</a>
-<script src="/js/back-to-top.js" defer></script>
-
-
-    
-    
-
-    
-    
-    
-    
-
-    
-    
     
 
 
-<script src="/js/main.js" defer></script>
+
+
 
     
-    <div class="searchbox ins-search">
-    <div class="searchbox-container ins-search-container">
-        <div class="searchbox-input-wrapper">
-            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
-            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
-        </div>
-        <div class="searchbox-result-wrapper ins-section-wrapper">
-            <div class="ins-section-container"></div>
-        </div>
-    </div>
-</div>
-<script>
-    (function (window) {
-        var INSIGHT_CONFIG = {
-            TRANSLATION: {
-                POSTS: 'Posts',
-                PAGES: 'Pages',
-                CATEGORIES: 'Categories',
-                TAGS: 'Tags',
-                UNTITLED: '(Untitled)',
-            },
-            CONTENT_URL: '/content.json',
-        };
-        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
-    })(window);
-</script>
-<script src="/js/insight.js" defer></script>
-<link rel="stylesheet" href="/css/search.css">
-<link rel="stylesheet" href="/css/insight.css">
-    
-</body>
+  </body>
 </html>

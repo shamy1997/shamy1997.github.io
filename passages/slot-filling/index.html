@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html>
+  
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta name="author" content="Yuqiu Ji">
+  
+  
+  <title>Slot Filling with SimpleRNN | 好乐无荒</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="NLP,keras,RNN,">
+  
+
+  
+  <meta name="description" content="">
+
+  
+
+  
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.11.1/dist/av-min.js" async></script>
+  
+
+  
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+  
+
+  
+    <script src="//unpkg.com/valine/dist/Valine.min.js" async></script>
+  
+
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"GqgKOWYsq9ic42QAjcPaYffa-gzGzoHsz","appkey":"dfrV8qBWczqyiVj0DPsAzucB","comment":true,"count":true},
+    welcome: {"enable":false,"interval":30},
+    start_time: "2019-01-01",
+    passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
+    is_post: true,
+    lock: false,
+    author: "Yuqiu Ji",
+    share: {"twitter":false,"facebook":false,"weibo":false,"qq":false,"wechat":false},
+    mathjax: true,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.svg">
+    <link rel="apple-touch-icon" href="/images/favicon.svg">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">好乐无荒</a>
+      </span>
+    
+    
+      <span class="site-header-brand-motto"> | 良士休休</span>
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">首页</a>
+      
+        <a href="/archives/" target="_self">归档</a>
+      
+        <a href="/tags/" target="_self">标签</a>
+      
+        <a href="/categories/" target="_self">分类</a>
+      
+        <a href="/about/" target="_self">关于</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://github.com/shamy1997/" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/tags/" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/about/" target="_self">
+            关于
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2018-09-10
+    </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    Slot Filling with SimpleRNN
+  </h1>
+  
+  <article class="passage-article">
+    <h1 id="什么是Slot-Filling？"><a href="#什么是Slot-Filling？" class="headerlink" title="什么是Slot Filling？"></a>什么是Slot Filling？</h1><p>Slot Filling是自然语言理解中的一个基本问题，是对语言含义的简单化处理，它的思想类似于语言学中框架主义的一派，先设定好特定的语言类型槽，再将输入的单词一一填入槽内，而获取言语含义的时候即是根据语义槽的含义进行提取和检索。我们这里的任务就是将表示定购航班（ATIS数据集）这一言语行为的一系列语句填入各种类型的语义槽中。</p>
+<h1 id="为什么使用SimpleRNN"><a href="#为什么使用SimpleRNN" class="headerlink" title="为什么使用SimpleRNN?"></a>为什么使用SimpleRNN?</h1><p>Slot Filling属于RNN应用中一对一的应用，通过训练模型，每个词都能被填到合适的槽中。<br>RNN和一般的神经网络的不同在于，在RNN中，我们在时间t的输出不仅取决于当前的输入和权重，还取决于之前的输入，而对于其他神经网络模型，每个时刻的输入和输出都是独立而随机的，没有相关性。放到我们要处理语义理解的问题上看，语言作为一种基于时间的线性输出，显然会受到前词的影响，因此我们选取RNN模型来进行解决这个问题。<br>这里选取SimpleRNN,是因为这个RNN比较简单，能达到熟悉框架的练习效果，之后可以选取其他有效的RNN模型，如LSTMS进行优化。</p>
+<h1 id="构建思路一览："><a href="#构建思路一览：" class="headerlink" title="构建思路一览："></a>构建思路一览：</h1><ul>
+<li>载入数据，使用的是<a href="https://github.com/chsasank/ATIS.keras" target="_blank" rel="noopener">chsasank</a>修改的<a href="https://github.com/mesnilgr/is13" target="_blank" rel="noopener">mesnilgr</a>的load.py。</li>
+<li>定义模型。采取Keras中的序列模型搭建，首先使用一个100维的word embedding层将输入的单词转化为高维空间中的一个向量（在这个空间中，语义和语法位置越近的单词的距离越小），然后我们构建一个dropout层防止过拟合，设置SimpleRNN层，设置TimeDistributed层以完成基于时间的反向传播。最后我们将这些层组织在一起，并确定optimizer和loss function。我们选取的optimizer是rmsprop,这样在训练后期依然能找到较有项，而选取categorical_crossentropy作为损失函数，则是因为处理的问题性质适合于此。</li>
+<li>训练模型。出于对计算资源的考虑，我们一般使用minibtach的方法批量对模型进行训练。但是我们这里的数据是一句句话，如果按照一个固定的batch_size将其分裂，可能增加了不必要的联系（因为上下两句话是独立的），因此我们将一句话作为一个batch去进行训练、验证以及预测，并手动算出一个epoch的平均误差。</li>
+<li>评估和预测模型。我们通过观察验证误差和预测F1精度来对模型进行评估。预测F1精度使用的是<a href="https://github.com/sighsmile/conlleval" target="_blank" rel="noopener">signsmile</a>编写的conlleval.py。</li>
+<li>保存模型。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pickle</span><br><span class="line"><span class="keyword">from</span> keras.models <span class="keyword">import</span> Sequential</span><br><span class="line"><span class="keyword">from</span> keras.layers.embeddings <span class="keyword">import</span> Embedding</span><br><span class="line"><span class="keyword">from</span> keras.layers.recurrent <span class="keyword">import</span> SimpleRNN</span><br><span class="line"><span class="keyword">from</span> keras.layers.core <span class="keyword">import</span> Dense,Dropout</span><br><span class="line"><span class="keyword">from</span> keras.utils <span class="keyword">import</span> to_categorical</span><br><span class="line"><span class="keyword">from</span> keras.layers.wrappers <span class="keyword">import</span> TimeDistributed</span><br><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> data.load</span><br><span class="line"><span class="keyword">from</span> metrics.accuracy <span class="keyword">import</span> evaluate</span><br></pre></td></tr></table></figure>
+<pre><code>Using TensorFlow backend.
+</code></pre><h1 id="Load-Data"><a href="#Load-Data" class="headerlink" title="Load Data"></a>Load Data</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">train_set,valid_set,dicts = data.load.atisfull()</span><br><span class="line"><span class="comment"># print(train_set[:1])</span></span><br><span class="line"><span class="comment"># dicts = &#123;'label2idx':&#123;&#125;,'words2idx':&#123;&#125;,'table2idx':&#123;&#125;&#125;</span></span><br><span class="line">w2idx,labels2idx = dicts[<span class="string">'words2idx'</span>],dicts[<span class="string">'labels2idx'</span>]</span><br><span class="line">train_x,_,train_label = train_set</span><br><span class="line">val_x,_,val_label = valid_set</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">idx2w = &#123;w2idx[i]:i <span class="keyword">for</span> i <span class="keyword">in</span> w2idx&#125;</span><br><span class="line">idx2lab = &#123;labels2idx[i]:i <span class="keyword">for</span> i <span class="keyword">in</span> labels2idx&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">n_classes = len(idx2lab)</span><br><span class="line">n_vocab = len(idx2w)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">words_train = [[idx2w[i] <span class="keyword">for</span> i <span class="keyword">in</span> w[:]] <span class="keyword">for</span> w <span class="keyword">in</span> train_x]</span><br><span class="line">labels_train = [[idx2lab[i] <span class="keyword">for</span> i <span class="keyword">in</span> w[:]] <span class="keyword">for</span> w <span class="keyword">in</span> train_label]</span><br><span class="line"></span><br><span class="line">words_val = [[idx2w[i] <span class="keyword">for</span> i <span class="keyword">in</span> w[:]] <span class="keyword">for</span> w <span class="keyword">in</span> val_x]</span><br><span class="line"><span class="comment"># labels_val = [[idx2lab[i] for i in w[:]] for w in val_label]</span></span><br><span class="line">labels_val =[]</span><br><span class="line"><span class="keyword">for</span> w <span class="keyword">in</span> val_label:</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> w[:]:</span><br><span class="line">        labels_val.append(idx2lab[i])</span><br><span class="line"></span><br><span class="line">print(<span class="string">'Real Sentence : &#123;&#125;'</span>.format(words_train[<span class="number">0</span>]))</span><br><span class="line">print(<span class="string">'Encoded Form : &#123;&#125;'</span>.format(train_x[<span class="number">0</span>]))</span><br><span class="line">print(<span class="string">'='</span>*<span class="number">40</span>)</span><br><span class="line">print(<span class="string">'Real Label : &#123;&#125;'</span>.format(labels_train[<span class="number">0</span>]))</span><br><span class="line">print(<span class="string">'Encoded Form : &#123;&#125;'</span>.format(train_label[<span class="number">0</span>]))</span><br></pre></td></tr></table></figure>
+<pre><code>Real Sentence : [&apos;i&apos;, &apos;want&apos;, &apos;to&apos;, &apos;fly&apos;, &apos;from&apos;, &apos;boston&apos;, &apos;at&apos;, &apos;DIGITDIGITDIGIT&apos;, &apos;am&apos;, &apos;and&apos;, &apos;arrive&apos;, &apos;in&apos;, &apos;denver&apos;, &apos;at&apos;, &apos;DIGITDIGITDIGITDIGIT&apos;, &apos;in&apos;, &apos;the&apos;, &apos;morning&apos;]
+Encoded Form : [232 542 502 196 208  77  62  10  35  40  58 234 137  62  11 234 481 321]
+========================================
+Real Label : [&apos;O&apos;, &apos;O&apos;, &apos;O&apos;, &apos;O&apos;, &apos;O&apos;, &apos;B-fromloc.city_name&apos;, &apos;O&apos;, &apos;B-depart_time.time&apos;, &apos;I-depart_time.time&apos;, &apos;O&apos;, &apos;O&apos;, &apos;O&apos;, &apos;B-toloc.city_name&apos;, &apos;O&apos;, &apos;B-arrive_time.time&apos;, &apos;O&apos;, &apos;O&apos;, &apos;B-arrive_time.period_of_day&apos;]
+Encoded Form : [126 126 126 126 126  48 126  35  99 126 126 126  78 126  14 126 126  12]
+</code></pre><h1 id="Define-and-Compile-the-model"><a href="#Define-and-Compile-the-model" class="headerlink" title="Define and Compile the model"></a>Define and Compile the model</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">model = Sequential()</span><br><span class="line">model.add(Embedding(n_vocab,<span class="number">100</span>))</span><br><span class="line">model.add(Dropout(<span class="number">0.25</span>))</span><br><span class="line">model.add(SimpleRNN(<span class="number">100</span>,return_sequences=<span class="keyword">True</span>))</span><br><span class="line">model.add(TimeDistributed(Dense(n_classes,activation=<span class="string">'softmax'</span>)))</span><br><span class="line">model.compile(optimizer = <span class="string">'rmsprop'</span>,loss = <span class="string">'categorical_crossentropy'</span>)</span><br><span class="line">model.summary()</span><br></pre></td></tr></table></figure>
+<pre><code>_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+embedding_1 (Embedding)      (None, None, 100)         57200     
+_________________________________________________________________
+dropout_1 (Dropout)          (None, None, 100)         0         
+_________________________________________________________________
+simple_rnn_1 (SimpleRNN)     (None, None, 100)         20100     
+_________________________________________________________________
+time_distributed_1 (TimeDist (None, None, 127)         12827     
+=================================================================
+Total params: 90,127
+Trainable params: 90,127
+Non-trainable params: 0
+_________________________________________________________________
+</code></pre><h1 id="Train-the-model"><a href="#Train-the-model" class="headerlink" title="Train the model"></a>Train the model</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">train_the_model</span><span class="params">(n_epochs,train_x,train_label,val_x,val_label)</span>:</span></span><br><span class="line">    epoch,train_avgloss,val_avgloss,f1s = [],[],[],[]</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,n_epochs+<span class="number">1</span>):</span><br><span class="line">        epoch.append(i)</span><br><span class="line">        </span><br><span class="line">        <span class="comment">## training</span></span><br><span class="line">        train_avg_loss =<span class="number">0</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> n_batch,sent <span class="keyword">in</span> enumerate(train_x):</span><br><span class="line">            label = train_label[n_batch]</span><br><span class="line">            <span class="comment"># label to one-hot</span></span><br><span class="line">            label = to_categorical(label,num_classes=n_classes)[np.newaxis,:]</span><br><span class="line">            sent = sent[np.newaxis,:]</span><br><span class="line">            loss = model.train_on_batch(sent,label)</span><br><span class="line">            train_avg_loss += loss</span><br><span class="line">            </span><br><span class="line">        train_avg_loss = train_avg_loss/n_batch</span><br><span class="line">        train_avgloss.append(train_avg_loss)</span><br><span class="line">        </span><br><span class="line">        <span class="comment">## evaluate&amp;predict</span></span><br><span class="line">        val_pred_label,pred_label_val,val_avg_loss  = [],[],<span class="number">0</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> n_batch,sent <span class="keyword">in</span> enumerate(val_x):</span><br><span class="line">            label = val_label[n_batch]</span><br><span class="line">            label = to_categorical(label,num_classes=n_classes)[np.newaxis,:]</span><br><span class="line">            sent = sent[np.newaxis,:]</span><br><span class="line">            loss = model.test_on_batch(sent,label)</span><br><span class="line">            val_avg_loss += loss</span><br><span class="line">            </span><br><span class="line">            pred = model.predict_on_batch(sent)</span><br><span class="line">            pred = np.argmax(pred,<span class="number">-1</span>)[<span class="number">0</span>]</span><br><span class="line">            val_pred_label.append(pred)</span><br><span class="line">            </span><br><span class="line">        val_avg_loss = val_avg_loss/n_batch</span><br><span class="line">        val_avgloss.append(val_avg_loss)</span><br><span class="line">        </span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> w <span class="keyword">in</span> val_pred_label:</span><br><span class="line">            <span class="keyword">for</span> k <span class="keyword">in</span> w[:]:</span><br><span class="line">                pred_label_val.append(idx2lab[k])</span><br><span class="line">            </span><br><span class="line">        prec, rec, f1 = evaluate(labels_val,pred_label_val, verbose=<span class="keyword">False</span>)</span><br><span class="line">        print(<span class="string">'Training epoch &#123;&#125;\t train_avg_loss = &#123;&#125; \t val_avg_loss = &#123;&#125;'</span>.format(i,train_avg_loss,val_avg_loss))</span><br><span class="line">        print(<span class="string">'precision: &#123;:.2f&#125;% \t recall: &#123;:.2f&#125;% \t f1 :&#123;:.2f&#125;%'</span>.format(prec,rec,f1))</span><br><span class="line">        print(<span class="string">'-'</span>*<span class="number">60</span>)</span><br><span class="line">        f1s.append(f1)</span><br><span class="line"></span><br><span class="line">        </span><br><span class="line"><span class="comment">#     return epoch,pred_label_train,train_avgloss,pred_label_val,val_avgloss</span></span><br><span class="line">    <span class="keyword">return</span> epoch,f1s,val_avgloss,train_avgloss</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">epoch,f1s,val_avgloss,train_avgloss = train_the_model(<span class="number">40</span>,train_x,train_label,val_x,val_label)</span><br></pre></td></tr></table></figure>
+<p><strong>输出：</strong><br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">  Training epoch <span class="number">1</span>	 train_avg_loss = <span class="number">0.5546463992293973</span> 	 val_avg_loss = <span class="number">0.4345020865901363</span></span><br><span class="line"><span class="symbol">  precision:</span> <span class="number">84.79</span>% 	 <span class="string">recall:</span> <span class="number">80.79</span>% 	 <span class="string">f1 :</span><span class="number">82.74</span>%</span><br><span class="line">  ------------------------------------------------------------</span><br><span class="line">  Training epoch <span class="number">2</span>	 train_avg_loss = <span class="number">0.2575569036037627</span> 	 val_avg_loss = <span class="number">0.36228470020366654</span></span><br><span class="line"><span class="symbol">  precision:</span> <span class="number">86.64</span>% 	 <span class="string">recall:</span> <span class="number">83.86</span>% 	 <span class="string">f1 :</span><span class="number">85.22</span>%</span><br><span class="line">  ------------------------------------------------------------</span><br><span class="line">  Training epoch <span class="number">3</span>	 train_avg_loss = <span class="number">0.2238766908014994</span> 	 val_avg_loss = <span class="number">0.33974187403771694</span></span><br><span class="line"><span class="symbol">  precision:</span> <span class="number">88.03</span>% 	 <span class="string">recall:</span> <span class="number">85.55</span>% 	 <span class="string">f1 :</span><span class="number">86.77</span>%</span><br><span class="line">  ------------------------------------------------------------</span><br><span class="line">……</span><br><span class="line">     ------------------------------------------------------------</span><br><span class="line">  Training epoch <span class="number">40</span>	 train_avg_loss = <span class="number">0.09190682124901069</span> 	 val_avg_loss = <span class="number">0.2697056618613356</span></span><br><span class="line"><span class="symbol">  precision:</span> <span class="number">92.51</span>% 	 <span class="string">recall:</span> <span class="number">91.47</span>% 	 <span class="string">f1 :</span><span class="number">91.99</span>%</span><br><span class="line">  ------------------------------------------------------------</span><br></pre></td></tr></table></figure></p>
+<h1 id="可视化"><a href="#可视化" class="headerlink" title="可视化"></a>可视化</h1><p>观察验证误差，选取合适的epoch。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">%matplotlib inline</span><br><span class="line">plt.xlabel=(<span class="string">'epoch'</span>)</span><br><span class="line">plt.ylabel=(<span class="string">'loss'</span>)</span><br><span class="line">plt.plot(epoch,train_avgloss,<span class="string">'b'</span>)</span><br><span class="line">plt.plot(epoch,val_avgloss,<span class="string">'r'</span>,label=(<span class="string">'validation error'</span>))</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="http://ohj9e0ect.bkt.clouddn.com/blog/180911/5A7mAF88bL.png?imageslim" alt="mark"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'最大f1值为 &#123;:.2f&#125;%'</span>.format(max(f1s)))</span><br></pre></td></tr></table></figure>
+<pre><code>最大f1值为 92.56%
+</code></pre><h1 id="保存模型"><a href="#保存模型" class="headerlink" title="保存模型"></a>保存模型</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">model.save(<span class="string">'slot_filling_with_simpleRNN.h5'</span>)</span><br></pre></td></tr></table></figure>
+<h1 id="结果分析"><a href="#结果分析" class="headerlink" title="结果分析"></a>结果分析</h1><p>使用SimpleRNN最终得到的F1值为92.56%，和师兄的95.47%相比确实还相差很多。这主要是和我们模型的选取有关，SimpleRNN只能将前词的影响带入到模型中，但是语言中后词对前词也会有一定的影响，因此可以通过选择更加复杂的模型或者增加能够捕捉到后词信息的层来进行优化。</p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
+<li><a href="https://chsasank.github.io/spoken-language-understanding.html" target="_blank" rel="noopener">Keras Tutorial - Spoken Language Understanding</a></li>
+<li><a href="https://github.com/czs0x55aa/pytorch-slot-filling/blob/master/evaluate.py" target="_blank" rel="noopener">pytorch-slot-filling</a></li>
+<li><a href="https://github.com/liu946/AtisSlotLabeling" target="_blank" rel="noopener">liu946 AtisSlotLabeling</a></li>
+<li><a href="https://blog.csdn.net/winteeena/article/details/78997053" target="_blank" rel="noopener">【Keras情感分类】训练过程中出现的问题汇总</a></li>
+<li><a href="https://keras.io/zh/layers/recurrent/" target="_blank" rel="noopener">keras-SimpleRNN</a></li>
+<li><a href="https://www.cnblogs.com/dapeng-bupt/p/7606111.html" target="_blank" rel="noopener">机器学习中过拟合的解决办法</a></li>
+</ul>
+
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#什么是Slot-Filling？"><span class="toc-text">什么是Slot Filling？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#为什么使用SimpleRNN"><span class="toc-text">为什么使用SimpleRNN?</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#构建思路一览："><span class="toc-text">构建思路一览：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Load-Data"><span class="toc-text">Load Data</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Define-and-Compile-the-model"><span class="toc-text">Define and Compile the model</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Train-the-model"><span class="toc-text">Train the model</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#可视化"><span class="toc-text">可视化</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#保存模型"><span class="toc-text">保存模型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#结果分析"><span class="toc-text">结果分析</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考资料"><span class="toc-text">参考资料</span></a></li></ol>
+  </div>
+</aside>
+  
+    <aside class="passage-copyright">
+      <div>本文作者: Yuqiu Ji</div>
+      
+        <div>
+          原文链接: 
+          <a href="" target="_blank">http://shamy1997.github.io/passages/slot-filling/</a>
+        </div>
+      
+      <div>
+        版权声明: 本博客所有文章除特别声明外, 均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议. 转载请注明出处!
+      </div>
+    </aside>
+  
+  
+    <div class="passage-tags">
+     
+      <a href="/tags/NLP/"><i class="fa fa-tags"></i>NLP</a>
+     
+      <a href="/tags/keras/"><i class="fa fa-tags"></i>keras</a>
+     
+      <a href="/tags/RNN/"><i class="fa fa-tags"></i>RNN</a>
+    
+    </div>
+  
+</div>
+
+    </main>
+    
+      
+<div class="site-comment-contanier" data-plateform="leancloud">
+  
+    <p id="site-comment-info">
+      <i class="fa fa-spinner fa-spin"></i> 评论加载中
+    </p>
+    <div id="site-comment"></div>
+  
+</div>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">博客推荐</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://liweinlp.com/" target="_blank">立委NLP频道</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://yihui.name/cn/" target="_blank">谢益辉</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">系列教程</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://machinelearningmastery.com/blog/" target="_blank">machinelearningmastery</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="http://wuhuang.bitcron.com/lin-wiki/" target="_blank">lin-wiki</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">抓到我</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://www.douban.com/people/45130547/" target="_blank">豆瓣</a>
+          </span>
+        
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>
+    </div>
+    
+      <div class="site-footer-info">
+        <i class="fa fa-paw"></i> 您是本站第 <span id="site-count"></span> 位访客
+      </div>
+    
+    
+      <div class="site-footer-info">
+        <i class="fa fa-at"></i> Email: fdujyq@gmail.com
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 <a href="https://github.com/dongyuanxin/theme-ad/" target="_blank">Theme-AD</a>.
+      Created by <a href="https://godbmw.com/" target="_blank">GodBMW</a>.
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="site-layer-reward" id="site-layer-reward" style="display: none;">
+        
+          <div>
+            <img src="/images/wechat.png" alt="WeChat">
+            
+              <p>WeChat</p>
+            
+          </div>
+        
+          <div>
+            <img src="/images/alipay.png" alt="AliPay">
+            
+              <p>AliPay</p>
+            
+          </div>
+        
+      </div>
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="/passages/about-terminal/" data-enable="true">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="/passages/tf小试牛刀/" data-enable="true">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+      <a href="#site-comment" data-enable="true">
+        <i class="fa fa-commenting"></i>
+      </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    <a href="javascript:void(0);" id="site-reward">
+      <i class="fa fa-thumbs-up"></i>
+    </a>
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+  
+  
+  
+  
+</div>
+    
+
+
+
+
+
+    
+  </body>
+</html>

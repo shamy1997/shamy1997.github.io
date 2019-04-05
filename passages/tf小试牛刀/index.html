@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html>
+  
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta name="author" content="Yuqiu Ji">
+  
+  
+  <title>TensorFlow小试牛刀 | 好乐无荒</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="tensorflow,深度学习,">
+  
+
+  
+  <meta name="description" content="">
+
+  
+
+  
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.11.1/dist/av-min.js" async></script>
+  
+
+  
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+  
+
+  
+    <script src="//unpkg.com/valine/dist/Valine.min.js" async></script>
+  
+
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"GqgKOWYsq9ic42QAjcPaYffa-gzGzoHsz","appkey":"dfrV8qBWczqyiVj0DPsAzucB","comment":true,"count":true},
+    welcome: {"enable":false,"interval":30},
+    start_time: "2019-01-01",
+    passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
+    is_post: true,
+    lock: false,
+    author: "Yuqiu Ji",
+    share: {"twitter":false,"facebook":false,"weibo":false,"qq":false,"wechat":false},
+    mathjax: true,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.svg">
+    <link rel="apple-touch-icon" href="/images/favicon.svg">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">好乐无荒</a>
+      </span>
+    
+    
+      <span class="site-header-brand-motto"> | 良士休休</span>
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">首页</a>
+      
+        <a href="/archives/" target="_self">归档</a>
+      
+        <a href="/tags/" target="_self">标签</a>
+      
+        <a href="/categories/" target="_self">分类</a>
+      
+        <a href="/about/" target="_self">关于</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://github.com/shamy1997/" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/tags/" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/about/" target="_self">
+            关于
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2018-09-03
+    </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    TensorFlow小试牛刀
+  </h1>
+  
+  <article class="passage-article">
+    <blockquote>
+<p>此日志为参照Udacity课程中《Intro to tensorflow》的jupyter notebook所做的分解源码，目的在于理解代码逻辑，熟悉创建流程和套路。其中参考了不少博文链接，非常感谢，全部放在文末，在原文中不再指出。</p>
+</blockquote>
+<p>数据链接：百度云：<a href="https://pan.baidu.com/s/1xEB_B8QPzSjuLpPXgnAhJg" target="_blank" rel="noopener">NoMNIST</a>  密码：fsks</p>
+<h1 id="P1-预处理数据"><a href="#P1-预处理数据" class="headerlink" title="P1:预处理数据"></a>P1:预处理数据</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> pickle</span><br><span class="line"><span class="keyword">from</span> urllib.request <span class="keyword">import</span> urlretrieve</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> LabelBinarizer</span><br><span class="line"><span class="keyword">from</span> sklearn.utils <span class="keyword">import</span> resample</span><br><span class="line"><span class="keyword">from</span> tqdm <span class="keyword">import</span> tqdm</span><br><span class="line"><span class="keyword">from</span> zipfile <span class="keyword">import</span> ZipFile</span><br></pre></td></tr></table></figure>
+<h2 id="解压图片文件"><a href="#解压图片文件" class="headerlink" title="解压图片文件"></a>解压图片文件</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">uncompress_features_labels</span><span class="params">(file)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Uncompress features and labels from a zip file</span></span><br><span class="line"><span class="string">    :param file: The zip file to extract the data from</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    features = []</span><br><span class="line">    labels = []</span><br><span class="line"></span><br><span class="line">    <span class="keyword">with</span> ZipFile(file) <span class="keyword">as</span> zipf:</span><br><span class="line">        <span class="comment"># Progress Bar</span></span><br><span class="line">        filenames_pbar = tqdm(zipf.namelist(), unit=<span class="string">'files'</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># Get features and labels from all files</span></span><br><span class="line">        <span class="keyword">for</span> filename <span class="keyword">in</span> filenames_pbar:</span><br><span class="line">            <span class="comment"># Check if the file is a directory</span></span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> filename.endswith(<span class="string">'/'</span>):</span><br><span class="line">                <span class="keyword">with</span> zipf.open(filename) <span class="keyword">as</span> image_file:</span><br><span class="line">                    image = Image.open(image_file)</span><br><span class="line">                    image.load()</span><br><span class="line">                    <span class="comment"># Load image data as 1 dimensional array</span></span><br><span class="line">                    <span class="comment"># We're using float32 to save on memory space</span></span><br><span class="line">                    feature = np.array(image, dtype=np.float32).flatten()</span><br><span class="line"></span><br><span class="line">                <span class="comment"># Get the the letter from the filename.  This is the letter of the image.</span></span><br><span class="line">                label = os.path.split(filename)[<span class="number">1</span>][<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">                features.append(feature)</span><br><span class="line">                labels.append(label)</span><br><span class="line">    <span class="keyword">return</span> np.array(features), np.array(labels)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Get the features and labels from the zip files</span></span><br><span class="line">train_features, train_labels = uncompress_features_labels(<span class="string">'notMNIST_train.zip'</span>)</span><br><span class="line">test_features, test_labels = uncompress_features_labels(<span class="string">'notMNIST_test.zip'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Limit the amount of data to work with a docker container</span></span><br><span class="line">docker_size_limit = <span class="number">150000</span></span><br><span class="line">train_features, train_labels = resample(train_features, train_labels, n_samples=docker_size_limit)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Set flags for feature engineering.  This will prevent you from skipping an important step.</span></span><br><span class="line">is_features_normal = <span class="keyword">False</span></span><br><span class="line">is_labels_encod = <span class="keyword">False</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">100</span>%|█████████████████████████████████████████████████████████████████████| <span class="number">210001/210001</span> [<span class="number">00:54&lt;00:00</span>, <span class="number">3832</span>.<span class="number">78</span>files/s]</span><br><span class="line"><span class="number">100</span>%|███████████████████████████████████████████████████████████████████████| <span class="number">10001/10001</span> [<span class="number">00:03&lt;00:00</span>, <span class="number">3207</span>.<span class="number">15</span>files/s]</span><br></pre></td></tr></table></figure>
+<h2 id="Min-Max-Scaling"><a href="#Min-Max-Scaling" class="headerlink" title="Min-Max Scaling"></a>Min-Max Scaling</h2><p>Implement Min-Max scaling in the <code>normalize_grayscale()</code> function to a range of <code>a=0.1</code> and <code>b=0.9</code>. After scaling, the values of the pixels in the input data should range from 0.1 to 0.9.</p>
+<p>Since the raw notMNIST image data is in <a href="https://en.wikipedia.org/wiki/Grayscale" target="_blank" rel="noopener">grayscale</a>, the current values range from a min of 0 to a max of 255.</p>
+<p>Min-Max Scaling:$X’=a+{\frac {\left(X-X_{\min }\right)\left(b-a\right)}{X_{\max }-X_{\min }}}$</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">normalize_grayscale</span><span class="params">(image_data)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Normalize the image data with Min-Max scaling to a range of [0.1, 0.9]</span></span><br><span class="line"><span class="string">    :param image_data: The image data to be normalized</span></span><br><span class="line"><span class="string">    :return: Normalized image data</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line"> </span><br><span class="line">    a = <span class="number">0.1</span></span><br><span class="line">    b = <span class="number">0.9</span></span><br><span class="line">    max_grayscale = <span class="number">255</span></span><br><span class="line">    min_grayscale = <span class="number">0</span></span><br><span class="line">    <span class="keyword">return</span> a+((image_data-min_grayscale))*(b-a)/(max_grayscale-min_grayscale)</span><br></pre></td></tr></table></figure>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">train_features</span> = normalize_grayscale(train_features)</span><br><span class="line"><span class="attr">test_features</span> = normalize_grayscale(test_features)</span><br></pre></td></tr></table></figure>
+<h2 id="标签二值化"><a href="#标签二值化" class="headerlink" title="标签二值化"></a>标签二值化</h2><p><code>LabelBinarizer()</code>是sklearn.preprocession中用来将非数值类标签转换为独热编码向量的函数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Create the encoder 创建编码器</span></span><br><span class="line">encoder = LabelBinarizer()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 编码器找到类别并分配 one-hot 向量</span></span><br><span class="line">encoder.fit(train_labels)</span><br><span class="line"></span><br><span class="line"><span class="comment">#最后把目标（lables）转换成独热编码的（one-hot encoded）向量</span></span><br><span class="line">train_labels = encoder.transform(train_labels)</span><br><span class="line">test_labels = encoder.transform(test_labels)</span><br></pre></td></tr></table></figure>
+<p>转换数据类型，这样后面公式中才可以进行运算。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">train_labels = train_labels.astype(np.float32)</span><br><span class="line">test_labels = test_labels.astype(np.float32)</span><br></pre></td></tr></table></figure>
+<h2 id="随机划分训练集和测试集"><a href="#随机划分训练集和测试集" class="headerlink" title="随机划分训练集和测试集"></a>随机划分训练集和测试集</h2><p>常见形式为：<br><code>X_train,X_test, y_train, y_test =cross_validation.train_test_split(train_data,train_target,test_size=0.4, random_state=0)</code></p>
+<p><strong>参数解释：</strong></p>
+<ul>
+<li>train_data：所要划分的样本特征集</li>
+<li>train_target：所要划分的样本结果</li>
+<li>test_size：样本占比，如果是整数的话就是样本的数量</li>
+<li>random_state：是随机数的种子。</li>
+</ul>
+<p>随机数种子：其实就是该组随机数的编号，在需要重复试验的时候，保证得到一组一样的随机数。比如你每次都填1，其他参数一样的情况下你得到的随机数组是一样的。但填0或不填，每次都会不一样。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Get randomized datasets for training and validation</span></span><br><span class="line">train_features, valid_features, train_labels, valid_labels = train_test_split(</span><br><span class="line">    train_features,</span><br><span class="line">    train_labels,</span><br><span class="line">    test_size=<span class="number">0.05</span>,</span><br><span class="line">    random_state=<span class="number">832289</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="打包数据方便下次取用"><a href="#打包数据方便下次取用" class="headerlink" title="打包数据方便下次取用"></a>打包数据方便下次取用</h2><p>序列化的方法为 pickle.dump()，该方法的相关参数如下：<br><code>pickle.dump(obj, file, protocol=None,*,fix_imports=True)</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建pickle_file</span></span><br><span class="line"><span class="comment"># 参数file必须是以二进制的形式进行操作,即「wb」</span></span><br><span class="line">pickle_file = <span class="string">'notMNIST.pickle'</span></span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> os.path.isfile(pickle_file):</span><br><span class="line">    print(<span class="string">'Saving data to pickle file...'</span>)</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">with</span> open(<span class="string">'notMNIST.pickle'</span>, <span class="string">'wb'</span>) <span class="keyword">as</span> pfile:</span><br><span class="line">            pickle.dump(</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="string">'train_dataset'</span>: train_features,</span><br><span class="line">                    <span class="string">'train_labels'</span>: train_labels,</span><br><span class="line">                    <span class="string">'valid_dataset'</span>: valid_features,</span><br><span class="line">                    <span class="string">'valid_labels'</span>: valid_labels,</span><br><span class="line">                    <span class="string">'test_dataset'</span>: test_features,</span><br><span class="line">                    <span class="string">'test_labels'</span>: test_labels,</span><br><span class="line">                &#125;,</span><br><span class="line">                pfile, pickle.HIGHEST_PROTOCOL)</span><br><span class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">        print(<span class="string">'Unable to save data to'</span>, pickle_file, <span class="string">':'</span>, e)</span><br><span class="line">        <span class="keyword">raise</span></span><br></pre></td></tr></table></figure>
+<h1 id="P2-从预处理好的pickle中读取数据"><a href="#P2-从预处理好的pickle中读取数据" class="headerlink" title="P2:从预处理好的pickle中读取数据"></a>P2:从预处理好的pickle中读取数据</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">%matplotlib inline</span><br><span class="line"></span><br><span class="line"><span class="comment"># Load the modules</span></span><br><span class="line"><span class="keyword">import</span> pickle</span><br><span class="line"><span class="keyword">import</span> math</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"><span class="keyword">from</span> tqdm <span class="keyword">import</span> tqdm</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="comment"># Reload the data</span></span><br><span class="line">pickle_file = <span class="string">'notMNIST.pickle'</span></span><br><span class="line"><span class="keyword">with</span> open(pickle_file, <span class="string">'rb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">  pickle_data = pickle.load(f)</span><br><span class="line">  train_features = pickle_data[<span class="string">'train_dataset'</span>]</span><br><span class="line">  train_labels = pickle_data[<span class="string">'train_labels'</span>]</span><br><span class="line">  valid_features = pickle_data[<span class="string">'valid_dataset'</span>]</span><br><span class="line">  valid_labels = pickle_data[<span class="string">'valid_labels'</span>]</span><br><span class="line">  test_features = pickle_data[<span class="string">'test_dataset'</span>]</span><br><span class="line">  test_labels = pickle_data[<span class="string">'test_labels'</span>]</span><br><span class="line">  <span class="keyword">del</span> pickle_data  <span class="comment"># Free up memory</span></span><br></pre></td></tr></table></figure>
+<pre><code>C:\Users\10677\Anaconda3\envs\keras\lib\site-packages\h5py\__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+</code></pre><h1 id="使用TF创建单层神经网络"><a href="#使用TF创建单层神经网络" class="headerlink" title="使用TF创建单层神经网络"></a>使用TF创建单层神经网络</h1><p>接下来，我们使用<code>TensorFlow</code>创建一个只有一个输入层和输出层的神经网络，激活函数为<code>softmax</code>。<br>在<code>TensorFlow</code>中，数据不是以整数、浮点数或字符串的形式存储的，而是以<code>tensor</code>对象的形式被存储的。</p>
+<p>在<code>tensor</code>中传递值有两种方法：</p>
+<ul>
+<li>使用<code>tf.constant()</code>，传入变量，但是传入之后就不可变了</li>
+<li>如果要使数据可变，结合<code>tf.placeholder()</code>和<code>tf.feed_dict</code>来输入</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># All the pixels in the image (28 * 28 = 784)</span></span><br><span class="line">features_count = <span class="number">784</span></span><br><span class="line"><span class="comment"># All the labels ("A,B...J")</span></span><br><span class="line">labels_count = <span class="number">10</span></span><br><span class="line"></span><br><span class="line">features = tf.placeholder(tf.float32)</span><br><span class="line">labels = tf.placeholder(tf.float32)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Set the weights and biases tensors</span></span><br><span class="line"><span class="comment"># tf.truncated_normal:生成正态分布的随机值</span></span><br><span class="line"><span class="comment"># weights已经随机化，biases就不必随机，简化为0即可</span></span><br><span class="line"></span><br><span class="line">weights = tf.Variable(tf.truncated_normal((features_count,labels_count)))</span><br><span class="line">biases = tf.Variable(tf.zeros(labels_count))</span><br><span class="line"></span><br><span class="line"><span class="comment"># Feed dicts for training, validation, and test session</span></span><br><span class="line">train_feed_dict = &#123;features: train_features, labels: train_labels&#125;</span><br><span class="line">valid_feed_dict = &#123;features: valid_features, labels: valid_labels&#125;</span><br><span class="line">test_feed_dict = &#123;features: test_features, labels: test_labels&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># Linear Function WX + b</span></span><br><span class="line">logits = tf.matmul(features, weights) + biases</span><br><span class="line"></span><br><span class="line">prediction = tf.nn.softmax(logits)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Cross entropy</span></span><br><span class="line">cross_entropy = -tf.reduce_sum(labels * tf.log(prediction), reduction_indices=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Training loss</span></span><br><span class="line">loss = tf.reduce_mean(cross_entropy)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Create an operation that initializes all variables</span></span><br><span class="line">init = tf.global_variables_initializer()</span><br><span class="line"></span><br><span class="line"><span class="comment"># Test Cases</span></span><br><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> session:</span><br><span class="line">    session.run(init)</span><br><span class="line">    session.run(loss, feed_dict=train_feed_dict)</span><br><span class="line">    session.run(loss, feed_dict=valid_feed_dict)</span><br><span class="line">    session.run(loss, feed_dict=test_feed_dict)</span><br><span class="line">    biases_data = session.run(biases)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">is_correct_prediction = tf.equal(tf.argmax(prediction, <span class="number">1</span>), tf.argmax(labels, <span class="number">1</span>))</span><br><span class="line">accuracy = tf.reduce_mean(tf.cast(is_correct_prediction, tf.float32))</span><br></pre></td></tr></table></figure>
+<h1 id="P3-训练神经网络"><a href="#P3-训练神经网络" class="headerlink" title="P3:训练神经网络"></a>P3:训练神经网络</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Change if you have memory restrictions</span></span><br><span class="line">batch_size = <span class="number">128</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Find the best parameters for each configuration</span></span><br><span class="line">epochs =  <span class="number">4</span></span><br><span class="line">learning_rate = <span class="number">0.2</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># Gradient Descent</span></span><br><span class="line"><span class="comment"># 使用梯度下降进行训练</span></span><br><span class="line">optimizer = tf.train.GradientDescentOptimizer(learning_rate).minimize(loss)    </span><br><span class="line"></span><br><span class="line"><span class="comment"># The accuracy measured against the validation set</span></span><br><span class="line">validation_accuracy = <span class="number">0.0</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Measurements use for graphing loss and accuracy</span></span><br><span class="line">log_batch_step = <span class="number">50</span></span><br><span class="line">batches = []</span><br><span class="line">loss_batch = []</span><br><span class="line">train_acc_batch = []</span><br><span class="line">valid_acc_batch = []</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> session:</span><br><span class="line">    session.run(init)</span><br><span class="line">    batch_count = int(math.ceil(len(train_features)/batch_size))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> epoch_i <span class="keyword">in</span> range(epochs):</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># Progress bar</span></span><br><span class="line">        batches_pbar = tqdm(range(batch_count), desc=<span class="string">'Epoch &#123;:&gt;2&#125;/&#123;&#125;'</span>.format(epoch_i+<span class="number">1</span>, epochs), unit=<span class="string">'batches'</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># The training cycle</span></span><br><span class="line">        <span class="keyword">for</span> batch_i <span class="keyword">in</span> batches_pbar:</span><br><span class="line">            <span class="comment"># Get a batch of training features and labels</span></span><br><span class="line">            batch_start = batch_i*batch_size</span><br><span class="line">            batch_features = train_features[batch_start:batch_start + batch_size]</span><br><span class="line">            batch_labels = train_labels[batch_start:batch_start + batch_size]</span><br><span class="line"></span><br><span class="line">            <span class="comment"># Run optimizer and get loss</span></span><br><span class="line">            _, l = session.run(</span><br><span class="line">                [optimizer, loss],</span><br><span class="line">                feed_dict=&#123;features: batch_features, labels: batch_labels&#125;)</span><br><span class="line"></span><br><span class="line">            <span class="comment"># Log every 50 batches</span></span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> batch_i % log_batch_step:</span><br><span class="line">                <span class="comment"># Calculate Training and Validation accuracy</span></span><br><span class="line">                training_accuracy = session.run(accuracy, feed_dict=train_feed_dict)</span><br><span class="line">                validation_accuracy = session.run(accuracy, feed_dict=valid_feed_dict)</span><br><span class="line"></span><br><span class="line">                <span class="comment"># Log batches</span></span><br><span class="line">                previous_batch = batches[<span class="number">-1</span>] <span class="keyword">if</span> batches <span class="keyword">else</span> <span class="number">0</span></span><br><span class="line">                batches.append(log_batch_step + previous_batch)</span><br><span class="line">                loss_batch.append(l)</span><br><span class="line">                train_acc_batch.append(training_accuracy)</span><br><span class="line">                valid_acc_batch.append(validation_accuracy)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Check accuracy against Validation data</span></span><br><span class="line">        validation_accuracy = session.run(accuracy, feed_dict=valid_feed_dict)</span><br><span class="line"></span><br><span class="line">loss_plot = plt.subplot(<span class="number">211</span>)</span><br><span class="line">loss_plot.set_title(<span class="string">'Loss'</span>)</span><br><span class="line">loss_plot.plot(batches, loss_batch, <span class="string">'g'</span>)</span><br><span class="line">loss_plot.set_xlim([batches[<span class="number">0</span>], batches[<span class="number">-1</span>]])</span><br><span class="line">acc_plot = plt.subplot(<span class="number">212</span>)</span><br><span class="line">acc_plot.set_title(<span class="string">'Accuracy'</span>)</span><br><span class="line">acc_plot.plot(batches, train_acc_batch, <span class="string">'r'</span>, label=<span class="string">'Training Accuracy'</span>)</span><br><span class="line">acc_plot.plot(batches, valid_acc_batch, <span class="string">'x'</span>, label=<span class="string">'Validation Accuracy'</span>)</span><br><span class="line">acc_plot.set_ylim([<span class="number">0</span>, <span class="number">1.0</span>])</span><br><span class="line">acc_plot.set_xlim([batches[<span class="number">0</span>], batches[<span class="number">-1</span>]])</span><br><span class="line">acc_plot.legend(loc=<span class="number">4</span>)</span><br><span class="line">plt.tight_layout()</span><br><span class="line">plt.show()</span><br><span class="line"></span><br><span class="line">print(<span class="string">'Validation accuracy at &#123;&#125;'</span>.format(validation_accuracy))</span><br></pre></td></tr></table></figure>
+<pre><code>Epoch  1/4: 100%|████████████████████████████████████████████████████████████| 1114/1114 [00:11&lt;00:00, 101.27batches/s]
+Epoch  2/4: 100%|████████████████████████████████████████████████████████████| 1114/1114 [00:10&lt;00:00, 101.99batches/s]
+Epoch  3/4: 100%|████████████████████████████████████████████████████████████| 1114/1114 [00:10&lt;00:00, 101.38batches/s]
+Epoch  4/4: 100%|█████████████████████████████████████████████████████████████| 1114/1114 [00:12&lt;00:00, 92.55batches/s]
+</code></pre><p><img src="http://ohj9e0ect.bkt.clouddn.com/blog/180903/dAh5BG2iKD.png?imageslim" alt="mark"></p>
+<pre><code>Validation accuracy at 0.7662666440010071
+</code></pre><h1 id="P4-检测"><a href="#P4-检测" class="headerlink" title="P4:检测"></a>P4:检测</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">test_accuracy = <span class="number">0.0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> session:</span><br><span class="line">    </span><br><span class="line">    session.run(init)</span><br><span class="line">    batch_count = int(math.ceil(len(train_features)/batch_size))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> epoch_i <span class="keyword">in</span> range(epochs):</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># Progress bar</span></span><br><span class="line">        batches_pbar = tqdm(range(batch_count), desc=<span class="string">'Epoch &#123;:&gt;2&#125;/&#123;&#125;'</span>.format(epoch_i+<span class="number">1</span>, epochs), unit=<span class="string">'batches'</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># The training cycle</span></span><br><span class="line">        <span class="keyword">for</span> batch_i <span class="keyword">in</span> batches_pbar:</span><br><span class="line">            <span class="comment"># Get a batch of training features and labels</span></span><br><span class="line">            batch_start = batch_i*batch_size</span><br><span class="line">            batch_features = train_features[batch_start:batch_start + batch_size]</span><br><span class="line">            batch_labels = train_labels[batch_start:batch_start + batch_size]</span><br><span class="line"></span><br><span class="line">            <span class="comment"># Run optimizer</span></span><br><span class="line">            _ = session.run(optimizer, feed_dict=&#123;features: batch_features, labels: batch_labels&#125;)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Check accuracy against Test data</span></span><br><span class="line">        test_accuracy = session.run(accuracy, feed_dict=test_feed_dict)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">assert</span> test_accuracy &gt;= <span class="number">0.80</span>, <span class="string">'Test accuracy at &#123;&#125;, should be equal to or greater than 0.80'</span>.format(test_accuracy)</span><br><span class="line">print(<span class="string">'Nice Job! Test Accuracy is &#123;&#125;'</span>.format(test_accuracy))</span><br></pre></td></tr></table></figure>
+<pre><code>Epoch  1/4: 100%|████████████████████████████████████████████████████████████| 1114/1114 [00:01&lt;00:00, 588.57batches/s]
+Epoch  2/4: 100%|████████████████████████████████████████████████████████████| 1114/1114 [00:01&lt;00:00, 634.64batches/s]
+Epoch  3/4: 100%|████████████████████████████████████████████████████████████| 1114/1114 [00:01&lt;00:00, 633.74batches/s]
+Epoch  4/4: 100%|████████████████████████████████████████████████████████████| 1114/1114 [00:01&lt;00:00, 638.60batches/s]
+
+
+Nice Job! Test Accuracy is 0.8468999862670898
+</code></pre><h2 id="参考链接："><a href="#参考链接：" class="headerlink" title="参考链接："></a>参考链接：</h2><ul>
+<li><a href="https://lorexxar.cn/2016/07/21/python-tqdm/" target="_blank" rel="noopener">python tqdm模块分析</a></li>
+<li><a href="https://blog.csdn.net/CherDW/article/details/54881167" target="_blank" rel="noopener">Sklearn-train_test_split随机划分训练集和测试集</a></li>
+<li><a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.flatten.html" target="_blank" rel="noopener">numpy_ndarray.flatten</a></li>
+<li><a href="http://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.LabelBinarizer.html" target="_blank" rel="noopener">sklearn.LabelBinarizer</a></li>
+</ul>
+
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#P1-预处理数据"><span class="toc-text">P1:预处理数据</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#解压图片文件"><span class="toc-text">解压图片文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Min-Max-Scaling"><span class="toc-text">Min-Max Scaling</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#标签二值化"><span class="toc-text">标签二值化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#随机划分训练集和测试集"><span class="toc-text">随机划分训练集和测试集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#打包数据方便下次取用"><span class="toc-text">打包数据方便下次取用</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#P2-从预处理好的pickle中读取数据"><span class="toc-text">P2:从预处理好的pickle中读取数据</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#使用TF创建单层神经网络"><span class="toc-text">使用TF创建单层神经网络</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#P3-训练神经网络"><span class="toc-text">P3:训练神经网络</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#P4-检测"><span class="toc-text">P4:检测</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#参考链接："><span class="toc-text">参考链接：</span></a></li></ol></li></ol>
+  </div>
+</aside>
+  
+    <aside class="passage-copyright">
+      <div>本文作者: Yuqiu Ji</div>
+      
+        <div>
+          原文链接: 
+          <a href="" target="_blank">http://shamy1997.github.io/passages/tf小试牛刀/</a>
+        </div>
+      
+      <div>
+        版权声明: 本博客所有文章除特别声明外, 均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议. 转载请注明出处!
+      </div>
+    </aside>
+  
+  
+    <div class="passage-tags">
+     
+      <a href="/tags/tensorflow/"><i class="fa fa-tags"></i>tensorflow</a>
+     
+      <a href="/tags/深度学习/"><i class="fa fa-tags"></i>深度学习</a>
+    
+    </div>
+  
+</div>
+
+    </main>
+    
+      
+<div class="site-comment-contanier" data-plateform="leancloud">
+  
+    <p id="site-comment-info">
+      <i class="fa fa-spinner fa-spin"></i> 评论加载中
+    </p>
+    <div id="site-comment"></div>
+  
+</div>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">博客推荐</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://liweinlp.com/" target="_blank">立委NLP频道</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://yihui.name/cn/" target="_blank">谢益辉</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">系列教程</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://machinelearningmastery.com/blog/" target="_blank">machinelearningmastery</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="http://wuhuang.bitcron.com/lin-wiki/" target="_blank">lin-wiki</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">抓到我</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://www.douban.com/people/45130547/" target="_blank">豆瓣</a>
+          </span>
+        
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>
+    </div>
+    
+      <div class="site-footer-info">
+        <i class="fa fa-paw"></i> 您是本站第 <span id="site-count"></span> 位访客
+      </div>
+    
+    
+      <div class="site-footer-info">
+        <i class="fa fa-at"></i> Email: fdujyq@gmail.com
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 <a href="https://github.com/dongyuanxin/theme-ad/" target="_blank">Theme-AD</a>.
+      Created by <a href="https://godbmw.com/" target="_blank">GodBMW</a>.
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="site-layer-reward" id="site-layer-reward" style="display: none;">
+        
+          <div>
+            <img src="/images/wechat.png" alt="WeChat">
+            
+              <p>WeChat</p>
+            
+          </div>
+        
+          <div>
+            <img src="/images/alipay.png" alt="AliPay">
+            
+              <p>AliPay</p>
+            
+          </div>
+        
+      </div>
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="/passages/slot-filling/" data-enable="true">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="/passages/颗粒度分词调研/" data-enable="true">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+      <a href="#site-comment" data-enable="true">
+        <i class="fa fa-commenting"></i>
+      </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    <a href="javascript:void(0);" id="site-reward">
+      <i class="fa fa-thumbs-up"></i>
+    </a>
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+  
+  
+  
+  
+</div>
+    
+
+
+
+
+
+    
+  </body>
+</html>

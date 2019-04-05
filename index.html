@@ -1,1095 +1,484 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html>
+  
 <head><meta name="generator" content="Hexo 3.8.0">
-    <meta charset="utf-8">
-<title>好乐无荒</title>
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta charset="utf-8">
+  <meta name="author" content="Yuqiu Ji">
+  
+  
+  <title>好乐无荒</title>
 
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
+  
+    <meta name="keywords" content="Hexo, Theme-AD">
+  
 
-    <meta property="og:type" content="website">
-<meta property="og:title" content="好乐无荒">
-<meta property="og:url" content="http://shamy1997.github.io/index.html">
-<meta property="og:site_name" content="好乐无荒">
-<meta property="og:locale" content="zh">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="好乐无荒">
+  
+  <meta name="description" content="">
 
+  
 
+  
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.11.1/dist/av-min.js" async></script>
+  
 
+  
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+  
 
+  
+    <script src="//unpkg.com/valine/dist/Valine.min.js" async></script>
+  
 
-<link rel="icon" href="/images/favicon.svg">
+  
 
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"GqgKOWYsq9ic42QAjcPaYffa-gzGzoHsz","appkey":"dfrV8qBWczqyiVj0DPsAzucB","comment":true,"count":true},
+    welcome: {"enable":false,"interval":30},
+    start_time: "2019-01-01",
+    passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
+    is_post: false,
+    lock: false,
+    author: "Yuqiu Ji",
+    share: {"twitter":false,"facebook":false,"weibo":false,"qq":false,"wechat":false},
+    mathjax: true,
+    page_type: "",
+    root: "/"
+  };
+</script>
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
 
+  
+    <link rel="icon" href="/images/favicon.svg">
+    <link rel="apple-touch-icon" href="/images/favicon.svg">
+  
 
-    
-    
-    
-    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
-    
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
-    
-    
-    
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
-    
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
 
-    
-    
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
-
-
-    
-    
-    
-    
-
-<link rel="stylesheet" href="/css/back-to-top.css">
-
-
-    
-    
-
-    
-    
-    
-    
-
-    
-    
-<link rel="stylesheet" href="/css/progressbar.css">
-<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
-
-    
-
-
-<link rel="stylesheet" href="/css/style.css">
+  
 </head>
-<body class="is-2-column">
-    <nav class="navbar navbar-main">
-    <div class="container">
-        <div class="navbar-brand is-flex-center">
-            <a class="navbar-item navbar-logo" href="/">
-            
-                <img src="/images/logoagain.png" alt="好乐无荒" height="28">
-            
-            </a>
-        </div>
-        <div class="navbar-menu">
-            
-            <div class="navbar-start">
-                
-                <a class="navbar-item is-active" href="/">Home</a>
-                
-                <a class="navbar-item" href="/archives">Archives</a>
-                
-                <a class="navbar-item" href="/categories">Categories</a>
-                
-                <a class="navbar-item" href="/tags">Tags</a>
-                
-                <a class="navbar-item" href="/about">About</a>
-                
-            </div>
-            
-            <div class="navbar-end">
-                
-                
-                
-                <a class="navbar-item search" title="Search" href="javascript:;">
-                    <i class="fas fa-search"></i>
-                </a>
-                
-            </div>
-        </div>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">好乐无荒</a>
+      </span>
+    
+    
+      <span class="site-header-brand-motto"> | 良士休休</span>
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">首页</a>
+      
+        <a href="/archives/" target="_self">归档</a>
+      
+        <a href="/tags/" target="_self">标签</a>
+      
+        <a href="/categories/" target="_self">分类</a>
+      
+        <a href="/about/" target="_self">关于</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://github.com/shamy1997/" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
     </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/tags/" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/about/" target="_self">
+            关于
+          </a>
+        </li>
+      
+    </ol>
+  </div>
 </nav>
-    
-    <section class="section">
-        <div class="container">
-            <div class="columns">
-                <div class="column is-4-tablet is-4-desktop is-9-widescreen has-order-2 column-main">
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-12-22T12:37:49.000Z">2018-12-22</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    2 minutes read (About 337 words)
-                </span>
-                
+<div id="site-process"></div>
+    <main>
+      <div class="home">
+  
+    <div class="home-article-wrapper clearfix">
+      <div class="home-article" data-cover="false">
+        <div class="home-article-inner" data-cover="false">
+          <div class="passage-meta">
+            <span>
+              <i class="fa fa-calendar"></i>2018-12-22
+            </span>
+            
+            
+              <span>
+                | <i class="fa fa-unlock-alt"></i>UNLOCK
+              </span>
+            
+          </div>
+          <h1 class="home-article-title">
+            <a href="/passages/about-terminal/">终端命令笔记</a>
+          </h1>
+          <div class="home-article-content passage-article">
+            
+              
+            
+          </div>
+          <a class="home-article-read" href="/passages/about-terminal/">
+            README MORE >>>
+          </a>
+          
+            <div class="passage-tags">
+             
+              <a href="/tags/命令行/"><i class="fa fa-tags"></i>命令行</a>
+            
             </div>
+          
         </div>
         
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2018/12/22/about-terminal/">终端命令笔记</a>
-            
-        </h1>
-        <div class="content">
-            <h1 id="vi-常用命令"><a href="#vi-常用命令" class="headerlink" title="vi 常用命令"></a>vi 常用命令</h1><h2 id="1-进入-vi-编辑器"><a href="#1-进入-vi-编辑器" class="headerlink" title="1. 进入 vi 编辑器"></a>1. 进入 vi 编辑器</h2><figure class="highlight vim hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo <span class="hljs-keyword">vi</span> <span class="hljs-symbol">&lt;path&gt;</span></span><br></pre></td></tr></table></figure>
-<h2 id="2-修改内容"><a href="#2-修改内容" class="headerlink" title="2. 修改内容"></a>2. 修改内容</h2><p>输入<code>i</code>，进入<code>insert</code>模式。<br>按<code>esc</code>，退出模式。</p>
-<h2 id="3-保存，退出"><a href="#3-保存，退出" class="headerlink" title="3. 保存，退出"></a>3. 保存，退出</h2><ul>
-<li><code>:w</code> 保存文件但不退出vi;</li>
-<li><code>:wq</code> 保存文件并退出vi;</li>
-<li><code>q:</code> 不保存文件，退出vi</li>
-<li><code>:e!</code> 放弃所有修改，从上次保存文件开始再编辑</li>
-</ul>
-<p><a href="https://www.cnblogs.com/mondol/p/vi-examples.html" target="_blank" rel="noopener">vi命令大全</a> </p>
-<h1 id="Jupyter-or-conda-not-found"><a href="#Jupyter-or-conda-not-found" class="headerlink" title="Jupyter or conda not found"></a>Jupyter or conda not found</h1><p>我安装好anaconda后，打算用命令行直接打开jupyter notebook，结果却没有成功，网上一般的解释是要把anaconda配置到环境变量里：<br>在终端中输入：</p>
-<figure class="highlight jboss-cli hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vi ~<span class="hljs-string">/.bash_profile</span></span><br></pre></td></tr></table></figure>
-<p>打开后在末尾加上：</p>
-<figure class="highlight routeros hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-builtin-name">export</span> <span class="hljs-attribute">PATH</span>=<span class="hljs-string">'~/anaconda/bin:$PATH'</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 这里的path要根据anaconda所在的位置定义</span></span><br><span class="line"></span><br><span class="line">source ~/.bash_profile</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 表示修改立即生效</span></span><br></pre></td></tr></table></figure>
-<p>但是呢，我试了好几次都没有成功，事实上，是我配置了<code>oh-my-zsh</code>的原因。</p>
-<p>因此，正确的解决方法是，打开<code>~/.zshrc</code>，然后在文件最后一行添加：</p>
-<figure class="highlight routeros hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-builtin-name">export</span> <span class="hljs-attribute">PATH</span>=<span class="hljs-variable">$PATH</span>:$HOME/anaconda/bin</span><br></pre></td></tr></table></figure>
-<p>保存文件后，关闭窗口，重新开启窗口时，输入命令<code>conda --v</code>来检测是否成功。</p>
-<p><a href="https://stackoverflow.com/questions/18675907/how-to-run-conda" target="_blank" rel="noopener">参考链接🔗</a> </p>
-<h1 id="zsh-not-found"><a href="#zsh-not-found" class="headerlink" title="zsh not found"></a>zsh not found</h1><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-built_in">exec</span> /bin/zsh</span><br></pre></td></tr></table></figure>
-<p><a href="https://www.jiloc.com/43492.html" target="_blank" rel="noopener">参考资料🔗</a> </p>
-
-        </div>
-        
-        
-        
+      </div>
     </div>
-</div>
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-09-10T02:20:20.000Z">2018-09-10</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    12 minutes read (About 1806 words)
-                </span>
-                
+  
+    <div class="home-article-wrapper clearfix">
+      <div class="home-article" data-cover="false">
+        <div class="home-article-inner" data-cover="false">
+          <div class="passage-meta">
+            <span>
+              <i class="fa fa-calendar"></i>2018-09-10
+            </span>
+            
+            
+              <span>
+                | <i class="fa fa-unlock-alt"></i>UNLOCK
+              </span>
+            
+          </div>
+          <h1 class="home-article-title">
+            <a href="/passages/slot-filling/">Slot Filling with SimpleRNN</a>
+          </h1>
+          <div class="home-article-content passage-article">
+            
+              
+            
+          </div>
+          <a class="home-article-read" href="/passages/slot-filling/">
+            README MORE >>>
+          </a>
+          
+            <div class="passage-tags">
+             
+              <a href="/tags/NLP/"><i class="fa fa-tags"></i>NLP</a>
+             
+              <a href="/tags/keras/"><i class="fa fa-tags"></i>keras</a>
+             
+              <a href="/tags/RNN/"><i class="fa fa-tags"></i>RNN</a>
+            
             </div>
+          
         </div>
         
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2018/09/10/slot-filling/">Slot Filling with SimpleRNN</a>
-            
-        </h1>
-        <div class="content">
-            <h1 id="什么是Slot-Filling？"><a href="#什么是Slot-Filling？" class="headerlink" title="什么是Slot Filling？"></a>什么是Slot Filling？</h1><p>Slot Filling是自然语言理解中的一个基本问题，是对语言含义的简单化处理，它的思想类似于语言学中框架主义的一派，先设定好特定的语言类型槽，再将输入的单词一一填入槽内，而获取言语含义的时候即是根据语义槽的含义进行提取和检索。我们这里的任务就是将表示定购航班（ATIS数据集）这一言语行为的一系列语句填入各种类型的语义槽中。</p>
-<h1 id="为什么使用SimpleRNN"><a href="#为什么使用SimpleRNN" class="headerlink" title="为什么使用SimpleRNN?"></a>为什么使用SimpleRNN?</h1><p>Slot Filling属于RNN应用中一对一的应用，通过训练模型，每个词都能被填到合适的槽中。<br>RNN和一般的神经网络的不同在于，在RNN中，我们在时间t的输出不仅取决于当前的输入和权重，还取决于之前的输入，而对于其他神经网络模型，每个时刻的输入和输出都是独立而随机的，没有相关性。放到我们要处理语义理解的问题上看，语言作为一种基于时间的线性输出，显然会受到前词的影响，因此我们选取RNN模型来进行解决这个问题。<br>这里选取SimpleRNN,是因为这个RNN比较简单，能达到熟悉框架的练习效果，之后可以选取其他有效的RNN模型，如LSTMS进行优化。</p>
-<h1 id="构建思路一览："><a href="#构建思路一览：" class="headerlink" title="构建思路一览："></a>构建思路一览：</h1><ul>
-<li>载入数据，使用的是<a href="https://github.com/chsasank/ATIS.keras" target="_blank" rel="noopener">chsasank</a>修改的<a href="https://github.com/mesnilgr/is13" target="_blank" rel="noopener">mesnilgr</a>的load.py。</li>
-<li>定义模型。采取Keras中的序列模型搭建，首先使用一个100维的word embedding层将输入的单词转化为高维空间中的一个向量（在这个空间中，语义和语法位置越近的单词的距离越小），然后我们构建一个dropout层防止过拟合，设置SimpleRNN层，设置TimeDistributed层以完成基于时间的反向传播。最后我们将这些层组织在一起，并确定optimizer和loss function。我们选取的optimizer是rmsprop,这样在训练后期依然能找到较有项，而选取categorical_crossentropy作为损失函数，则是因为处理的问题性质适合于此。</li>
-<li>训练模型。出于对计算资源的考虑，我们一般使用minibtach的方法批量对模型进行训练。但是我们这里的数据是一句句话，如果按照一个固定的batch_size将其分裂，可能增加了不必要的联系（因为上下两句话是独立的），因此我们将一句话作为一个batch去进行训练、验证以及预测，并手动算出一个epoch的平均误差。</li>
-<li>评估和预测模型。我们通过观察验证误差和预测F1精度来对模型进行评估。预测F1精度使用的是<a href="https://github.com/sighsmile/conlleval" target="_blank" rel="noopener">signsmile</a>编写的conlleval.py。</li>
-<li>保存模型。</li>
-</ul>
-<figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np</span><br><span class="line"><span class="hljs-keyword">import</span> pickle</span><br><span class="line"><span class="hljs-keyword">from</span> keras.models <span class="hljs-keyword">import</span> Sequential</span><br><span class="line"><span class="hljs-keyword">from</span> keras.layers.embeddings <span class="hljs-keyword">import</span> Embedding</span><br><span class="line"><span class="hljs-keyword">from</span> keras.layers.recurrent <span class="hljs-keyword">import</span> SimpleRNN</span><br><span class="line"><span class="hljs-keyword">from</span> keras.layers.core <span class="hljs-keyword">import</span> Dense,Dropout</span><br><span class="line"><span class="hljs-keyword">from</span> keras.utils <span class="hljs-keyword">import</span> to_categorical</span><br><span class="line"><span class="hljs-keyword">from</span> keras.layers.wrappers <span class="hljs-keyword">import</span> TimeDistributed</span><br><span class="line"><span class="hljs-keyword">from</span> matplotlib <span class="hljs-keyword">import</span> pyplot <span class="hljs-keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">import</span> data.load</span><br><span class="line"><span class="hljs-keyword">from</span> metrics.accuracy <span class="hljs-keyword">import</span> evaluate</span><br></pre></td></tr></table></figure>
-<pre><code>Using TensorFlow backend.
-</code></pre><h1 id="Load-Data"><a href="#Load-Data" class="headerlink" title="Load Data"></a>Load Data</h1><figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">train_set,valid_set,dicts = data.load.atisfull()</span><br><span class="line"><span class="hljs-comment"># print(train_set[:1])</span></span><br><span class="line"><span class="hljs-comment"># dicts = &#123;'label2idx':&#123;&#125;,'words2idx':&#123;&#125;,'table2idx':&#123;&#125;&#125;</span></span><br><span class="line">w2idx,labels2idx = dicts[<span class="hljs-string">'words2idx'</span>],dicts[<span class="hljs-string">'labels2idx'</span>]</span><br><span class="line">train_x,_,train_label = train_set</span><br><span class="line">val_x,_,val_label = valid_set</span><br></pre></td></tr></table></figure>
-<figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">idx2w = &#123;w2idx[i]:i <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> w2idx&#125;</span><br><span class="line">idx2lab = &#123;labels2idx[i]:i <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> labels2idx&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">n_classes = len(idx2lab)</span><br><span class="line">n_vocab = len(idx2w)</span><br></pre></td></tr></table></figure>
-<figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">words_train = [[idx2w[i] <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> w[:]] <span class="hljs-keyword">for</span> w <span class="hljs-keyword">in</span> train_x]</span><br><span class="line">labels_train = [[idx2lab[i] <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> w[:]] <span class="hljs-keyword">for</span> w <span class="hljs-keyword">in</span> train_label]</span><br><span class="line"></span><br><span class="line">words_val = [[idx2w[i] <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> w[:]] <span class="hljs-keyword">for</span> w <span class="hljs-keyword">in</span> val_x]</span><br><span class="line"><span class="hljs-comment"># labels_val = [[idx2lab[i] for i in w[:]] for w in val_label]</span></span><br><span class="line">labels_val =[]</span><br><span class="line"><span class="hljs-keyword">for</span> w <span class="hljs-keyword">in</span> val_label:</span><br><span class="line">    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> w[:]:</span><br><span class="line">        labels_val.append(idx2lab[i])</span><br><span class="line"></span><br><span class="line">print(<span class="hljs-string">'Real Sentence : &#123;&#125;'</span>.format(words_train[<span class="hljs-number">0</span>]))</span><br><span class="line">print(<span class="hljs-string">'Encoded Form : &#123;&#125;'</span>.format(train_x[<span class="hljs-number">0</span>]))</span><br><span class="line">print(<span class="hljs-string">'='</span>*<span class="hljs-number">40</span>)</span><br><span class="line">print(<span class="hljs-string">'Real Label : &#123;&#125;'</span>.format(labels_train[<span class="hljs-number">0</span>]))</span><br><span class="line">print(<span class="hljs-string">'Encoded Form : &#123;&#125;'</span>.format(train_label[<span class="hljs-number">0</span>]))</span><br></pre></td></tr></table></figure>
-<pre><code>Real Sentence : [&apos;i&apos;, &apos;want&apos;, &apos;to&apos;, &apos;fly&apos;, &apos;from&apos;, &apos;boston&apos;, &apos;at&apos;, &apos;DIGITDIGITDIGIT&apos;, &apos;am&apos;, &apos;and&apos;, &apos;arrive&apos;, &apos;in&apos;, &apos;denver&apos;, &apos;at&apos;, &apos;DIGITDIGITDIGITDIGIT&apos;, &apos;in&apos;, &apos;the&apos;, &apos;morning&apos;]
-Encoded Form : [232 542 502 196 208  77  62  10  35  40  58 234 137  62  11 234 481 321]
-========================================
-Real Label : [&apos;O&apos;, &apos;O&apos;, &apos;O&apos;, &apos;O&apos;, &apos;O&apos;, &apos;B-fromloc.city_name&apos;, &apos;O&apos;, &apos;B-depart_time.time&apos;, &apos;I-depart_time.time&apos;, &apos;O&apos;, &apos;O&apos;, &apos;O&apos;, &apos;B-toloc.city_name&apos;, &apos;O&apos;, &apos;B-arrive_time.time&apos;, &apos;O&apos;, &apos;O&apos;, &apos;B-arrive_time.period_of_day&apos;]
-Encoded Form : [126 126 126 126 126  48 126  35  99 126 126 126  78 126  14 126 126  12]
-</code></pre><h1 id="Define-and-Compile-the-model"><a href="#Define-and-Compile-the-model" class="headerlink" title="Define and Compile the model"></a>Define and Compile the model</h1><figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">model = Sequential()</span><br><span class="line">model.add(Embedding(n_vocab,<span class="hljs-number">100</span>))</span><br><span class="line">model.add(Dropout(<span class="hljs-number">0.25</span>))</span><br><span class="line">model.add(SimpleRNN(<span class="hljs-number">100</span>,return_sequences=<span class="hljs-keyword">True</span>))</span><br><span class="line">model.add(TimeDistributed(Dense(n_classes,activation=<span class="hljs-string">'softmax'</span>)))</span><br><span class="line">model.compile(optimizer = <span class="hljs-string">'rmsprop'</span>,loss = <span class="hljs-string">'categorical_crossentropy'</span>)</span><br><span class="line">model.summary()</span><br></pre></td></tr></table></figure>
-<pre><code>_________________________________________________________________
-Layer (type)                 Output Shape              Param #   
-=================================================================
-embedding_1 (Embedding)      (None, None, 100)         57200     
-_________________________________________________________________
-dropout_1 (Dropout)          (None, None, 100)         0         
-_________________________________________________________________
-simple_rnn_1 (SimpleRNN)     (None, None, 100)         20100     
-_________________________________________________________________
-time_distributed_1 (TimeDist (None, None, 127)         12827     
-=================================================================
-Total params: 90,127
-Trainable params: 90,127
-Non-trainable params: 0
-_________________________________________________________________
-</code></pre><h1 id="Train-the-model"><a href="#Train-the-model" class="headerlink" title="Train the model"></a>Train the model</h1><figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">train_the_model</span><span class="hljs-params">(n_epochs,train_x,train_label,val_x,val_label)</span>:</span></span><br><span class="line">    epoch,train_avgloss,val_avgloss,f1s = [],[],[],[]</span><br><span class="line">    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">1</span>,n_epochs+<span class="hljs-number">1</span>):</span><br><span class="line">        epoch.append(i)</span><br><span class="line">        </span><br><span class="line">        <span class="hljs-comment">## training</span></span><br><span class="line">        train_avg_loss =<span class="hljs-number">0</span></span><br><span class="line">        </span><br><span class="line">        <span class="hljs-keyword">for</span> n_batch,sent <span class="hljs-keyword">in</span> enumerate(train_x):</span><br><span class="line">            label = train_label[n_batch]</span><br><span class="line">            <span class="hljs-comment"># label to one-hot</span></span><br><span class="line">            label = to_categorical(label,num_classes=n_classes)[np.newaxis,:]</span><br><span class="line">            sent = sent[np.newaxis,:]</span><br><span class="line">            loss = model.train_on_batch(sent,label)</span><br><span class="line">            train_avg_loss += loss</span><br><span class="line">            </span><br><span class="line">        train_avg_loss = train_avg_loss/n_batch</span><br><span class="line">        train_avgloss.append(train_avg_loss)</span><br><span class="line">        </span><br><span class="line">        <span class="hljs-comment">## evaluate&amp;predict</span></span><br><span class="line">        val_pred_label,pred_label_val,val_avg_loss  = [],[],<span class="hljs-number">0</span></span><br><span class="line">        </span><br><span class="line">        <span class="hljs-keyword">for</span> n_batch,sent <span class="hljs-keyword">in</span> enumerate(val_x):</span><br><span class="line">            label = val_label[n_batch]</span><br><span class="line">            label = to_categorical(label,num_classes=n_classes)[np.newaxis,:]</span><br><span class="line">            sent = sent[np.newaxis,:]</span><br><span class="line">            loss = model.test_on_batch(sent,label)</span><br><span class="line">            val_avg_loss += loss</span><br><span class="line">            </span><br><span class="line">            pred = model.predict_on_batch(sent)</span><br><span class="line">            pred = np.argmax(pred,<span class="hljs-number">-1</span>)[<span class="hljs-number">0</span>]</span><br><span class="line">            val_pred_label.append(pred)</span><br><span class="line">            </span><br><span class="line">        val_avg_loss = val_avg_loss/n_batch</span><br><span class="line">        val_avgloss.append(val_avg_loss)</span><br><span class="line">        </span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">for</span> w <span class="hljs-keyword">in</span> val_pred_label:</span><br><span class="line">            <span class="hljs-keyword">for</span> k <span class="hljs-keyword">in</span> w[:]:</span><br><span class="line">                pred_label_val.append(idx2lab[k])</span><br><span class="line">            </span><br><span class="line">        prec, rec, f1 = evaluate(labels_val,pred_label_val, verbose=<span class="hljs-keyword">False</span>)</span><br><span class="line">        print(<span class="hljs-string">'Training epoch &#123;&#125;\t train_avg_loss = &#123;&#125; \t val_avg_loss = &#123;&#125;'</span>.format(i,train_avg_loss,val_avg_loss))</span><br><span class="line">        print(<span class="hljs-string">'precision: &#123;:.2f&#125;% \t recall: &#123;:.2f&#125;% \t f1 :&#123;:.2f&#125;%'</span>.format(prec,rec,f1))</span><br><span class="line">        print(<span class="hljs-string">'-'</span>*<span class="hljs-number">60</span>)</span><br><span class="line">        f1s.append(f1)</span><br><span class="line"></span><br><span class="line">        </span><br><span class="line"><span class="hljs-comment">#     return epoch,pred_label_train,train_avgloss,pred_label_val,val_avgloss</span></span><br><span class="line">    <span class="hljs-keyword">return</span> epoch,f1s,val_avgloss,train_avgloss</span><br></pre></td></tr></table></figure>
-<figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">epoch,f1s,val_avgloss,train_avgloss = train_the_model(<span class="hljs-number">40</span>,train_x,train_label,val_x,val_label)</span><br></pre></td></tr></table></figure>
-<p><strong>输出：</strong><br><figure class="highlight groovy hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">  Training epoch <span class="hljs-number">1</span>	 train_avg_loss = <span class="hljs-number">0.5546463992293973</span> 	 val_avg_loss = <span class="hljs-number">0.4345020865901363</span></span><br><span class="line"><span class="hljs-symbol">  precision:</span> <span class="hljs-number">84.79</span>% 	 <span class="hljs-string">recall:</span> <span class="hljs-number">80.79</span>% 	 <span class="hljs-string">f1 :</span><span class="hljs-number">82.74</span>%</span><br><span class="line">  ------------------------------------------------------------</span><br><span class="line">  Training epoch <span class="hljs-number">2</span>	 train_avg_loss = <span class="hljs-number">0.2575569036037627</span> 	 val_avg_loss = <span class="hljs-number">0.36228470020366654</span></span><br><span class="line"><span class="hljs-symbol">  precision:</span> <span class="hljs-number">86.64</span>% 	 <span class="hljs-string">recall:</span> <span class="hljs-number">83.86</span>% 	 <span class="hljs-string">f1 :</span><span class="hljs-number">85.22</span>%</span><br><span class="line">  ------------------------------------------------------------</span><br><span class="line">  Training epoch <span class="hljs-number">3</span>	 train_avg_loss = <span class="hljs-number">0.2238766908014994</span> 	 val_avg_loss = <span class="hljs-number">0.33974187403771694</span></span><br><span class="line"><span class="hljs-symbol">  precision:</span> <span class="hljs-number">88.03</span>% 	 <span class="hljs-string">recall:</span> <span class="hljs-number">85.55</span>% 	 <span class="hljs-string">f1 :</span><span class="hljs-number">86.77</span>%</span><br><span class="line">  ------------------------------------------------------------</span><br><span class="line">……</span><br><span class="line">     ------------------------------------------------------------</span><br><span class="line">  Training epoch <span class="hljs-number">40</span>	 train_avg_loss = <span class="hljs-number">0.09190682124901069</span> 	 val_avg_loss = <span class="hljs-number">0.2697056618613356</span></span><br><span class="line"><span class="hljs-symbol">  precision:</span> <span class="hljs-number">92.51</span>% 	 <span class="hljs-string">recall:</span> <span class="hljs-number">91.47</span>% 	 <span class="hljs-string">f1 :</span><span class="hljs-number">91.99</span>%</span><br><span class="line">  ------------------------------------------------------------</span><br></pre></td></tr></table></figure></p>
-<h1 id="可视化"><a href="#可视化" class="headerlink" title="可视化"></a>可视化</h1><p>观察验证误差，选取合适的epoch。</p>
-<figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">%matplotlib inline</span><br><span class="line">plt.xlabel=(<span class="hljs-string">'epoch'</span>)</span><br><span class="line">plt.ylabel=(<span class="hljs-string">'loss'</span>)</span><br><span class="line">plt.plot(epoch,train_avgloss,<span class="hljs-string">'b'</span>)</span><br><span class="line">plt.plot(epoch,val_avgloss,<span class="hljs-string">'r'</span>,label=(<span class="hljs-string">'validation error'</span>))</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<p><img src="http://ohj9e0ect.bkt.clouddn.com/blog/180911/5A7mAF88bL.png?imageslim" alt="mark"></p>
-<figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="hljs-string">'最大f1值为 &#123;:.2f&#125;%'</span>.format(max(f1s)))</span><br></pre></td></tr></table></figure>
-<pre><code>最大f1值为 92.56%
-</code></pre><h1 id="保存模型"><a href="#保存模型" class="headerlink" title="保存模型"></a>保存模型</h1><figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">model.save(<span class="hljs-string">'slot_filling_with_simpleRNN.h5'</span>)</span><br></pre></td></tr></table></figure>
-<h1 id="结果分析"><a href="#结果分析" class="headerlink" title="结果分析"></a>结果分析</h1><p>使用SimpleRNN最终得到的F1值为92.56%，和师兄的95.47%相比确实还相差很多。这主要是和我们模型的选取有关，SimpleRNN只能将前词的影响带入到模型中，但是语言中后词对前词也会有一定的影响，因此可以通过选择更加复杂的模型或者增加能够捕捉到后词信息的层来进行优化。</p>
-<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
-<li><a href="https://chsasank.github.io/spoken-language-understanding.html" target="_blank" rel="noopener">Keras Tutorial - Spoken Language Understanding</a></li>
-<li><a href="https://github.com/czs0x55aa/pytorch-slot-filling/blob/master/evaluate.py" target="_blank" rel="noopener">pytorch-slot-filling</a></li>
-<li><a href="https://github.com/liu946/AtisSlotLabeling" target="_blank" rel="noopener">liu946 AtisSlotLabeling</a></li>
-<li><a href="https://blog.csdn.net/winteeena/article/details/78997053" target="_blank" rel="noopener">【Keras情感分类】训练过程中出现的问题汇总</a></li>
-<li><a href="https://keras.io/zh/layers/recurrent/" target="_blank" rel="noopener">keras-SimpleRNN</a></li>
-<li><a href="https://www.cnblogs.com/dapeng-bupt/p/7606111.html" target="_blank" rel="noopener">机器学习中过拟合的解决办法</a></li>
-</ul>
-
-        </div>
-        
-        
-        
+      </div>
     </div>
-</div>
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-09-02T16:02:32.000Z">2018-09-03</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    18 minutes read (About 2726 words)
-                </span>
-                
+  
+    <div class="home-article-wrapper clearfix">
+      <div class="home-article" data-cover="false">
+        <div class="home-article-inner" data-cover="false">
+          <div class="passage-meta">
+            <span>
+              <i class="fa fa-calendar"></i>2018-09-03
+            </span>
+            
+            
+              <span>
+                | <i class="fa fa-unlock-alt"></i>UNLOCK
+              </span>
+            
+          </div>
+          <h1 class="home-article-title">
+            <a href="/passages/tf小试牛刀/">TensorFlow小试牛刀</a>
+          </h1>
+          <div class="home-article-content passage-article">
+            
+              
+            
+          </div>
+          <a class="home-article-read" href="/passages/tf小试牛刀/">
+            README MORE >>>
+          </a>
+          
+            <div class="passage-tags">
+             
+              <a href="/tags/tensorflow/"><i class="fa fa-tags"></i>tensorflow</a>
+             
+              <a href="/tags/深度学习/"><i class="fa fa-tags"></i>深度学习</a>
+            
             </div>
+          
         </div>
         
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2018/09/03/tf小试牛刀/">TensorFlow小试牛刀</a>
-            
-        </h1>
-        <div class="content">
-            <blockquote>
-<p>此日志为参照Udacity课程中《Intro to tensorflow》的jupyter notebook所做的分解源码，目的在于理解代码逻辑，熟悉创建流程和套路。其中参考了不少博文链接，非常感谢，全部放在文末，在原文中不再指出。</p>
-</blockquote>
-<p>数据链接：百度云：<a href="https://pan.baidu.com/s/1xEB_B8QPzSjuLpPXgnAhJg" target="_blank" rel="noopener">NoMNIST</a>  密码：fsks</p>
-<h1 id="P1-预处理数据"><a href="#P1-预处理数据" class="headerlink" title="P1:预处理数据"></a>P1:预处理数据</h1><figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> hashlib</span><br><span class="line"><span class="hljs-keyword">import</span> os</span><br><span class="line"><span class="hljs-keyword">import</span> pickle</span><br><span class="line"><span class="hljs-keyword">from</span> urllib.request <span class="hljs-keyword">import</span> urlretrieve</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np</span><br><span class="line"><span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image</span><br><span class="line"><span class="hljs-keyword">from</span> sklearn.model_selection <span class="hljs-keyword">import</span> train_test_split</span><br><span class="line"><span class="hljs-keyword">from</span> sklearn.preprocessing <span class="hljs-keyword">import</span> LabelBinarizer</span><br><span class="line"><span class="hljs-keyword">from</span> sklearn.utils <span class="hljs-keyword">import</span> resample</span><br><span class="line"><span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm</span><br><span class="line"><span class="hljs-keyword">from</span> zipfile <span class="hljs-keyword">import</span> ZipFile</span><br></pre></td></tr></table></figure>
-<h2 id="解压图片文件"><a href="#解压图片文件" class="headerlink" title="解压图片文件"></a>解压图片文件</h2><figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">uncompress_features_labels</span><span class="hljs-params">(file)</span>:</span></span><br><span class="line">    <span class="hljs-string">"""</span></span><br><span class="line"><span class="hljs-string">    Uncompress features and labels from a zip file</span></span><br><span class="line"><span class="hljs-string">    :param file: The zip file to extract the data from</span></span><br><span class="line"><span class="hljs-string">    """</span></span><br><span class="line">    features = []</span><br><span class="line">    labels = []</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">with</span> ZipFile(file) <span class="hljs-keyword">as</span> zipf:</span><br><span class="line">        <span class="hljs-comment"># Progress Bar</span></span><br><span class="line">        filenames_pbar = tqdm(zipf.namelist(), unit=<span class="hljs-string">'files'</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="hljs-comment"># Get features and labels from all files</span></span><br><span class="line">        <span class="hljs-keyword">for</span> filename <span class="hljs-keyword">in</span> filenames_pbar:</span><br><span class="line">            <span class="hljs-comment"># Check if the file is a directory</span></span><br><span class="line">            <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> filename.endswith(<span class="hljs-string">'/'</span>):</span><br><span class="line">                <span class="hljs-keyword">with</span> zipf.open(filename) <span class="hljs-keyword">as</span> image_file:</span><br><span class="line">                    image = Image.open(image_file)</span><br><span class="line">                    image.load()</span><br><span class="line">                    <span class="hljs-comment"># Load image data as 1 dimensional array</span></span><br><span class="line">                    <span class="hljs-comment"># We're using float32 to save on memory space</span></span><br><span class="line">                    feature = np.array(image, dtype=np.float32).flatten()</span><br><span class="line"></span><br><span class="line">                <span class="hljs-comment"># Get the the letter from the filename.  This is the letter of the image.</span></span><br><span class="line">                label = os.path.split(filename)[<span class="hljs-number">1</span>][<span class="hljs-number">0</span>]</span><br><span class="line"></span><br><span class="line">                features.append(feature)</span><br><span class="line">                labels.append(label)</span><br><span class="line">    <span class="hljs-keyword">return</span> np.array(features), np.array(labels)</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># Get the features and labels from the zip files</span></span><br><span class="line">train_features, train_labels = uncompress_features_labels(<span class="hljs-string">'notMNIST_train.zip'</span>)</span><br><span class="line">test_features, test_labels = uncompress_features_labels(<span class="hljs-string">'notMNIST_test.zip'</span>)</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># Limit the amount of data to work with a docker container</span></span><br><span class="line">docker_size_limit = <span class="hljs-number">150000</span></span><br><span class="line">train_features, train_labels = resample(train_features, train_labels, n_samples=docker_size_limit)</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># Set flags for feature engineering.  This will prevent you from skipping an important step.</span></span><br><span class="line">is_features_normal = <span class="hljs-keyword">False</span></span><br><span class="line">is_labels_encod = <span class="hljs-keyword">False</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight dns hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-number">100</span>%|█████████████████████████████████████████████████████████████████████| <span class="hljs-number">210001/210001</span> [<span class="hljs-number">00:54&lt;00:00</span>, <span class="hljs-number">3832</span>.<span class="hljs-number">78</span>files/s]</span><br><span class="line"><span class="hljs-number">100</span>%|███████████████████████████████████████████████████████████████████████| <span class="hljs-number">10001/10001</span> [<span class="hljs-number">00:03&lt;00:00</span>, <span class="hljs-number">3207</span>.<span class="hljs-number">15</span>files/s]</span><br></pre></td></tr></table></figure>
-<h2 id="Min-Max-Scaling"><a href="#Min-Max-Scaling" class="headerlink" title="Min-Max Scaling"></a>Min-Max Scaling</h2><p>Implement Min-Max scaling in the <code>normalize_grayscale()</code> function to a range of <code>a=0.1</code> and <code>b=0.9</code>. After scaling, the values of the pixels in the input data should range from 0.1 to 0.9.</p>
-<p>Since the raw notMNIST image data is in <a href="https://en.wikipedia.org/wiki/Grayscale" target="_blank" rel="noopener">grayscale</a>, the current values range from a min of 0 to a max of 255.</p>
-<p>Min-Max Scaling:$X’=a+{\frac {\left(X-X_{\min }\right)\left(b-a\right)}{X_{\max }-X_{\min }}}$</p>
-<figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">normalize_grayscale</span><span class="hljs-params">(image_data)</span>:</span></span><br><span class="line">    <span class="hljs-string">"""</span></span><br><span class="line"><span class="hljs-string">    Normalize the image data with Min-Max scaling to a range of [0.1, 0.9]</span></span><br><span class="line"><span class="hljs-string">    :param image_data: The image data to be normalized</span></span><br><span class="line"><span class="hljs-string">    :return: Normalized image data</span></span><br><span class="line"><span class="hljs-string">    """</span></span><br><span class="line"> </span><br><span class="line">    a = <span class="hljs-number">0.1</span></span><br><span class="line">    b = <span class="hljs-number">0.9</span></span><br><span class="line">    max_grayscale = <span class="hljs-number">255</span></span><br><span class="line">    min_grayscale = <span class="hljs-number">0</span></span><br><span class="line">    <span class="hljs-keyword">return</span> a+((image_data-min_grayscale))*(b-a)/(max_grayscale-min_grayscale)</span><br></pre></td></tr></table></figure>
-<figure class="highlight ini hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-attr">train_features</span> = normalize_grayscale(train_features)</span><br><span class="line"><span class="hljs-attr">test_features</span> = normalize_grayscale(test_features)</span><br></pre></td></tr></table></figure>
-<h2 id="标签二值化"><a href="#标签二值化" class="headerlink" title="标签二值化"></a>标签二值化</h2><p><code>LabelBinarizer()</code>是sklearn.preprocession中用来将非数值类标签转换为独热编码向量的函数。</p>
-<figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># Create the encoder 创建编码器</span></span><br><span class="line">encoder = LabelBinarizer()</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 编码器找到类别并分配 one-hot 向量</span></span><br><span class="line">encoder.fit(train_labels)</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">#最后把目标（lables）转换成独热编码的（one-hot encoded）向量</span></span><br><span class="line">train_labels = encoder.transform(train_labels)</span><br><span class="line">test_labels = encoder.transform(test_labels)</span><br></pre></td></tr></table></figure>
-<p>转换数据类型，这样后面公式中才可以进行运算。</p>
-<figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">train_labels = train_labels.astype(np.float32)</span><br><span class="line">test_labels = test_labels.astype(np.float32)</span><br></pre></td></tr></table></figure>
-<h2 id="随机划分训练集和测试集"><a href="#随机划分训练集和测试集" class="headerlink" title="随机划分训练集和测试集"></a>随机划分训练集和测试集</h2><p>常见形式为：<br><code>X_train,X_test, y_train, y_test =cross_validation.train_test_split(train_data,train_target,test_size=0.4, random_state=0)</code></p>
-<p><strong>参数解释：</strong></p>
-<ul>
-<li>train_data：所要划分的样本特征集</li>
-<li>train_target：所要划分的样本结果</li>
-<li>test_size：样本占比，如果是整数的话就是样本的数量</li>
-<li>random_state：是随机数的种子。</li>
-</ul>
-<p>随机数种子：其实就是该组随机数的编号，在需要重复试验的时候，保证得到一组一样的随机数。比如你每次都填1，其他参数一样的情况下你得到的随机数组是一样的。但填0或不填，每次都会不一样。</p>
-<figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># Get randomized datasets for training and validation</span></span><br><span class="line">train_features, valid_features, train_labels, valid_labels = train_test_split(</span><br><span class="line">    train_features,</span><br><span class="line">    train_labels,</span><br><span class="line">    test_size=<span class="hljs-number">0.05</span>,</span><br><span class="line">    random_state=<span class="hljs-number">832289</span>)</span><br></pre></td></tr></table></figure>
-<h2 id="打包数据方便下次取用"><a href="#打包数据方便下次取用" class="headerlink" title="打包数据方便下次取用"></a>打包数据方便下次取用</h2><p>序列化的方法为 pickle.dump()，该方法的相关参数如下：<br><code>pickle.dump(obj, file, protocol=None,*,fix_imports=True)</code></p>
-<figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># 新建pickle_file</span></span><br><span class="line"><span class="hljs-comment"># 参数file必须是以二进制的形式进行操作,即「wb」</span></span><br><span class="line">pickle_file = <span class="hljs-string">'notMNIST.pickle'</span></span><br><span class="line"><span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> os.path.isfile(pickle_file):</span><br><span class="line">    print(<span class="hljs-string">'Saving data to pickle file...'</span>)</span><br><span class="line">    <span class="hljs-keyword">try</span>:</span><br><span class="line">        <span class="hljs-keyword">with</span> open(<span class="hljs-string">'notMNIST.pickle'</span>, <span class="hljs-string">'wb'</span>) <span class="hljs-keyword">as</span> pfile:</span><br><span class="line">            pickle.dump(</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="hljs-string">'train_dataset'</span>: train_features,</span><br><span class="line">                    <span class="hljs-string">'train_labels'</span>: train_labels,</span><br><span class="line">                    <span class="hljs-string">'valid_dataset'</span>: valid_features,</span><br><span class="line">                    <span class="hljs-string">'valid_labels'</span>: valid_labels,</span><br><span class="line">                    <span class="hljs-string">'test_dataset'</span>: test_features,</span><br><span class="line">                    <span class="hljs-string">'test_labels'</span>: test_labels,</span><br><span class="line">                &#125;,</span><br><span class="line">                pfile, pickle.HIGHEST_PROTOCOL)</span><br><span class="line">    <span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> e:</span><br><span class="line">        print(<span class="hljs-string">'Unable to save data to'</span>, pickle_file, <span class="hljs-string">':'</span>, e)</span><br><span class="line">        <span class="hljs-keyword">raise</span></span><br></pre></td></tr></table></figure>
-<h1 id="P2-从预处理好的pickle中读取数据"><a href="#P2-从预处理好的pickle中读取数据" class="headerlink" title="P2:从预处理好的pickle中读取数据"></a>P2:从预处理好的pickle中读取数据</h1><figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">%matplotlib inline</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># Load the modules</span></span><br><span class="line"><span class="hljs-keyword">import</span> pickle</span><br><span class="line"><span class="hljs-keyword">import</span> math</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np</span><br><span class="line"><span class="hljs-keyword">import</span> tensorflow <span class="hljs-keyword">as</span> tf</span><br><span class="line"><span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm</span><br><span class="line"><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># Reload the data</span></span><br><span class="line">pickle_file = <span class="hljs-string">'notMNIST.pickle'</span></span><br><span class="line"><span class="hljs-keyword">with</span> open(pickle_file, <span class="hljs-string">'rb'</span>) <span class="hljs-keyword">as</span> f:</span><br><span class="line">  pickle_data = pickle.load(f)</span><br><span class="line">  train_features = pickle_data[<span class="hljs-string">'train_dataset'</span>]</span><br><span class="line">  train_labels = pickle_data[<span class="hljs-string">'train_labels'</span>]</span><br><span class="line">  valid_features = pickle_data[<span class="hljs-string">'valid_dataset'</span>]</span><br><span class="line">  valid_labels = pickle_data[<span class="hljs-string">'valid_labels'</span>]</span><br><span class="line">  test_features = pickle_data[<span class="hljs-string">'test_dataset'</span>]</span><br><span class="line">  test_labels = pickle_data[<span class="hljs-string">'test_labels'</span>]</span><br><span class="line">  <span class="hljs-keyword">del</span> pickle_data  <span class="hljs-comment"># Free up memory</span></span><br></pre></td></tr></table></figure>
-<pre><code>C:\Users\10677\Anaconda3\envs\keras\lib\site-packages\h5py\__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
-  from ._conv import register_converters as _register_converters
-</code></pre><h1 id="使用TF创建单层神经网络"><a href="#使用TF创建单层神经网络" class="headerlink" title="使用TF创建单层神经网络"></a>使用TF创建单层神经网络</h1><p>接下来，我们使用<code>TensorFlow</code>创建一个只有一个输入层和输出层的神经网络，激活函数为<code>softmax</code>。<br>在<code>TensorFlow</code>中，数据不是以整数、浮点数或字符串的形式存储的，而是以<code>tensor</code>对象的形式被存储的。</p>
-<p>在<code>tensor</code>中传递值有两种方法：</p>
-<ul>
-<li>使用<code>tf.constant()</code>，传入变量，但是传入之后就不可变了</li>
-<li>如果要使数据可变，结合<code>tf.placeholder()</code>和<code>tf.feed_dict</code>来输入</li>
-</ul>
-<figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># All the pixels in the image (28 * 28 = 784)</span></span><br><span class="line">features_count = <span class="hljs-number">784</span></span><br><span class="line"><span class="hljs-comment"># All the labels ("A,B...J")</span></span><br><span class="line">labels_count = <span class="hljs-number">10</span></span><br><span class="line"></span><br><span class="line">features = tf.placeholder(tf.float32)</span><br><span class="line">labels = tf.placeholder(tf.float32)</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># Set the weights and biases tensors</span></span><br><span class="line"><span class="hljs-comment"># tf.truncated_normal:生成正态分布的随机值</span></span><br><span class="line"><span class="hljs-comment"># weights已经随机化，biases就不必随机，简化为0即可</span></span><br><span class="line"></span><br><span class="line">weights = tf.Variable(tf.truncated_normal((features_count,labels_count)))</span><br><span class="line">biases = tf.Variable(tf.zeros(labels_count))</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># Feed dicts for training, validation, and test session</span></span><br><span class="line">train_feed_dict = &#123;features: train_features, labels: train_labels&#125;</span><br><span class="line">valid_feed_dict = &#123;features: valid_features, labels: valid_labels&#125;</span><br><span class="line">test_feed_dict = &#123;features: test_features, labels: test_labels&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># Linear Function WX + b</span></span><br><span class="line">logits = tf.matmul(features, weights) + biases</span><br><span class="line"></span><br><span class="line">prediction = tf.nn.softmax(logits)</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># Cross entropy</span></span><br><span class="line">cross_entropy = -tf.reduce_sum(labels * tf.log(prediction), reduction_indices=<span class="hljs-number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># Training loss</span></span><br><span class="line">loss = tf.reduce_mean(cross_entropy)</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># Create an operation that initializes all variables</span></span><br><span class="line">init = tf.global_variables_initializer()</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># Test Cases</span></span><br><span class="line"><span class="hljs-keyword">with</span> tf.Session() <span class="hljs-keyword">as</span> session:</span><br><span class="line">    session.run(init)</span><br><span class="line">    session.run(loss, feed_dict=train_feed_dict)</span><br><span class="line">    session.run(loss, feed_dict=valid_feed_dict)</span><br><span class="line">    session.run(loss, feed_dict=test_feed_dict)</span><br><span class="line">    biases_data = session.run(biases)</span><br></pre></td></tr></table></figure>
-<figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">is_correct_prediction = tf.equal(tf.argmax(prediction, <span class="hljs-number">1</span>), tf.argmax(labels, <span class="hljs-number">1</span>))</span><br><span class="line">accuracy = tf.reduce_mean(tf.cast(is_correct_prediction, tf.float32))</span><br></pre></td></tr></table></figure>
-<h1 id="P3-训练神经网络"><a href="#P3-训练神经网络" class="headerlink" title="P3:训练神经网络"></a>P3:训练神经网络</h1><figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># Change if you have memory restrictions</span></span><br><span class="line">batch_size = <span class="hljs-number">128</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># Find the best parameters for each configuration</span></span><br><span class="line">epochs =  <span class="hljs-number">4</span></span><br><span class="line">learning_rate = <span class="hljs-number">0.2</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># Gradient Descent</span></span><br><span class="line"><span class="hljs-comment"># 使用梯度下降进行训练</span></span><br><span class="line">optimizer = tf.train.GradientDescentOptimizer(learning_rate).minimize(loss)    </span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># The accuracy measured against the validation set</span></span><br><span class="line">validation_accuracy = <span class="hljs-number">0.0</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># Measurements use for graphing loss and accuracy</span></span><br><span class="line">log_batch_step = <span class="hljs-number">50</span></span><br><span class="line">batches = []</span><br><span class="line">loss_batch = []</span><br><span class="line">train_acc_batch = []</span><br><span class="line">valid_acc_batch = []</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">with</span> tf.Session() <span class="hljs-keyword">as</span> session:</span><br><span class="line">    session.run(init)</span><br><span class="line">    batch_count = int(math.ceil(len(train_features)/batch_size))</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">for</span> epoch_i <span class="hljs-keyword">in</span> range(epochs):</span><br><span class="line">        </span><br><span class="line">        <span class="hljs-comment"># Progress bar</span></span><br><span class="line">        batches_pbar = tqdm(range(batch_count), desc=<span class="hljs-string">'Epoch &#123;:&gt;2&#125;/&#123;&#125;'</span>.format(epoch_i+<span class="hljs-number">1</span>, epochs), unit=<span class="hljs-string">'batches'</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="hljs-comment"># The training cycle</span></span><br><span class="line">        <span class="hljs-keyword">for</span> batch_i <span class="hljs-keyword">in</span> batches_pbar:</span><br><span class="line">            <span class="hljs-comment"># Get a batch of training features and labels</span></span><br><span class="line">            batch_start = batch_i*batch_size</span><br><span class="line">            batch_features = train_features[batch_start:batch_start + batch_size]</span><br><span class="line">            batch_labels = train_labels[batch_start:batch_start + batch_size]</span><br><span class="line"></span><br><span class="line">            <span class="hljs-comment"># Run optimizer and get loss</span></span><br><span class="line">            _, l = session.run(</span><br><span class="line">                [optimizer, loss],</span><br><span class="line">                feed_dict=&#123;features: batch_features, labels: batch_labels&#125;)</span><br><span class="line"></span><br><span class="line">            <span class="hljs-comment"># Log every 50 batches</span></span><br><span class="line">            <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> batch_i % log_batch_step:</span><br><span class="line">                <span class="hljs-comment"># Calculate Training and Validation accuracy</span></span><br><span class="line">                training_accuracy = session.run(accuracy, feed_dict=train_feed_dict)</span><br><span class="line">                validation_accuracy = session.run(accuracy, feed_dict=valid_feed_dict)</span><br><span class="line"></span><br><span class="line">                <span class="hljs-comment"># Log batches</span></span><br><span class="line">                previous_batch = batches[<span class="hljs-number">-1</span>] <span class="hljs-keyword">if</span> batches <span class="hljs-keyword">else</span> <span class="hljs-number">0</span></span><br><span class="line">                batches.append(log_batch_step + previous_batch)</span><br><span class="line">                loss_batch.append(l)</span><br><span class="line">                train_acc_batch.append(training_accuracy)</span><br><span class="line">                valid_acc_batch.append(validation_accuracy)</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment"># Check accuracy against Validation data</span></span><br><span class="line">        validation_accuracy = session.run(accuracy, feed_dict=valid_feed_dict)</span><br><span class="line"></span><br><span class="line">loss_plot = plt.subplot(<span class="hljs-number">211</span>)</span><br><span class="line">loss_plot.set_title(<span class="hljs-string">'Loss'</span>)</span><br><span class="line">loss_plot.plot(batches, loss_batch, <span class="hljs-string">'g'</span>)</span><br><span class="line">loss_plot.set_xlim([batches[<span class="hljs-number">0</span>], batches[<span class="hljs-number">-1</span>]])</span><br><span class="line">acc_plot = plt.subplot(<span class="hljs-number">212</span>)</span><br><span class="line">acc_plot.set_title(<span class="hljs-string">'Accuracy'</span>)</span><br><span class="line">acc_plot.plot(batches, train_acc_batch, <span class="hljs-string">'r'</span>, label=<span class="hljs-string">'Training Accuracy'</span>)</span><br><span class="line">acc_plot.plot(batches, valid_acc_batch, <span class="hljs-string">'x'</span>, label=<span class="hljs-string">'Validation Accuracy'</span>)</span><br><span class="line">acc_plot.set_ylim([<span class="hljs-number">0</span>, <span class="hljs-number">1.0</span>])</span><br><span class="line">acc_plot.set_xlim([batches[<span class="hljs-number">0</span>], batches[<span class="hljs-number">-1</span>]])</span><br><span class="line">acc_plot.legend(loc=<span class="hljs-number">4</span>)</span><br><span class="line">plt.tight_layout()</span><br><span class="line">plt.show()</span><br><span class="line"></span><br><span class="line">print(<span class="hljs-string">'Validation accuracy at &#123;&#125;'</span>.format(validation_accuracy))</span><br></pre></td></tr></table></figure>
-<pre><code>Epoch  1/4: 100%|████████████████████████████████████████████████████████████| 1114/1114 [00:11&lt;00:00, 101.27batches/s]
-Epoch  2/4: 100%|████████████████████████████████████████████████████████████| 1114/1114 [00:10&lt;00:00, 101.99batches/s]
-Epoch  3/4: 100%|████████████████████████████████████████████████████████████| 1114/1114 [00:10&lt;00:00, 101.38batches/s]
-Epoch  4/4: 100%|█████████████████████████████████████████████████████████████| 1114/1114 [00:12&lt;00:00, 92.55batches/s]
-</code></pre><p><img src="http://ohj9e0ect.bkt.clouddn.com/blog/180903/dAh5BG2iKD.png?imageslim" alt="mark"></p>
-<pre><code>Validation accuracy at 0.7662666440010071
-</code></pre><h1 id="P4-检测"><a href="#P4-检测" class="headerlink" title="P4:检测"></a>P4:检测</h1><figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">test_accuracy = <span class="hljs-number">0.0</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">with</span> tf.Session() <span class="hljs-keyword">as</span> session:</span><br><span class="line">    </span><br><span class="line">    session.run(init)</span><br><span class="line">    batch_count = int(math.ceil(len(train_features)/batch_size))</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">for</span> epoch_i <span class="hljs-keyword">in</span> range(epochs):</span><br><span class="line">        </span><br><span class="line">        <span class="hljs-comment"># Progress bar</span></span><br><span class="line">        batches_pbar = tqdm(range(batch_count), desc=<span class="hljs-string">'Epoch &#123;:&gt;2&#125;/&#123;&#125;'</span>.format(epoch_i+<span class="hljs-number">1</span>, epochs), unit=<span class="hljs-string">'batches'</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="hljs-comment"># The training cycle</span></span><br><span class="line">        <span class="hljs-keyword">for</span> batch_i <span class="hljs-keyword">in</span> batches_pbar:</span><br><span class="line">            <span class="hljs-comment"># Get a batch of training features and labels</span></span><br><span class="line">            batch_start = batch_i*batch_size</span><br><span class="line">            batch_features = train_features[batch_start:batch_start + batch_size]</span><br><span class="line">            batch_labels = train_labels[batch_start:batch_start + batch_size]</span><br><span class="line"></span><br><span class="line">            <span class="hljs-comment"># Run optimizer</span></span><br><span class="line">            _ = session.run(optimizer, feed_dict=&#123;features: batch_features, labels: batch_labels&#125;)</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment"># Check accuracy against Test data</span></span><br><span class="line">        test_accuracy = session.run(accuracy, feed_dict=test_feed_dict)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">assert</span> test_accuracy &gt;= <span class="hljs-number">0.80</span>, <span class="hljs-string">'Test accuracy at &#123;&#125;, should be equal to or greater than 0.80'</span>.format(test_accuracy)</span><br><span class="line">print(<span class="hljs-string">'Nice Job! Test Accuracy is &#123;&#125;'</span>.format(test_accuracy))</span><br></pre></td></tr></table></figure>
-<pre><code>Epoch  1/4: 100%|████████████████████████████████████████████████████████████| 1114/1114 [00:01&lt;00:00, 588.57batches/s]
-Epoch  2/4: 100%|████████████████████████████████████████████████████████████| 1114/1114 [00:01&lt;00:00, 634.64batches/s]
-Epoch  3/4: 100%|████████████████████████████████████████████████████████████| 1114/1114 [00:01&lt;00:00, 633.74batches/s]
-Epoch  4/4: 100%|████████████████████████████████████████████████████████████| 1114/1114 [00:01&lt;00:00, 638.60batches/s]
-
-
-Nice Job! Test Accuracy is 0.8468999862670898
-</code></pre><h2 id="参考链接："><a href="#参考链接：" class="headerlink" title="参考链接："></a>参考链接：</h2><ul>
-<li><a href="https://lorexxar.cn/2016/07/21/python-tqdm/" target="_blank" rel="noopener">python tqdm模块分析</a></li>
-<li><a href="https://blog.csdn.net/CherDW/article/details/54881167" target="_blank" rel="noopener">Sklearn-train_test_split随机划分训练集和测试集</a></li>
-<li><a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.flatten.html" target="_blank" rel="noopener">numpy_ndarray.flatten</a></li>
-<li><a href="http://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.LabelBinarizer.html" target="_blank" rel="noopener">sklearn.LabelBinarizer</a></li>
-</ul>
-
-        </div>
-        
-        
-        
+      </div>
     </div>
-</div>
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-08-30T06:23:49.000Z">2018-08-30</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    42 minutes read (About 6255 words)
-                </span>
-                
+  
+    <div class="home-article-wrapper clearfix">
+      <div class="home-article" data-cover="false">
+        <div class="home-article-inner" data-cover="false">
+          <div class="passage-meta">
+            <span>
+              <i class="fa fa-calendar"></i>2018-08-30
+            </span>
+            
+            
+              <span>
+                | <i class="fa fa-unlock-alt"></i>UNLOCK
+              </span>
+            
+          </div>
+          <h1 class="home-article-title">
+            <a href="/passages/颗粒度分词调研/">北大分词方案解读及颗粒度分词方案</a>
+          </h1>
+          <div class="home-article-content passage-article">
+            
+              
+            
+          </div>
+          <a class="home-article-read" href="/passages/颗粒度分词调研/">
+            README MORE >>>
+          </a>
+          
+            <div class="passage-tags">
+             
+              <a href="/tags/NLP/"><i class="fa fa-tags"></i>NLP</a>
+             
+              <a href="/tags/分词/"><i class="fa fa-tags"></i>分词</a>
+            
             </div>
+          
         </div>
         
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2018/08/30/颗粒度分词调研/">北大分词方案解读及颗粒度分词方案</a>
-            
-        </h1>
-        <div class="content">
-            <h1 id="一、调研资料"><a href="#一、调研资料" class="headerlink" title="一、调研资料"></a>一、调研资料</h1><ol>
-<li><a href="https://www.jianguoyun.com/p/DXc5BJwQhaz8Bhio1m4" target="_blank" rel="noopener">北大现代汉语语料库基本加工规范</a></li>
-<li><a href="https://www.jianguoyun.com/p/DQfbcd4Qhaz8BhjF1m4" target="_blank" rel="noopener">计算所汉语词性标注集</a></li>
-<li><a href="http://www.hankcs.com/nlp/corpus/several-revenue-segmentation-system-used-set-of-source-tagging.html" target="_blank" rel="noopener">几个开源分词系统所使用标注集的来源</a></li>
-<li><a href="https://www.jianguoyun.com/p/DT74b1kQhaz8Bhje1m4" target="_blank" rel="noopener">海量中文智能分词接口手册</a></li>
-<li><a href="https://patents.google.com/patent/CN102479191B" target="_blank" rel="noopener">阿里多粒度分词专利</a></li>
-<li><a href="https://patents.google.com/patent/CN101246472A/zh" target="_blank" rel="noopener">腾讯多粒度分词专利</a></li>
-<li><a href="https://patents.google.com/patent/CN103324626A/zh" target="_blank" rel="noopener">百度多粒度分词专利</a></li>
-<li><a href="http://www.cnblogs.com/eaglet/archive/2008/05/27/1208423.html" target="_blank" rel="noopener">KTDictSeg 分词组件1.3版本 部分算法讨论 – 分词粒度</a></li>
-</ol>
-<h1 id="二、调研目的"><a href="#二、调研目的" class="headerlink" title="二、调研目的"></a>二、调研目的</h1><p>分词单位不同于语言学中的“词”，不同的算法下的分词结果千差万别，有的分出的是语言学意义上的词，而有的分出的是语言学意义上的“短语”（或者说“词组”）因此，我们希望寻找一个可理解的统一的粒度标准，而这个粒度标准能够实现对不同分词任务的不同层次的分词。为证实多颗粒度的分词标注确实能提高特定的分词任务的准确率，我们进行了这样的前期调研。<br>通过搜集资料，我们以北大方案为蓝本，以一定的语言学知识为基础，对分词颗粒进行不同粒度的划分。<br>首先对北大分词方案进行解读，然后再阐释我对分词粒度初步的构建想法。</p>
-<p>注：颗粒度方案只考虑分词问题，不考虑词性标注。</p>
-<h1 id="三、北大分词方案讲解"><a href="#三、北大分词方案讲解" class="headerlink" title="三、北大分词方案讲解"></a>三、北大分词方案讲解</h1><h2 id="1-分词单位的概念界定"><a href="#1-分词单位的概念界定" class="headerlink" title="1. 分词单位的概念界定"></a>1. 分词单位的概念界定</h2><p><code>分词单位</code>，“指信息处理中使用的、具有确定的语义和语法功能的基本单位”，该概念明确了其使用的特定环境——“信息处理任务”，以及其语义和语法功能明确的特点。</p>
-<p>基于这样的概念划分，北大方案认定的分词单位里不仅包括了词，还“包括了一部分结合紧密、使用稳定的词组”，并且“在某些特殊情况孤立的语素或非语素字”。</p>
-<p>事实上，我们撇开北大方案来看词这个整体，根据朱德熙先生的划分，可以分为可穷尽的虚词类和不可穷尽的实词类。虚词类，举例来说，包括连词、语气词、介词等，这类词可以在语法词典中被枚举出来，因此在进行分词时难度较小。因此，分词的困难常常出现在实词的切分上。</p>
-<p>结合北大方案的划分，我认为对实词序列进行划分时，一般可以遵照以下原则：</p>
-<p>（1）依据语法词典来划分，如果语法词典中进行规定，那么就不做划分。语言是约定俗成的产物，当某个词语组合被广泛而稳定地使用时，那么社会团体便会接受这样的一个“新词”，因此这样的一个词语组合也可以被视作是一个分词单位。而判断社会团体是否已经接受这一语言现象很显性的一大标志便是词典收录了该词条。那么问题就转变为，什么样的词典可以成为可供划分的语法词典。</p>
-<p>（2）考虑切分序列的音节组合。汉语在发展过程中经历了一个从单音节向双音节的发展过程。虽然现代汉语以双音节为主要的成词单位，但是古代汉语中的一些单音节词依然残存在现代汉语中，并且在一些特殊语体中还广泛地存在着。因此，对于那些单音节成词的单位在标注时要格外注意标记出来，而处理多音节序列时，则要尽量保证分词结果以双音节为一个单位。</p>
-<p>（3）考虑到词义与语素结合义。我们所认定的分词单位，它的词义是凝合而成的，而不是两个语素的意义简单的相加。因此，如果一个切分单位的语义是其切分单位意义的简单相加，那么就要对其进行切分。而判定是否是词义简单的相加的方法主要有“的”插入法和替换法两种，这在后面具体的讲解中会进行阐释。</p>
-<p>（4）要考虑到切分的经济性。北大方案是切分和标注同时进行，为了保证标注符号使用的经济性，方案要求，要保证切分出来的单位尽量少的是无法独立成词的语素。因此，对于一个切分序列，如果我们切分后多出了无法独立成词的语素，比如说前接成分、后接成分等，我们尽可能地不去切分它。</p>
-<h2 id="2-分词实际情况中的应用"><a href="#2-分词实际情况中的应用" class="headerlink" title="2.分词实际情况中的应用"></a>2.分词实际情况中的应用</h2><p>接下来，我们将对分词方案的第四章、第五章结合我们总结出来的规则进行精简式的说明。</p>
-<p>（1）人名</p>
-<p>对于人名的切分，方案给出的切分标准是姓和名切分开。而对于其他称呼是否切分，可以用语义规则来解释。第二条规则：姓名后的职务、职称或称呼要分开。第四条规则：带明显排行的亲属称谓要切分开。这两条规则是因为组成的切分序列的意思即是各组成成分的组合义，因此要切分。而第三条规则：对人的简称、尊称若为两个字，则合为一个切分单位。不仅是因为这些切分序列的含义不是其组成成分的组合义，至少有表示尊敬的社会含义，还是因为如果切分，会多出无法独立成词的语素，因此把这些双音节作为一个切分单位。而对于外国人名和笔名、著名人名，我们不做切分，一是因为这种命名是随意的，切分下来的意义不大；二是因为著名人名是在语法词典中就规定了的内容。</p>
-<p>（2）地名</p>
-<p>大部分地名都是在语法词典中事先规定了的，除此以外的切分原则主要是和音节有关，如果地名后接的是单音节语素，则不切分；如果接的是双音节或多音节语素，则要进行切分。</p>
-<p>（3）团体、机构、组织的专有名称</p>
-<p>对于团体、机构、组织的专有名称，如果它们被语法词典收录，那么肯定不切分，如果没有，则要进行切分。（如果找不到这样合适的词典，一个PLAN B的建议：按照普通词组切分，再上游任务中再识别出来）</p>
-<p>（4）除人名、国名、地名、团体、机构、组织以外的其他专名</p>
-<p>首先，我们还是要考虑其是否被语法词典收录。然后要考虑其后接语素的音节，如果是单音节的，如“人”“族”这样的，不切分，如果是多音节的，则要进行切分。</p>
-<p>（5）数词与数量词组</p>
-<p>数词与数量词组的规定是另外的。详见方案。</p>
-<p>（6）时间词</p>
-<p>时间词中登录在语法词典中的，比如历史朝代的名称，特殊的年份“甲午年”等，不做切分，其他的要按照“年、月、日、时、分、秒”的层次进行切分。</p>
-<p>（7）单音节代词“本”、“每”、“各”、“诸</p>
-<p>若后接成分是单音节名词，则不做切分，若是双音节或多音节，则要切分开。</p>
-<p>（8）区别词</p>
-<p>首先，我们要明确何为区别词，区别词指的是成对的，有分类性质的一类词，它们只能够做定语，不能做谓语，所以又称为非谓形容词。</p>
-<p>举例来说，区别词包括：男、女、雌、雄、单、双、复、金、银、西式、中式、古代、近代、现代、当代、阴性、阳性、军用、民用、国有、私有、小型、中型、大型、微型、有期、无期、彩色、黑白、急性、慢性、小号、中号、大号、野生、家养、正式、非正式、人造（从动词过来的）、天然、冒牌、正牌、正版、盗版、下等、中等、上等、初级、中级、高级、中式、欧式等等。</p>
-<p>对于含有区别词的序列，我们的切分原则也是同样按照音节来进行，如果区别词后接一个单音节名词，则不切分，若接的是多音节名词，则要切分。</p>
-<p>（9）述补结构</p>
-<p>简单来说，述补结构指的是描述一个动词发生的情貌或结果，即对动词所代表的事件进行的补充。对于双音节的述补结构我们的切分原则是，如果进行切分后，会有无法独立成词的语素存在，则不切分，反之，则切分。</p>
-<p>述补结构中还有一类常见的多音节的“得”字补语，对于这类述补结构，我们可以将“得”字去掉，若去掉后依然能成词，则要将其切分；若不能成词，则“得”字补语整体作为一个分词单位，内部不做切分。</p>
-<p>（10）、（11）、（12）、（13）略</p>
-<p>（14）语素和非语素字的处理</p>
-<p>对于离合词的离析形式，要进行切分。所谓离合词，指的是可以在组合的两个语素中插入其他成分的词，比如“吃饭”，它的离析形式有，“吃了饭”“吃了一个饭”等。</p>
-<p>对于表示方位的双音节词，若切分出无法独立成词的语素，则不切分，否则则要进行切分。</p>
-<p>（15）文本中非汉字的字符串  略</p>
-<p>（16）重叠</p>
-<p> 重叠是汉语独特的语言现象之一。北大方案中对这类词的切分看似复杂，实质上是切分到能够独立使用的单位，并且要避免切分出不能单独成词的语素。</p>
-<p>比如，“甜甜的蜂蜜”，由于“甜甜”不能单独成词，因此要切分到“甜甜的”。</p>
-<p>而“试试看”由于“看”这里表示动作的尝试，作为这个意义并不能单独运用，因此不切分。</p>
-<p>（17）附加成分</p>
-<p>附加成分实质上指的是构词中的前缀和后缀。汉语构词法中有一类是依据词缀加词根进行的派生构词。对于这一类切分序列，除非其接入成分太多，会对其进行切分，否则不切分。比如“老师们”就不做切分，“苦苦追求而不得者”中的“者”由于统摄的成分太多，所以要单独切分开。</p>
-<p>（18）复合词构词</p>
-<p>在切分复合词的问题上，北大方案是存在讨论的余地的。由于复合词本身和短语之间的界限较为模糊，即使在语言学意义的界定上也会存在分歧，因此对于复合词类型的切分序列是否切分，实质上很难回答。北大方案给出的解决办法是，首先如果切分后会有无法独立成词的成分，那么就不切分；另外要判断这个复合词的意义是否只是组成成分的简单相加，如果是，那么就切分，如果不是，那就说明组成该词的两个成分之间意义是有相互渗透的联结的，就不能切分。但是如何判断复合词意义是否是组合成分的相加呢？</p>
-<p>这里的方法主要有两个，一个是加“的”法。这个方法主要针对的是定中结构的复合词，即一个语素修饰另一个语素。比如“白花”，和“白的花”意义一致，那么就要切分。</p>
-<p>第二个方法是替换法，将复合词“AB”的A语素拿出来进行组词，再将B语素拿出来进行组词，若单独组词后其词义都是一样的，那么就说明复合词AB的词义是A语素义和B语素义的相加，因此要切分；若有A语素或B语素有和其他组词情况中语义不同的，那么就不切分复合词AB。</p>
-<p>但是这两个方法并不能解决所有的复合词判断问题，因此到底是将问题简化还是对规则进一步细致，是值得思考的。</p>
-<h2 id="颗粒度方案（调整版）"><a href="#颗粒度方案（调整版）" class="headerlink" title="颗粒度方案（调整版）"></a>颗粒度方案（调整版）</h2><p>调整内容：</p>
-<ul>
-<li>将原来的第一粒度作为细粒度（非常细，存在语义不透明的词缀），将第二粒度和第三粒度合并成为粗粒度），针对专有名词的问题，划出粗粒度2级（这个可以讨论，是在分词中一下子划分出来，还是在上游任务中再处理。在参考资料的专利中，他们往往在分词中就解决了）。</li>
-<li>理清实体和专有名词的区别<h3 id="细粒度"><a href="#细粒度" class="headerlink" title="细粒度"></a>细粒度</h3></li>
-<li>单音词<ul>
-<li>单独一个语素即可成词的，如“火、书、水”</li>
-</ul>
-</li>
-<li>连绵词<ul>
-<li>必须和其他语素结合成词的，且结合的语素是固定的，如“葡萄”“乒乓”</li>
-</ul>
-</li>
-<li>音译词<ul>
-<li>包括了外国的专名（人名等）</li>
-</ul>
-</li>
-<li>数词</li>
-<li>量词<ul>
-<li>比如：条、串、张</li>
-<li>这里要注意一些从名词发展过来的量词，比如“碗”</li>
-<li>这里包括度量：3/cm，7/天</li>
-<li>另外细粒度中，时间数和时间单位也切分开，如：2018/年</li>
-</ul>
-</li>
-<li>不含行政区划的地名<ul>
-<li>比如：上海、北京、武汉</li>
-</ul>
-</li>
-<li>专有名词：机构、团体、组织<ul>
-<li>是一个封闭类，是不可类推的</li>
-<li>包含上下隶属关系的团体机构专有名词，切分到最小的团体机构。比如“中国/银行/北京/分行”。</li>
-</ul>
-</li>
-<li>简称略语</li>
-<li>方位词</li>
-<li>语气词</li>
-<li>叹词</li>
-<li>实语素<ul>
-<li>包括北大方案里的形语素、名语素、动语素、人名中的姓氏，比如：锦（形语素）</li>
-</ul>
-</li>
-<li>虚语素<ul>
-<li>前接成分<ul>
-<li>比如“阿”“老”“非”</li>
-<li>这类除了传统意义上的前缀，也要考虑一些网络流行语的临时构词产出的前缀</li>
-</ul>
-</li>
-<li>副语素<ul>
-<li>主要是否定副词，比如“不”“很”</li>
-</ul>
-</li>
-<li>后接成分<ul>
-<li>比如：们，儿（表亲昵的），子，头，化，者</li>
-<li>我认为，还应包括行政区划的单位，比如：省、市、区等；和表示尊称的“老”“总”</li>
-</ul>
-</li>
-<li>助词<ul>
-<li>助动词、助数词</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>习语<ul>
-<li>包括成语、四字格短语、歇后语</li>
-<li>但是如果歇后语有标点符号，要按照标点符号划分</li>
-<li>比如：“不管三七二十一”“百尺竿头/，/更进一步”</li>
-</ul>
-</li>
-</ul>
-<h3 id="粗粒度"><a href="#粗粒度" class="headerlink" title="粗粒度"></a>粗粒度</h3><p>简言之：切到词组层，且注意音节数，对双音节放宽。将细粒度中可成词的组合成词（派生词），另将可独立成词的词根结合成复合词。<br>粗粒度的切分目标是，使得每一个实词性的切分单位都是表义明确的分词单位，不存在语义不透明的分词单位。因此，我们也不能奢求实体识别等上游任务在分词任务中就得以解决。</p>
-<ul>
-<li>前接成分+名词<ul>
-<li>比如：阿牛</li>
-</ul>
-</li>
-<li>前接成分+数<ul>
-<li>比如：阿大</li>
-</ul>
-</li>
-<li>名词+后接成分<ul>
-<li>比如：学生们、老师们、拳头、高清版</li>
-</ul>
-</li>
-<li>动词+后接成分<ul>
-<li>比如：创新化（单独“创新”还是分到”创新“）</li>
-</ul>
-</li>
-<li>姓氏+名<ul>
-<li>比如：张伟</li>
-</ul>
-</li>
-<li>数+量+（助数词）<ul>
-<li>比如：四/人，五个/人</li>
-</ul>
-</li>
-<li>时间<ul>
-<li>按北大方案，不要合并</li>
-<li>比如：1997年/9月/3日，早/八点</li>
-</ul>
-</li>
-<li>复合词<ul>
-<li>双音节、三音节（切分原则详见对北大方案的讲解）</li>
-<li>注意，不要将联合构词的词组算作复合词。</li>
-</ul>
-</li>
-<li>地名+行政区划<ul>
-<li>比如：北京市、上海市</li>
-</ul>
-</li>
-<li>地名+自然地形<ul>
-<li>比如：华北平原、南沙群岛</li>
-</ul>
-</li>
-</ul>
-<h2 id="粗粒度下的切分难点"><a href="#粗粒度下的切分难点" class="headerlink" title="粗粒度下的切分难点"></a>粗粒度下的切分难点</h2><h3 id="1-专名和实体的切分"><a href="#1-专名和实体的切分" class="headerlink" title="1.专名和实体的切分"></a>1.专名和实体的切分</h3><p>专有名词指的是专指性的人名、地名、团体、机构、组织、民族、商标。</p>
-<p>人名、地名、民族、商标基本上没有异议，但是哪些团体、机构、组织能算专有名词，哪些不能算是不太明确的。</p>
-<p>另外，除上面指出的分类外，其他的具有专指性的实体，不能被当做专有名词来处理。具体来说，专有名词的切分难点有以下几点：</p>
-<p>（1） 专有名词的专指性是忽略文本语境。比如”校长办公室发布重要通知“，即使通过前文我们知道这里指的是北大的校长办公室，我们只将它作为普通名词的处理，而不是作为一个专指性的机构名来处理。 <strong>但是在国际或中国范围内的知名的唯一的团体、机构、组织 的名称我们依然将之处理为专名</strong>，比如“国务院”，它和“校长办公室”的区别在于“国务院”全国只有一个，而“校长办公室”有很多个，因此“国务院”作为专名不切分，而“校长办公室”要切分成“校长/办公室”。</p>
-<p> （2）专有名词的组合性。专有名词有时会和其他名词一起组合成词。对于分词任务而言，我们只需考虑将专有名词和这个词切开后这个词能否单独成词，如果不能，那么就不切分，如果能，那么就切分。（这里和北大方案不同，北大方案认为接单音节可以切分，也可以不切分。）比如”满人“，”哈萨克人“，”昌平/分行“，而对于一些多个名词组合成专名的情况，比如“全国/总/工会”“全国/人民/代表/大会“，在细粒度和粗粒度中，由于它们音节数较多，视为普通名词进行切分。是否可以设置一个<strong>粗粒度2级，在粗粒度2级中，作为组织类专有名词，不切分</strong>。</p>
-<p>（3）专有名词层次性。表示机构的专有名词中有些是前后相连，包含上下隶属关系的。<strong>下级机构的专指性</strong>有的是从由上级团体继承来的，比如“北京大学计算语言学研究所”是一个专指性的短语，它之所以有专指性，是因为“北京大学”这个专有名词的专指性，如果没有“北京大学”，则“计算语言学研究所”按照普通名词词组来切分（参照第一点）；有的是通过其他专有名词，如地名、人名获得的，比如“鲁迅研究院”，“北京分行”。在粗粒度中，对于获得专指性的专有名词不切分，如“鲁迅研究院”，“北京分行”<strong>是否可以设置粗粒度2级，表示上下级的专有名词全部纳入？</strong>比如“北京大学计算语言学研究所”，在粗粒度2级中就不做切分。</p>
-<p>（4）电视节目、文艺作品（书、文档、协议）标题、电视剧、战争名等，不作为专有名词，按照普通名词划分。举例：</p>
-<ul>
-<li>伊拉克/战争</li>
-<li>辛亥/革命</li>
-<li>平津/战役</li>
-<li>开心/词典</li>
-<li>新闻/30分</li>
-<li>新闻/早/8点</li>
-<li>中央电视台/-/1<br>（它们后期可以通过书名号和引号识别出来。）</li>
-</ul>
-<h3 id="2-政治话语是否算作习语？（可以讨论）"><a href="#2-政治话语是否算作习语？（可以讨论）" class="headerlink" title="2.政治话语是否算作习语？（可以讨论）"></a>2.政治话语是否算作习语？（可以讨论）</h3><p>政治口号和政治思想由于在一定的历史时期中频繁使用，因此，如果切分表意就不一样。比如“中国特色社会主义思想”和“习近平新时代中国特色社会主义思想”就是两个概念。</p>
-<p>有两个解决方案，一个是将音节较短的政治话语算作语法词典中的词，如“科技强国”“科教兴国”“绿色经济”，“科技创新”等等，然后遇到这样的词，细粒度、粗粒度里都不切分，而音节较长的，比如“中华民族伟大复兴”就作为普通名词进行切分；第二个解决方案是全部按照普通名词切分，到具体的任务需求时再处理。不过，我觉得这两个解决方案都会影响分词粒度整体的平衡度，因为政治口号构词有时非常非常长。</p>
-<h3 id="3-某某理论的名称算作专名吗？某某领域理论中的专业术语算作专名吗？"><a href="#3-某某理论的名称算作专名吗？某某领域理论中的专业术语算作专名吗？" class="headerlink" title="3.某某理论的名称算作专名吗？某某领域理论中的专业术语算作专名吗？"></a>3.某某理论的名称算作专名吗？某某领域理论中的专业术语算作专名吗？</h3><p>理论的命名同样是任意性的命名行为，和菜名一样，如果对“xxx理论”中的“xxx”进行切分后，“xxx”的意思有所改变，那么就不能切分，如果没有改变，则可以切分。比如“精神分析/理论”，如果切分成“精神/分析”，这个“精神”和“你今天精神不佳”中的“精神”并不是一个意思，因此不能切分。而“牛顿/第二/定律”切分后没问题，因为这个理论的命名本身是组合而成的。</p>
-<p>那么各个领域中的专业术语是否算作专名呢？我认为在通用型的分词中，只加入最为重要的一些专业术语；而在特定领域中，再在这方面进行拓展。因此，“社会生活”在社会学中应当算作一个专业术语，但是在通用型的分词中还是按照普通名词来进行切分，即“社会/生活”。</p>
-<h3 id="4-并列成分如何切分？"><a href="#4-并列成分如何切分？" class="headerlink" title="4.并列成分如何切分？"></a>4.并列成分如何切分？</h3><p>并列成分按照顿号进行切分，比如“平津/、/辽沈/战役”，”张/、/李家“（这里的”张“可以看做是”张家“的缩略形式）。</p>
-
-        </div>
-        
-        
-        
+      </div>
     </div>
-</div>
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-05-30T06:23:49.000Z">2018-05-30</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    a minute read (About 121 words)
-                </span>
-                
-            </div>
+  
+    <div class="home-article-wrapper clearfix">
+      <div class="home-article" data-cover="false">
+        <div class="home-article-inner" data-cover="false">
+          <div class="passage-meta">
+            <span>
+              <i class="fa fa-calendar"></i>2018-05-30
+            </span>
+            
+            
+              <span>
+                | <i class="fa fa-unlock-alt"></i>UNLOCK
+              </span>
+            
+          </div>
+          <h1 class="home-article-title">
+            <a href="/passages/hello-world/">Hello World</a>
+          </h1>
+          <div class="home-article-content passage-article">
+            
+              
+            
+          </div>
+          <a class="home-article-read" href="/passages/hello-world/">
+            README MORE >>>
+          </a>
+          
         </div>
         
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2018/05/30/hello-world/">Hello World</a>
-            
-        </h1>
-        <div class="content">
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="hljs-string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-        </div>
-        
-        
-        
+      </div>
     </div>
+  
 </div>
-
-
-
-
-
-</div>
-                
-
-
-
-
-<div class="column is-4-tablet is-4-desktop is-4-widescreen  has-order-1 column-left ">
+    </main>
     
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">博客推荐</h5>
         
-<div class="card widget">
-    <div class="card-content">
-        <nav class="level">
-            <div class="level-item has-text-centered">
-                <div>
-                    <img class="image is-128x128 has-mb-6" src="/images/avatar.jpg" alt="好乐无荒">
-                    
-                    <p class="is-size-4 is-block">
-                        好乐无荒
-                    </p>
-                    
-                    
-                    
-                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
-                        <i class="fas fa-map-marker-alt has-mr-7"></i>
-                        <span>Shanghai,China</span>
-                    </p>
-                    
-                </div>
-            </div>
-        </nav>
-        <nav class="level is-mobile">
-            <div class="level-item has-text-centered is-marginless">
-                <div>
-                    <p class="heading">
-                        Posts
-                    </p>
-                    <p class="title has-text-weight-normal">
-                        5
-                    </p>
-                </div>
-            </div>
-            <div class="level-item has-text-centered is-marginless">
-                <div>
-                    <p class="heading">
-                        Categories
-                    </p>
-                    <p class="title has-text-weight-normal">
-                        0
-                    </p>
-                </div>
-            </div>
-            <div class="level-item has-text-centered is-marginless">
-                <div>
-                    <p class="heading">
-                        Tags
-                    </p>
-                    <p class="title has-text-weight-normal">
-                        7
-                    </p>
-                </div>
-            </div>
-        </nav>
-        <div class="level">
-            <a class="level-item button is-link is-rounded" href="http://github.com/shamy1997">
-                Follow</a>
-        </div>
+          <span class="site-footer-item">
+            <a href="https://liweinlp.com/" target="_blank">立委NLP频道</a>
+          </span>
         
+          <span class="site-footer-item">
+            <a href="https://yihui.name/cn/" target="_blank">谢益辉</a>
+          </span>
         
-        <div class="level is-mobile">
-            
-            <a class="level-item button is-white is-marginless" target="_blank" title="Github" href="http://github.com/shamy1997">
-                
-                <i class="fab fa-github"></i>
-                
-            </a>
-            
-            <a class="level-item button is-white is-marginless" target="_blank" title="Douban" href="http://douban.com/people/45130547/">
-                
-                <i class="fa fa-leaf"></i>
-                
-            </a>
-            
-            <a class="level-item button is-white is-marginless" target="_blank" title="Twitter" href="https://twitter.com/1067723814Shamy">
-                
-                <i class="fab fa-twitter"></i>
-                
-            </a>
-            
-            <a class="level-item button is-white is-marginless" target="_blank" title="Steam" href="https://steamcommunity.com/profiles/76561198287644232/">
-                
-                <i class="fab fa-steam"></i>
-                
-            </a>
-            
-            <a class="level-item button is-white is-marginless" target="_blank" title="RSS" href="/">
-                
-                <i class="fas fa-rss"></i>
-                
-            </a>
-            
-        </div>
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">系列教程</h5>
         
+          <span class="site-footer-item">
+            <a href="https://machinelearningmastery.com/blog/" target="_blank">machinelearningmastery</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="http://wuhuang.bitcron.com/lin-wiki/" target="_blank">lin-wiki</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">抓到我</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://www.douban.com/people/45130547/" target="_blank">豆瓣</a>
+          </span>
+        
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>
     </div>
-</div>
     
-        
+      <div class="site-footer-info">
+        <i class="fa fa-paw"></i> 您是本站第 <span id="site-count"></span> 位访客
+      </div>
     
-        
     
-        
-<div class="card widget">
-    <div class="card-content">
-        <div class="menu">
-            <h3 class="menu-label">
-                Categories
-            </h3>
-            <ul class="menu-list">
-            
-            </ul>
-        </div>
+      <div class="site-footer-info">
+        <i class="fa fa-at"></i> Email: fdujyq@gmail.com
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 <a href="https://github.com/dongyuanxin/theme-ad/" target="_blank">Theme-AD</a>.
+      Created by <a href="https://godbmw.com/" target="_blank">GodBMW</a>.
+      All rights reserved.
     </div>
+  </footer>
 </div>
-    
-        
-<div class="card widget">
-    <div class="card-content">
-        <h3 class="menu-label">
-            Tag Cloud
-        </h3>
-        <a href="/tags/NLP/" style="font-size: 20px;">NLP</a> <a href="/tags/RNN/" style="font-size: 10px;">RNN</a> <a href="/tags/keras/" style="font-size: 10px;">keras</a> <a href="/tags/tensorflow/" style="font-size: 10px;">tensorflow</a> <a href="/tags/分词/" style="font-size: 10px;">分词</a> <a href="/tags/命令行/" style="font-size: 10px;">命令行</a> <a href="/tags/深度学习/" style="font-size: 10px;">深度学习</a>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
     </div>
-</div>
-
-    
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="site-layer-reward" id="site-layer-reward" style="display: none;">
         
-    
+          <div>
+            <img src="/images/wechat.png" alt="WeChat">
+            
+              <p>WeChat</p>
+            
+          </div>
         
-<div class="card widget">
-    <div class="card-content">
-        <h3 class="menu-label">
-            Recent
-        </h3>
+          <div>
+            <img src="/images/alipay.png" alt="AliPay">
+            
+              <p>AliPay</p>
+            
+          </div>
         
-        <article class="media">
-            
-            <a href="/2018/12/22/about-terminal/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="终端命令笔记">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-12-22T12:37:49.000Z">2018-12-22</time></div>
-                    <a href="/2018/12/22/about-terminal/" class="has-link-black-ter is-size-6">终端命令笔记</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2018/09/10/slot-filling/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Slot Filling with SimpleRNN">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-09-10T02:20:20.000Z">2018-09-10</time></div>
-                    <a href="/2018/09/10/slot-filling/" class="has-link-black-ter is-size-6">Slot Filling with SimpleRNN</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2018/09/03/tf小试牛刀/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="TensorFlow小试牛刀">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-09-02T16:02:32.000Z">2018-09-03</time></div>
-                    <a href="/2018/09/03/tf小试牛刀/" class="has-link-black-ter is-size-6">TensorFlow小试牛刀</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2018/08/30/颗粒度分词调研/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="北大分词方案解读及颗粒度分词方案">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-08-30T06:23:49.000Z">2018-08-30</time></div>
-                    <a href="/2018/08/30/颗粒度分词调研/" class="has-link-black-ter is-size-6">北大分词方案解读及颗粒度分词方案</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2018/05/30/hello-world/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Hello World">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-05-30T06:23:49.000Z">2018-05-30</time></div>
-                    <a href="/2018/05/30/hello-world/" class="has-link-black-ter is-size-6">Hello World</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
+      </div>
+      <div id="site-layer-welcome" style="display:none;"></div>
     </div>
-</div>
-
-    
-        <div class="card widget">
-    <div class="card-content">
-        <div class="menu">
-        <h3 class="menu-label">
-            Archives
-        </h3>
-        <ul class="menu-list">
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/12/">
-                <span class="level-start">
-                    <span class="level-item">December 2018</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/09/">
-                <span class="level-start">
-                    <span class="level-item">September 2018</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">2</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/08/">
-                <span class="level-start">
-                    <span class="level-item">August 2018</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/05/">
-                <span class="level-start">
-                    <span class="level-item">May 2018</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        </ul>
-        </div>
-    </div>
+  </div>
 </div>
     
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="javascript:void(0);" data-enable="false">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="javascript:void(0);" data-enable="false">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="false" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
     
-        <div class="column-right-shadow is-hidden-widescreen ">
-        
-        </div>
+      <a href="javascript:void(0);" data-enable="false">
+        <i class="fa fa-commenting"></i>
+      </a>
     
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    <a href="javascript:void(0);" id="site-reward">
+      <i class="fa fa-thumbs-up"></i>
+    </a>
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
 </div>
-
-                
-            </div>
-        </div>
-    </section>
-    <footer class="footer">
-    <div class="container">
-        <div class="level">
-            <div class="level-start has-text-centered-mobile">
-                <a class="footer-logo is-block has-mb-6" href="/">
-                
-                    <img src="/images/logoagain.png" alt="好乐无荒" height="28">
-                
-                </a>
-                <p class="is-size-7">
-                &copy; 2019 Yuqiu Ji&nbsp;
-                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-icarus">Icarus</a>
-                </p>
-            </div>
-            <div class="level-end">
-            
-                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
-                
-                
-                <p class="control">
-                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
-                        
-                        <i class="fab fa-creative-commons"></i>
-                        
-                    </a>
-                </p>
-                
-                <p class="control">
-                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
-                        
-                        <i class="fab fa-creative-commons-by"></i>
-                        
-                    </a>
-                </p>
-                
-                </div>
-            
-            </div>
-        </div>
-    </div>
-</footer>
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
-<script>moment.locale("zh");</script>
-
-
-    
-    
-    
-    <script src="/js/animation.js"></script>
-    
-
-    
-    
-    
-    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
-    <script src="/js/gallery.js" defer></script>
-    
-
-    
-    
-
-<div id="outdated">
-    <h6>Your browser is out-of-date!</h6>
-    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
-            my browser now </a></p>
-    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+    <div id="share-btn">
+  
+  
+  
+  
+  
 </div>
-<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        outdatedBrowser({
-            bgColor: '#f25648',
-            color: '#ffffff',
-            lowerThan: 'flex'
-        });
-    });
-</script>
-
-
-    
-    
-<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    MathJax.Hub.Config({
-        'HTML-CSS': {matchFontHeight: false},
-        SVG: {matchFontHeight: false},
-        CommonHTML: {matchFontHeight: false}
-    });
-});
-</script>
-
-    
-    
-
-<a id="back-to-top" title="Back to Top" href="javascript:;">
-    <i class="fas fa-chevron-up"></i>
-</a>
-<script src="/js/back-to-top.js" defer></script>
-
-
-    
-    
-
-    
-    
-    
-    
-
-    
-    
     
 
 
-<script src="/js/main.js" defer></script>
+
+
 
     
-    <div class="searchbox ins-search">
-    <div class="searchbox-container ins-search-container">
-        <div class="searchbox-input-wrapper">
-            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
-            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
-        </div>
-        <div class="searchbox-result-wrapper ins-section-wrapper">
-            <div class="ins-section-container"></div>
-        </div>
-    </div>
-</div>
-<script>
-    (function (window) {
-        var INSIGHT_CONFIG = {
-            TRANSLATION: {
-                POSTS: 'Posts',
-                PAGES: 'Pages',
-                CATEGORIES: 'Categories',
-                TAGS: 'Tags',
-                UNTITLED: '(Untitled)',
-            },
-            CONTENT_URL: '/content.json',
-        };
-        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
-    })(window);
-</script>
-<script src="/js/insight.js" defer></script>
-<link rel="stylesheet" href="/css/search.css">
-<link rel="stylesheet" href="/css/insight.css">
-    
-</body>
+  </body>
 </html>
