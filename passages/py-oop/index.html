@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html>
+  
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta name="author" content="Yuqiu Ji">
+  
+  
+  <title>python面向对象笔记 | 好乐无荒</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="代码精进,python,">
+  
+
+  
+  <meta name="description" content="">
+
+  
+
+  
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.11.1/dist/av-min.js" async></script>
+  
+
+  
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+  
+
+  
+    <script src="//unpkg.com/valine/dist/Valine.min.js" async></script>
+  
+
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"GqgKOWYsq9ic42QAjcPaYffa-gzGzoHsz","appkey":"dfrV8qBWczqyiVj0DPsAzucB","comment":true,"count":true},
+    welcome: {"enable":false,"interval":30},
+    start_time: "2019-01-01",
+    passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
+    is_post: true,
+    lock: false,
+    author: "Yuqiu Ji",
+    share: {"twitter":false,"facebook":false,"weibo":false,"qq":false,"wechat":false},
+    mathjax: true,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.svg">
+    <link rel="apple-touch-icon" href="/images/favicon.svg">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">好乐无荒</a>
+      </span>
+    
+    
+      <span class="site-header-brand-motto"> | 良士休休</span>
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">首页</a>
+      
+        <a href="/archives/" target="_self">归档</a>
+      
+        <a href="/tags/" target="_self">标签</a>
+      
+        <a href="/categories/" target="_self">分类</a>
+      
+        <a href="/about/" target="_self">关于</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://github.com/shamy1997/" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/tags/" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/about/" target="_self">
+            关于
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2019-09-26
+    </span>
+    
+      <span>
+        | <a href="/categories/代码精进/"><i class="fa fa-bookmark"></i>代码精进</a>
+      </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    python面向对象笔记
+  </h1>
+  
+  <article class="passage-article">
+    <p>看了好多遍，懂了又忘的面向对象！可恶，这次一定要搞懂！<br>[TOC]</p>
+<h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><p>定义了<code>__init__</code>后就要传入其定义的所有参数。<code>__init__</code>中所定义的属性直接与实例想联。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,name,score)</span>:</span></span><br><span class="line">        self.name = name</span><br><span class="line">        self.score = score</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">print_score</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> self.score&gt;<span class="number">90</span>:</span><br><span class="line">            print(<span class="string">'A'</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            print(<span class="string">'B'</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="访问限制"><a href="#访问限制" class="headerlink" title="访问限制"></a>访问限制</h2><ul>
+<li>以双划线<code>__</code>开头，<code>__</code>结尾的变量是特殊变量，特殊变量可以直接访问。</li>
+<li>以一个下划线<code>_</code>开头的变量是保护变量，只允许其自身和子类使用，不能用<code>form xx import *</code>。</li>
+<li>以两个下划线<code>__</code>开头的变量是private变量，虽然可以访问，但是按照惯例，应该视为私有变量，只允许这个类访问，不应该访问。</li>
+<li>如果要访问和更改内部私有变量，可以在类中设置相应的<code>set_item</code>，<code>change_item</code>，<code>get_item</code>方法来获得。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,name,score)</span>:</span></span><br><span class="line">        self.name = name</span><br><span class="line">        self.score = score</span><br><span class="line">        self.grade = <span class="keyword">None</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_score</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> self.score &gt; <span class="number">90</span>:</span><br><span class="line">            self.grade = <span class="string">'A'</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            self.grade = <span class="string">'-A'</span></span><br><span class="line">        <span class="keyword">return</span> self.grade</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_grade</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self._score()</span><br></pre></td></tr></table></figure>
+<h2 id="实例属性和类属性"><a href="#实例属性和类属性" class="headerlink" title="实例属性和类属性"></a>实例属性和类属性</h2><ul>
+<li>实例属性属于各个实例所有，互不干扰；</li>
+<li>类属性属于类所有，所有实例共享一个属性；</li>
+<li>不要对实例属性和类属性使用相同的名字，否则将产生难以发现的错误!实例属性的值会覆盖类属性的值</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 添加类属性</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Animal</span><span class="params">(object)</span>:</span></span><br><span class="line">    name = <span class="string">'animal'</span></span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+<h2 id="继承和多态"><a href="#继承和多态" class="headerlink" title="继承和多态"></a>继承和多态</h2><ul>
+<li>继承就是说，我创建一个新的类别的时候，object处填写已有的一个类别，新类别是子类别，旧类别是父类别。</li>
+<li>子类别会继承旧类别的所有的属性和方法；</li>
+<li>子类别可以更改父类别的方法（会覆盖父类别的方法）；</li>
+<li>子类别可以添加新的方法</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Animal</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">run</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(<span class="string">'Animal is running...'</span>)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dog</span><span class="params">(Animal)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">run</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(<span class="string">'Dog is running...'</span>)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">eat</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(<span class="string">'Dog eats bones.'</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="装饰器"><a href="#装饰器" class="headerlink" title="装饰器"></a>装饰器</h2><p>简单来说，装饰器就是把另外一个函数当成参数传入到当前函数中并返回一个函数，这个函数会取代被装饰的函数。</p>
+<h3 id="装饰器的运行过程"><a href="#装饰器的运行过程" class="headerlink" title="装饰器的运行过程"></a>装饰器的运行过程</h3><p>先将被修饰函数放入修饰器中的函数，然后正常运行修饰器函数，当调用被修饰函数时，执行被修饰函数。如果需要传入的被修饰函数需要传参，那么在调用的函数中也要设置参数位置。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># It’s not black magic, you just have to let the wrapper </span></span><br><span class="line"><span class="comment"># pass the argument:</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">a_decorator_passing_arguments</span><span class="params">(function_to_decorate)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">a_wrapper_accepting_arguments</span><span class="params">(arg1, arg2)</span>:</span></span><br><span class="line">        print(<span class="string">"I got args! Look: &#123;0&#125;, &#123;1&#125;"</span>.format(arg1, arg2))</span><br><span class="line">        function_to_decorate(arg1, arg2)</span><br><span class="line">    <span class="keyword">return</span> a_wrapper_accepting_arguments</span><br><span class="line"></span><br><span class="line"><span class="comment"># Since when you are calling the function returned by the decorator, you are</span></span><br><span class="line"><span class="comment"># calling the wrapper, passing arguments to the wrapper will let it pass them to </span></span><br><span class="line"><span class="comment"># the decorated function</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@a_decorator_passing_arguments</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">print_full_name</span><span class="params">(first_name, last_name)</span>:</span></span><br><span class="line">    print(<span class="string">"My name is &#123;0&#125; &#123;1&#125;"</span>.format(first_name, last_name))</span><br><span class="line"></span><br><span class="line">print_full_name(<span class="string">"Peter"</span>, <span class="string">"Venkman"</span>)</span><br><span class="line"><span class="comment"># outputs:</span></span><br><span class="line"><span class="comment">#I got args! Look: Peter Venkman</span></span><br><span class="line"><span class="comment">#My name is Peter Venkman</span></span><br></pre></td></tr></table></figure></p>
+<p>如果是在类中使用呢？方法和函数的唯一区别只在于第一个参数是<code>self</code>。因此，我们只需要更改一下这个地方即可。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">method_friendly_decorator</span><span class="params">(method_to_decorate)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">(self, lie)</span>:</span></span><br><span class="line">        lie = lie - <span class="number">3</span> <span class="comment"># very friendly, decrease age even more :-)</span></span><br><span class="line">        <span class="keyword">return</span> method_to_decorate(self, lie)</span><br><span class="line">    <span class="keyword">return</span> wrapper</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Lucy</span><span class="params">(object)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.age = <span class="number">32</span></span><br><span class="line"></span><br><span class="line"><span class="meta">    @method_friendly_decorator</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">sayYourAge</span><span class="params">(self, lie)</span>:</span></span><br><span class="line">        print(<span class="string">"I am &#123;0&#125;, what did you think?"</span>.format(self.age + lie))</span><br><span class="line"></span><br><span class="line">l = Lucy()</span><br><span class="line">l.sayYourAge(<span class="number">-3</span>)</span><br><span class="line"><span class="comment">#outputs: I am 26, what did you think?</span></span><br></pre></td></tr></table></figure>
+<p>装饰器函数可以不带参数，也可以带参数。当装饰器函数带参数时，其实充当的是装饰器函数的构造器的功能，其携带的参数都可访问，但是不能被传入到「真正」的装饰器函数中，否则会起冲突！在定义装饰器时传入参数，我们可以更好地控制装饰器的行为。但是在构建简单的装饰器时，使用不带参数的即可。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">methord_with_args</span><span class="params">(arg1)</span>:</span></span><br><span class="line">    print(<span class="string">'here is my arg &#123;&#125;'</span>.format(arg1))</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_fn</span><span class="params">(fn)</span>:</span></span><br><span class="line">        print(<span class="string">'run get(fn)'</span>)</span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">(arg2,arg3,arg4)</span>:</span></span><br><span class="line">            print(<span class="string">'here is my decorator args: &#123;0&#125;,&#123;1&#125;,&#123;2&#125;'</span>.format(arg2,arg3,arg4))</span><br><span class="line">            fn(arg1,arg3)</span><br><span class="line">        <span class="keyword">return</span> wrapper</span><br><span class="line">    <span class="keyword">return</span> get_fn</span><br><span class="line"></span><br><span class="line"><span class="meta">@methord_with_args('hi')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">what</span><span class="params">(arg2,arg3)</span>:</span></span><br><span class="line">    print(<span class="string">'what'</span>,arg2,arg3)</span><br><span class="line"></span><br><span class="line">what(<span class="string">'2'</span>,<span class="string">'3'</span>,<span class="string">'4'</span>)</span><br><span class="line"><span class="comment"># what 函数传入三个参数而非两个，是因为它已经被装饰后的 wrapper 函数所取代了！</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## output:</span></span><br><span class="line"><span class="comment"># here is my arg hi</span></span><br><span class="line"><span class="comment"># run get(fn)</span></span><br><span class="line"><span class="comment"># here is my decorator args: 2,3,4</span></span><br><span class="line"><span class="comment"># what hi 3</span></span><br></pre></td></tr></table></figure>
+<h3 id="常见的内置装饰器函数"><a href="#常见的内置装饰器函数" class="headerlink" title="常见的内置装饰器函数"></a>常见的内置装饰器函数</h3><h4 id="类方法-classmethod"><a href="#类方法-classmethod" class="headerlink" title="类方法@classmethod"></a>类方法<code>@classmethod</code></h4><p>在类中定义方法时使用<code>@classmethod</code>装饰器可以不创建实例就被使用。被类方法装饰器装饰的函数虽然<strong>不用传入<code>self</code>参数，但是仍需要传入一个<code>cls</code>参数来表示其自身</strong>。这个<code>cls</code>和<code>self</code>一样是不能传变量的。</p>
+<h4 id="静态方法-staticmethod"><a href="#静态方法-staticmethod" class="headerlink" title="静态方法@staticmethod"></a>静态方法<code>@staticmethod</code></h4><p>静态方法可以不创建实例来调用类中的一个方法。静态方法不需要传入参数，但也可以传入参数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Myclass</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">method</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">'instance method called'</span>,self</span><br><span class="line">    </span><br><span class="line"><span class="meta">    @staticmethod </span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">staticmethod</span><span class="params">()</span>:</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">'staticmethod called'</span></span><br><span class="line">    </span><br><span class="line"><span class="meta">    @classmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">classmethod</span><span class="params">(cls,a)</span>:</span></span><br><span class="line">        a += <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">'classmethod called'</span>,a</span><br><span class="line"></span><br><span class="line">print(Myclass.staticmethod())</span><br><span class="line">print(Myclass.classmethod(<span class="number">1</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment">## output</span></span><br><span class="line"><span class="comment"># staticmethod called</span></span><br><span class="line"><span class="comment"># ('classmethod called', 2)</span></span><br></pre></td></tr></table></figure>
+<h4 id="property"><a href="#property" class="headerlink" title="@property"></a><code>@property</code></h4><h5 id="用途1：与私有变量配合使用，来定义只读属性。"><a href="#用途1：与私有变量配合使用，来定义只读属性。" class="headerlink" title="用途1：与私有变量配合使用，来定义只读属性。"></a>用途1：与私有变量配合使用，来定义<strong>只读属性</strong>。</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,name)</span>:</span></span><br><span class="line">        self.name = name</span><br><span class="line">        self._age = <span class="number">20</span></span><br><span class="line">    </span><br><span class="line"><span class="meta">    @property</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">age</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self._age</span><br><span class="line"></span><br><span class="line">a = Person(<span class="string">'张三'</span>)</span><br><span class="line">a.age</span><br><span class="line"><span class="comment"># 20</span></span><br><span class="line"></span><br><span class="line">a.age = <span class="number">30</span></span><br><span class="line"><span class="comment"># 会报错：AttributeError: can't set attribute</span></span><br></pre></td></tr></table></figure>
+<h5 id="用途2：对类中的属性进行检查"><a href="#用途2：对类中的属性进行检查" class="headerlink" title="用途2：对类中的属性进行检查"></a>用途2：对类中的属性进行检查</h5><p>原来，我们要对类中属性的设置进行检查，会这样写：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(object)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_score</span><span class="params">(self)</span>:</span></span><br><span class="line">         <span class="keyword">return</span> self._score</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">set_score</span><span class="params">(self, value)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> isinstance(value, int):</span><br><span class="line">            <span class="keyword">raise</span> ValueError(<span class="string">'score must be an integer!'</span>)</span><br><span class="line">        <span class="keyword">if</span> value &lt; <span class="number">0</span> <span class="keyword">or</span> value &gt; <span class="number">100</span>:</span><br><span class="line">            <span class="keyword">raise</span> ValueError(<span class="string">'score must between 0 ~ 100!'</span>)</span><br><span class="line">        self._score = value</span><br></pre></td></tr></table></figure></p>
+<p>然后调用的时候会这样：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>s = Student()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.set_score(<span class="number">60</span>) <span class="comment"># ok!</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.get_score()</span><br><span class="line"><span class="number">60</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.set_score(<span class="number">9999</span>)</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  ...</span><br><span class="line">ValueError: score must between <span class="number">0</span> ~ <span class="number">100</span>!</span><br></pre></td></tr></table></figure></p>
+<p>但这样用两个方法太麻烦了，有了<code>@property</code>这个装饰器，就会方便很多。我们把一个<code>getter</code>方法变成属性，只需要加上<code>@property</code>就可以了，此时，<code>@property</code>本身又创建了另一个装饰器<code>@score.setter</code>，负责把一个<code>setter</code>方法变成属性赋值，于是，我们就拥有一个可控的属性操作:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(object)</span>:</span></span><br><span class="line"></span><br><span class="line"><span class="meta">    @property</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">score</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self._score</span><br><span class="line"></span><br><span class="line"><span class="meta">    @score.setter</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">score</span><span class="params">(self, value)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> isinstance(value, int):</span><br><span class="line">            <span class="keyword">raise</span> ValueError(<span class="string">'score must be an integer!'</span>)</span><br><span class="line">        <span class="keyword">if</span> value &lt; <span class="number">0</span> <span class="keyword">or</span> value &gt; <span class="number">100</span>:</span><br><span class="line">            <span class="keyword">raise</span> ValueError(<span class="string">'score must between 0 ~ 100!'</span>)</span><br><span class="line">        self._score = value</span><br><span class="line">        </span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s = Student()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.score = <span class="number">60</span> <span class="comment"># OK，实际转化为s.set_score(60)</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.score <span class="comment"># OK，实际转化为s.get_score()</span></span><br><span class="line"><span class="number">60</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.score = <span class="number">9999</span></span><br><span class="line">&gt;&gt;&gt;Traceback (most recent call last):</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span> ...</span><br><span class="line">&gt;&gt;&gt;ValueError: score must between <span class="number">0</span> ~ <span class="number">100</span>!</span><br></pre></td></tr></table></figure>
+<p>参考资料：</p>
+<ol>
+<li><p><a href="https://stackoverflow.com/questions/739654/how-to-make-a-chain-of-function-decorators/1594484#1594484" target="_blank" rel="noopener">stackflow高赞讲解装饰器</a></p>
+</li>
+<li><p><a href="https://www.runoob.com/python/python-object.html" target="_blank" rel="noopener">菜鸟教程</a></p>
+</li>
+<li><p><a href="https://www.cnblogs.com/wangyueyouyi/p/8508967.html" target="_blank" rel="noopener">python装饰器的原理</a></p>
+</li>
+</ol>
+
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#初始化"><span class="toc-text">初始化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#访问限制"><span class="toc-text">访问限制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实例属性和类属性"><span class="toc-text">实例属性和类属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#继承和多态"><span class="toc-text">继承和多态</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#装饰器"><span class="toc-text">装饰器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#装饰器的运行过程"><span class="toc-text">装饰器的运行过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常见的内置装饰器函数"><span class="toc-text">常见的内置装饰器函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#类方法-classmethod"><span class="toc-text">类方法@classmethod</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#静态方法-staticmethod"><span class="toc-text">静态方法@staticmethod</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#property"><span class="toc-text">@property</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#用途1：与私有变量配合使用，来定义只读属性。"><span class="toc-text">用途1：与私有变量配合使用，来定义只读属性。</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#用途2：对类中的属性进行检查"><span class="toc-text">用途2：对类中的属性进行检查</span></a></li></ol></li></ol></li></ol></li></ol>
+  </div>
+</aside>
+  
+    <aside class="passage-copyright">
+      <div>本文作者: Yuqiu Ji</div>
+      
+        <div>
+          原文链接: 
+          <a href="" target="_blank">http://shamy1997.github.io/passages/py-oop/</a>
+        </div>
+      
+      <div>
+        版权声明: 本博客所有文章除特别声明外, 均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议. 转载请注明出处!
+      </div>
+    </aside>
+  
+  
+    <div class="passage-tags">
+     
+      <a href="/tags/python/"><i class="fa fa-tags"></i>python</a>
+    
+    </div>
+  
+</div>
+
+    </main>
+    
+      
+<div class="site-comment-contanier" data-plateform="leancloud">
+  
+    <p id="site-comment-info">
+      <i class="fa fa-spinner fa-spin"></i> 评论加载中
+    </p>
+    <div id="site-comment"></div>
+  
+</div>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">博客推荐</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://liweinlp.com/" target="_blank">立委NLP频道</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="https://yihui.name/cn/" target="_blank">谢益辉</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">系列教程</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://machinelearningmastery.com/blog/" target="_blank">machinelearningmastery</a>
+          </span>
+        
+          <span class="site-footer-item">
+            <a href="http://wuhuang.bitcron.com/lin-wiki/" target="_blank">lin-wiki</a>
+          </span>
+        
+      </div>
+    
+      <div class="site-footer-col">
+        <h5 class="site-footer-title">抓到我</h5>
+        
+          <span class="site-footer-item">
+            <a href="https://www.douban.com/people/45130547/" target="_blank">豆瓣</a>
+          </span>
+        
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>
+    </div>
+    
+      <div class="site-footer-info">
+        <i class="fa fa-paw"></i> 您是本站第 <span id="site-count"></span> 位访客
+      </div>
+    
+    
+      <div class="site-footer-info">
+        <i class="fa fa-at"></i> Email: fdujyq@gmail.com
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 <a href="https://github.com/dongyuanxin/theme-ad/" target="_blank">Theme-AD</a>.
+      Created by <a href="https://godbmw.com/" target="_blank">GodBMW</a>.
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="site-layer-reward" id="site-layer-reward" style="display: none;">
+        
+          <div>
+            <img src="/images/wechat.png" alt="WeChat">
+            
+              <p>WeChat</p>
+            
+          </div>
+        
+          <div>
+            <img src="/images/alipay.png" alt="AliPay">
+            
+              <p>AliPay</p>
+            
+          </div>
+        
+      </div>
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="javascript:void(0);" data-enable="false">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="/passages/理解Word Embedding（1）：从Count Vector到word2vec/" data-enable="true">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+      <a href="#site-comment" data-enable="true">
+        <i class="fa fa-commenting"></i>
+      </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    <a href="javascript:void(0);" id="site-reward">
+      <i class="fa fa-thumbs-up"></i>
+    </a>
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+  
+  
+  
+  
+</div>
+    
+
+
+
+
+
+    
+  </body>
+</html>
