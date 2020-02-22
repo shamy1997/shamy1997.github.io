@@ -18,21 +18,21 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"shamy1997.github.io","root":"/","scheme":"Mist","version":"7.7.1","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"shamy1997.github.io","root":"/","scheme":"Mist","version":"7.7.1","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="vi 常用命令1. 进入 vi 编辑器1sudo vi &amp;lt;path&amp;gt; 2. 修改内容输入i，进入insert模式。按esc，退出模式。 3. 保存，退出 :w 保存文件但不退出vi; :wq 保存文件并退出vi; q: 不保存文件，退出vi :e! 放弃所有修改，从上次保存文件开始再编辑  vi命令大全  Jupyter or conda not found我安装好anaconda后">
+  <meta name="description" content="常用记录">
 <meta name="keywords" content="命令行">
 <meta property="og:type" content="article">
 <meta property="og:title" content="终端命令笔记">
 <meta property="og:url" content="http://shamy1997.github.io/passages/about-terminal/index.html">
 <meta property="og:site_name" content="好乐无荒">
-<meta property="og:description" content="vi 常用命令1. 进入 vi 编辑器1sudo vi &amp;lt;path&amp;gt; 2. 修改内容输入i，进入insert模式。按esc，退出模式。 3. 保存，退出 :w 保存文件但不退出vi; :wq 保存文件并退出vi; q: 不保存文件，退出vi :e! 放弃所有修改，从上次保存文件开始再编辑  vi命令大全  Jupyter or conda not found我安装好anaconda后">
+<meta property="og:description" content="常用记录">
 <meta property="og:locale" content="zh">
-<meta property="og:updated_time" content="2019-10-05T08:08:35.021Z">
+<meta property="og:updated_time" content="2020-02-22T03:31:03.607Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="终端命令笔记">
-<meta name="twitter:description" content="vi 常用命令1. 进入 vi 编辑器1sudo vi &amp;lt;path&amp;gt; 2. 修改内容输入i，进入insert模式。按esc，退出模式。 3. 保存，退出 :w 保存文件但不退出vi; :wq 保存文件并退出vi; q: 不保存文件，退出vi :e! 放弃所有修改，从上次保存文件开始再编辑  vi命令大全  Jupyter or conda not found我安装好anaconda后">
+<meta name="twitter:description" content="常用记录">
 
 <link rel="canonical" href="http://shamy1997.github.io/passages/about-terminal/">
 
@@ -146,9 +146,32 @@
     <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
   </ul>
 
 </nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off" placeholder="Searching..." spellcheck="false" type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
 </div>
     </header>
 
@@ -175,7 +198,7 @@
     <link itemprop="mainEntityOfPage" href="http://shamy1997.github.io/passages/about-terminal/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="https://s2.ax1x.com/2020/02/21/3uONi8.jpg">
       <meta itemprop="name" content="Yuqiu Ji">
       <meta itemprop="description" content="">
     </span>
@@ -202,7 +225,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-05 16:08:35" itemprop="dateModified" datetime="2019-10-05T16:08:35+08:00">2019-10-05</time>
+                <time title="Modified: 2020-02-22 11:31:03" itemprop="dateModified" datetime="2020-02-22T11:31:03+08:00">2020-02-22</time>
               </span>
 
           
@@ -230,7 +253,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="vi-常用命令"><a href="#vi-常用命令" class="headerlink" title="vi 常用命令"></a>vi 常用命令</h1><h2 id="1-进入-vi-编辑器"><a href="#1-进入-vi-编辑器" class="headerlink" title="1. 进入 vi 编辑器"></a>1. 进入 vi 编辑器</h2><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo <span class="keyword">vi</span> <span class="symbol">&lt;path&gt;</span></span><br></pre></td></tr></table></figure>
+        <p>常用记录</p>
+<a id="more"></a>
+<h1 id="vi-常用命令"><a href="#vi-常用命令" class="headerlink" title="vi 常用命令"></a>vi 常用命令</h1><h2 id="1-进入-vi-编辑器"><a href="#1-进入-vi-编辑器" class="headerlink" title="1. 进入 vi 编辑器"></a>1. 进入 vi 编辑器</h2><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo <span class="keyword">vi</span> <span class="symbol">&lt;path&gt;</span></span><br></pre></td></tr></table></figure>
 <h2 id="2-修改内容"><a href="#2-修改内容" class="headerlink" title="2. 修改内容"></a>2. 修改内容</h2><p>输入<code>i</code>，进入<code>insert</code>模式。<br>按<code>esc</code>，退出模式。</p>
 <h2 id="3-保存，退出"><a href="#3-保存，退出" class="headerlink" title="3. 保存，退出"></a>3. 保存，退出</h2><ul>
 <li><code>:w</code> 保存文件但不退出vi;</li>
@@ -288,12 +313,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/passages/slot-filling/" rel="prev" title="Slot Filling with SimpleRNN">
-      <i class="fa fa-chevron-left"></i> Slot Filling with SimpleRNN
+    <a href="/passages/理解Word Embedding（1）：从Count Vector到word2vec/" rel="prev" title="理解Word Embedding（1）：从Count Vector到word2vec">
+      <i class="fa fa-chevron-left"></i> 理解Word Embedding（1）：从Count Vector到word2vec
     </a></div>
       <div class="post-nav-item">
-    <a href="/passages/srl-paper-reading-md/" rel="next" title="论文阅读 | Deep Semantic Role Labeling:What Works and What’s Next">
-      论文阅读 | Deep Semantic Role Labeling:What Works and What’s Next <i class="fa fa-chevron-right"></i>
+    <a href="/passages/颗粒度分词调研/" rel="next" title="北大分词方案解读及颗粒度分词方案">
+      北大分词方案解读及颗粒度分词方案 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -361,6 +386,7 @@
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Yuqiu Ji" src="https://s2.ax1x.com/2020/02/21/3uONi8.jpg">
   <p class="site-author-name" itemprop="name">Yuqiu Ji</p>
   <div class="site-description" itemprop="description"></div>
 </div>
@@ -369,17 +395,21 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-count">7</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
         <span class="site-state-item-count">3</span>
-        <span class="site-state-item-name">categories</span>
+        <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
         <span class="site-state-item-count">12</span>
-        <span class="site-state-item-name">tags</span>
+        <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
 </div>
@@ -452,6 +482,8 @@
 
 
 
+
+  <script src="/js/local-search.js"></script>
 
 
 

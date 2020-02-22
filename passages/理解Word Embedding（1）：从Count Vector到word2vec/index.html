@@ -18,16 +18,16 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"shamy1997.github.io","root":"/","scheme":"Mist","version":"7.7.1","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"shamy1997.github.io","root":"/","scheme":"Mist","version":"7.7.1","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="参考博客链接: 🔗 这个 1. 什么是Word Embedding在机器学习和深度学习的任务中，我们都无法直接处理字符串或平文本，所以需要通过一种编码方式将其处理为数值，Word Embedding 就是这样将文本处理成数值的一类方法。 2. 不同的Word Embedding 类型2.1. 基于频率的Word Embedding2.1.1 Count Vectors假设一个一个语料库C有D个文">
+  <meta name="description" content="参考博客链接: 🔗 这个 1. 什么是Word Embedding在机器学习和深度学习的任务中，我们都无法直接处理字符串或平文本，所以需要通过一种编码方式将其处理为数值，Word Embedding 就是这样将文本处理成数值的一类方法。">
 <meta name="keywords" content="Word Embedding">
 <meta property="og:type" content="article">
 <meta property="og:title" content="理解Word Embedding（1）：从Count Vector到word2vec">
 <meta property="og:url" content="http://shamy1997.github.io/passages/理解Word Embedding（1）：从Count Vector到word2vec/index.html">
 <meta property="og:site_name" content="好乐无荒">
-<meta property="og:description" content="参考博客链接: 🔗 这个 1. 什么是Word Embedding在机器学习和深度学习的任务中，我们都无法直接处理字符串或平文本，所以需要通过一种编码方式将其处理为数值，Word Embedding 就是这样将文本处理成数值的一类方法。 2. 不同的Word Embedding 类型2.1. 基于频率的Word Embedding2.1.1 Count Vectors假设一个一个语料库C有D个文">
+<meta property="og:description" content="参考博客链接: 🔗 这个 1. 什么是Word Embedding在机器学习和深度学习的任务中，我们都无法直接处理字符串或平文本，所以需要通过一种编码方式将其处理为数值，Word Embedding 就是这样将文本处理成数值的一类方法。">
 <meta property="og:locale" content="zh">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g73hk5tjp1j30g20afwfu.jpg">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g73ht7n9doj30fz05j74n.jpg">
@@ -39,10 +39,10 @@
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g73hkwsehxj30oz04laah.jpg">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g73hl3etyzj30aa09emxu.jpg">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g73hl6oauhj309g06t750.jpg">
-<meta property="og:updated_time" content="2019-09-18T03:07:55.276Z">
+<meta property="og:updated_time" content="2020-02-22T03:33:39.025Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="理解Word Embedding（1）：从Count Vector到word2vec">
-<meta name="twitter:description" content="参考博客链接: 🔗 这个 1. 什么是Word Embedding在机器学习和深度学习的任务中，我们都无法直接处理字符串或平文本，所以需要通过一种编码方式将其处理为数值，Word Embedding 就是这样将文本处理成数值的一类方法。 2. 不同的Word Embedding 类型2.1. 基于频率的Word Embedding2.1.1 Count Vectors假设一个一个语料库C有D个文">
+<meta name="twitter:description" content="参考博客链接: 🔗 这个 1. 什么是Word Embedding在机器学习和深度学习的任务中，我们都无法直接处理字符串或平文本，所以需要通过一种编码方式将其处理为数值，Word Embedding 就是这样将文本处理成数值的一类方法。">
 <meta name="twitter:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g73hk5tjp1j30g20afwfu.jpg">
 
 <link rel="canonical" href="http://shamy1997.github.io/passages/理解Word Embedding（1）：从Count Vector到word2vec/">
@@ -157,9 +157,32 @@
     <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
   </ul>
 
 </nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off" placeholder="Searching..." spellcheck="false" type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
 </div>
     </header>
 
@@ -186,7 +209,7 @@
     <link itemprop="mainEntityOfPage" href="http://shamy1997.github.io/passages/理解Word Embedding（1）：从Count Vector到word2vec/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="https://s2.ax1x.com/2020/02/21/3uONi8.jpg">
       <meta itemprop="name" content="Yuqiu Ji">
       <meta itemprop="description" content="">
     </span>
@@ -206,14 +229,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2019-08-18 10:27:04" itemprop="dateCreated datePublished" datetime="2019-08-18T10:27:04+08:00">2019-08-18</time>
+              <time title="Created: 2018-12-18 10:27:04" itemprop="dateCreated datePublished" datetime="2018-12-18T10:27:04+08:00">2018-12-18</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-09-18 11:07:55" itemprop="dateModified" datetime="2019-09-18T11:07:55+08:00">2019-09-18</time>
+                <time title="Modified: 2020-02-22 11:33:39" itemprop="dateModified" datetime="2020-02-22T11:33:39+08:00">2020-02-22</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -254,6 +277,7 @@
       
         <p>参考博客链接: 🔗 <a href="https://www.analyticsvidhya.com/blog/2017/06/word-embeddings-count-word2veec/" target="_blank" rel="noopener">这个</a></p>
 <h2 id="1-什么是Word-Embedding"><a href="#1-什么是Word-Embedding" class="headerlink" title="1. 什么是Word Embedding"></a>1. 什么是Word Embedding</h2><p>在机器学习和深度学习的任务中，我们都无法直接处理字符串或平文本，所以需要通过一种编码方式将其处理为数值，Word Embedding 就是这样将文本处理成数值的一类方法。</p>
+<a id="more"></a>
 <h2 id="2-不同的Word-Embedding-类型"><a href="#2-不同的Word-Embedding-类型" class="headerlink" title="2. 不同的Word Embedding 类型"></a>2. 不同的Word Embedding 类型</h2><h3 id="2-1-基于频率的Word-Embedding"><a href="#2-1-基于频率的Word-Embedding" class="headerlink" title="2.1. 基于频率的Word Embedding"></a>2.1. 基于频率的Word Embedding</h3><h4 id="2-1-1-Count-Vectors"><a href="#2-1-1-Count-Vectors" class="headerlink" title="2.1.1 Count Vectors"></a>2.1.1 Count Vectors</h4><p>假设一个一个语料库C有D个文本片段{d1,d2,d3,…dD} 以及N个从语料库C中提取的token。这N个token将会形成我们的词典，这样我们设定的Count Vector 大小便是 DxN。在矩阵M中，每行都包含着每个文本片段的token出现的频率。</p>
 <p>让我们通过一个简单的例子来理解。</p>
 <p>D1: He is  lazy boy. She is also lazy.</p>
@@ -472,12 +496,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/passages/srl-paper-reading-md/" rel="prev" title="论文阅读 | Deep Semantic Role Labeling:What Works and What’s Next">
-      <i class="fa fa-chevron-left"></i> 论文阅读 | Deep Semantic Role Labeling:What Works and What’s Next
+    <a href="/passages/slot-filling/" rel="prev" title="Slot Filling with SimpleRNN">
+      <i class="fa fa-chevron-left"></i> Slot Filling with SimpleRNN
     </a></div>
       <div class="post-nav-item">
-    <a href="/passages/py-oop/" rel="next" title="python面向对象笔记">
-      python面向对象笔记 <i class="fa fa-chevron-right"></i>
+    <a href="/passages/about-terminal/" rel="next" title="终端命令笔记">
+      终端命令笔记 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -545,6 +569,7 @@
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Yuqiu Ji" src="https://s2.ax1x.com/2020/02/21/3uONi8.jpg">
   <p class="site-author-name" itemprop="name">Yuqiu Ji</p>
   <div class="site-description" itemprop="description"></div>
 </div>
@@ -553,17 +578,21 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-count">7</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
         <span class="site-state-item-count">3</span>
-        <span class="site-state-item-name">categories</span>
+        <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
         <span class="site-state-item-count">12</span>
-        <span class="site-state-item-name">tags</span>
+        <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
 </div>
@@ -636,6 +665,8 @@
 
 
 
+
+  <script src="/js/local-search.js"></script>
 
 
 
