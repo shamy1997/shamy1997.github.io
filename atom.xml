@@ -6,7 +6,7 @@
   <link href="http://shamy1997.github.io/atom.xml" rel="self"/>
   
   <link href="http://shamy1997.github.io/"/>
-  <updated>2020-03-14T11:04:31.287Z</updated>
+  <updated>2021-03-21T08:42:07.660Z</updated>
   <id>http://shamy1997.github.io/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="http://shamy1997.github.io/passages/text-similarity-md/"/>
     <id>http://shamy1997.github.io/passages/text-similarity-md/</id>
     <published>2020-03-14T07:56:01.000Z</published>
-    <updated>2020-03-14T11:04:31.287Z</updated>
+    <updated>2021-03-21T08:42:07.660Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="【翻译】文本相似度计算：如何估计两个文本之间相似程度？"><a href="#【翻译】文本相似度计算：如何估计两个文本之间相似程度？" class="headerlink" title="【翻译】文本相似度计算：如何估计两个文本之间相似程度？"></a>【翻译】文本相似度计算：如何估计两个文本之间相似程度？</h1><a id="more"></a><p>文本相似的计算场景有很多：</p><ul><li>搜索引擎：我们需要知道文本和搜索语句之间的关联程度；比如问答软件需要通过文本相似度计算给出数据库中依存的与用户输入文本最相近的条目。</li><li>法律事务：我们需要通过文本相似度计算检索出与新立法条最为接近的法律条文，确保条目之间不会有冲突。</li><li>咨询行业：AI 系统需要根据客户多种多样的问询给出一个标准回答。在这个系统中，AI 系统需要通过文本相似度计算辨别出具有不同表现形式但相同语义的问句，比如“我的快递怎么了”和“我的包裹怎么了”，用户应该得到的是相同的回答。</li></ul><p>那么什么是文本相似度计算呢？</p><!---more---><p>文本相似度，指的是两个文本片段在表层（词汇相似度）和含义（语义相似度）上两个方面上的相近程度。</p><ul><li>在表层上：如果你只考虑词汇级别的相似度，那么那些 4 个单词里有 3 个单词重合的句子都会被认为是相似的。这种方法不会考虑文本语境对词汇的词义带来的影响，也不会考虑整个句子的语义。</li><li>在含义上：我们不仅要关注词汇上的重复数目，还要关注上下文去更充分地捕捉词义。为了考虑语义相似度，我们要注重于篇章、段落层面上的语义挖掘。因为即使两句话词汇上完全一致，也可能有完全不一样的意思。</li></ul><p>我们知道，任何一个句子都有深层结构：</p><blockquote><p><strong>mouse</strong> <em>is the object of</em> <strong>ate</strong> <em>in the first case and</em> <strong>food</strong> <em>is the object of</em> <strong>ate</strong> <em>in the second case</em></p></blockquote><p>由于词序常常会导致语义的希望，我们希望我们的 sentence embedding 能对这种变化敏感。而幸运的是，我们的词向量经过多年的进化，已经能够区别<code>record the play</code>  和 <code>play the record</code> 的区别了。</p><h2 id="那么，我们的制胜秘诀是？"><a href="#那么，我们的制胜秘诀是？" class="headerlink" title="那么，我们的制胜秘诀是？"></a>那么，我们的制胜秘诀是？</h2><p>我们的大方向是，将文本表示成特征向量，然后比较文本之间的特征向量的距离来确定文本之间的相似度。我们有许多方式去计算文本的语义特征和深层结构。有监督的方法可以帮助 sentence embedding 更直接地学习到一个句子的语义。</p><p>下面，我们将比较计算语义相似度的最流行的集中做法，并比较他们的表现。</p><div class="table-container"><table><thead><tr><th>方法</th><th>效果</th></tr></thead><tbody><tr><td>Jaccard Similarity</td><td>☹☹☹</td></tr><tr><td>Different embedding + K-means</td><td>☹☹</td></tr><tr><td>Different embedding + Cosine Similarity</td><td>☹</td></tr><tr><td>Word2Vec + Smooth Inverse Frequency + Cosine Similarity</td><td>😊</td></tr><tr><td>Different embeddings + LSI + Cosine Similarity</td><td>☹</td></tr><tr><td>Different embeddings + LDA + Jensen-Shannon distance</td><td>😊</td></tr><tr><td>Different embeddings + Word Mover Distance</td><td>😊😊</td></tr><tr><td>Different embeddings + Variantional Auto Encoder(VAE)</td><td>😊😊</td></tr><tr><td></td><td></td></tr><tr><td></td><td></td></tr><tr><td></td><td></td></tr><tr><td></td></tr></tbody></table></div>]]></content>
+    <content type="html"><![CDATA[<h1 id="【翻译】文本相似度计算：如何估计两个文本之间相似程度？"><a href="#【翻译】文本相似度计算：如何估计两个文本之间相似程度？" class="headerlink" title="【翻译】文本相似度计算：如何估计两个文本之间相似程度？"></a>【翻译】文本相似度计算：如何估计两个文本之间相似程度？</h1><a id="more"></a><p>文本相似的计算场景有很多：</p><ul><li>搜索引擎：我们需要知道文本和搜索语句之间的关联程度；比如问答软件需要通过文本相似度计算给出数据库中依存的与用户输入文本最相近的条目。</li><li>法律事务：我们需要通过文本相似度计算检索出与新立法条最为接近的法律条文，确保条目之间不会有冲突。</li><li>咨询行业：AI 系统需要根据客户多种多样的问询给出一个标准回答。在这个系统中，AI 系统需要通过文本相似度计算辨别出具有不同表现形式但相同语义的问句，比如“我的快递怎么了”和“我的包裹怎么了”，用户应该得到的是相同的回答。</li></ul><p>那么什么是文本相似度计算呢？</p><!---more---><p>文本相似度，指的是两个文本片段在表层（词汇相似度）和含义（语义相似度）上两个方面上的相近程度。</p><ul><li>在表层上：如果你只考虑词汇级别的相似度，那么那些 4 个单词里有 3 个单词重合的句子都会被认为是相似的。这种方法不会考虑文本语境对词汇的词义带来的影响，也不会考虑整个句子的语义。</li><li>在含义上：我们不仅要关注词汇上的重复数目，还要关注上下文去更充分地捕捉词义。为了考虑语义相似度，我们要注重于篇章、段落层面上的语义挖掘。因为即使两句话词汇上完全一致，也可能有完全不一样的意思。</li></ul><p>我们知道，任何一个句子都有深层结构：</p><blockquote><p><strong>mouse</strong> <em>is the object of</em> <strong>ate</strong> <em>in the first case and</em> <strong>food</strong> <em>is the object of</em> <strong>ate</strong> <em>in the second case</em></p></blockquote><p>由于词序常常会导致语义的希望，我们希望我们的 sentence embedding 能对这种变化敏感。而幸运的是，我们的词向量经过多年的进化，已经能够区别<code>record the play</code>  和 <code>play the record</code> 的区别了。</p><h2 id="那么，我们的制胜秘诀是？"><a href="#那么，我们的制胜秘诀是？" class="headerlink" title="那么，我们的制胜秘诀是？"></a>那么，我们的制胜秘诀是？</h2><p>我们的大方向是，将文本表示成特征向量，然后比较文本之间的特征向量的距离来确定文本之间的相似度。我们有许多方式去计算文本的语义特征和深层结构。有监督的方法可以帮助 sentence embedding 更直接地学习到一个句子的语义。</p><p>下面，我们将比较计算语义相似度的最流行的集中做法，并比较他们的表现。</p><div class="table-container"><table><thead><tr><th>方法</th><th>效果</th></tr></thead><tbody><tr><td>Jaccard Similarity</td><td>😢😢😢</td></tr><tr><td>Different embedding + K-means</td><td>😢😢</td></tr><tr><td>Different embedding + Cosine Similarity</td><td>😢</td></tr><tr><td>Word2Vec + Smooth Inverse Frequency + Cosine Similarity</td><td>😊</td></tr><tr><td>Different embeddings + LSI + Cosine Similarity</td><td>😢</td></tr><tr><td>Different embeddings + LDA + Jensen-Shannon distance</td><td>😊</td></tr><tr><td>Different embeddings + Word Mover Distance</td><td>😊😊</td></tr><tr><td>Different embeddings + Variantional Auto Encoder(VAE)</td><td>😊😊</td></tr><tr><td></td><td></td></tr><tr><td></td><td></td></tr><tr><td></td><td></td></tr><tr><td></td></tr></tbody></table></div>]]></content>
     
     
     <summary type="html">&lt;h1 id=&quot;【翻译】文本相似度计算：如何估计两个文本之间相似程度？&quot;&gt;&lt;a href=&quot;#【翻译】文本相似度计算：如何估计两个文本之间相似程度？&quot; class=&quot;headerlink&quot; title=&quot;【翻译】文本相似度计算：如何估计两个文本之间相似程度？&quot;&gt;&lt;/a&gt;【翻译】文本相似度计算：如何估计两个文本之间相似程度？&lt;/h1&gt;</summary>
@@ -52,11 +52,11 @@
     <category term="SRL" scheme="http://shamy1997.github.io/categories/SRL/"/>
     
     
+    <category term="NLP" scheme="http://shamy1997.github.io/tags/NLP/"/>
+    
     <category term="SRL" scheme="http://shamy1997.github.io/tags/SRL/"/>
     
     <category term="paper-reading" scheme="http://shamy1997.github.io/tags/paper-reading/"/>
-    
-    <category term="NLP" scheme="http://shamy1997.github.io/tags/NLP/"/>
     
   </entry>
   
