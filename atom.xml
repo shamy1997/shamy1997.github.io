@@ -6,7 +6,7 @@
   <link href="http://shamy1997.github.io/atom.xml" rel="self"/>
   
   <link href="http://shamy1997.github.io/"/>
-  <updated>2021-03-21T08:42:07.660Z</updated>
+  <updated>2021-04-20T01:19:50.071Z</updated>
   <id>http://shamy1997.github.io/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>linux中快速统计单词词频.md</title>
+    <link href="http://shamy1997.github.io/passages/linux%E4%B8%8B%E6%9F%A5%E6%89%BE%E5%8D%95%E8%AF%8D/"/>
+    <id>http://shamy1997.github.io/passages/linux%E4%B8%8B%E6%9F%A5%E6%89%BE%E5%8D%95%E8%AF%8D/</id>
+    <published>2021-04-20T01:11:15.000Z</published>
+    <updated>2021-04-20T01:19:50.071Z</updated>
+    
+    <content type="html"><![CDATA[<ol><li>使用vim统计</li></ol><p>用vim打开目标文件，在命令模式下，输入</p><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">%s/word//gn</span><br></pre></td></tr></table></figure><ol><li>使用grep：</li></ol><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep -o objStr  filename|wc -l</span><br></pre></td></tr></table></figure><p>统计多个字符串出现的次数：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep -o ‘objStr1\|objStr2<span class="string">'  filename|wc -l</span></span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;ol&gt;
+&lt;li&gt;使用vim统计&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;用vim打开目标文件，在命令模式下，输入&lt;/p&gt;
+&lt;figure class=&quot;highlight vim&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;</summary>
+      
+    
+    
+    
+    <category term="一日一技" scheme="http://shamy1997.github.io/categories/一日一技/"/>
+    
+    
+    <category term="linux" scheme="http://shamy1997.github.io/tags/linux/"/>
+    
+  </entry>
   
   <entry>
     <title>文本相似度计算</title>
