@@ -22,7 +22,7 @@
   </script>
 
   <meta name="description" content="什么是SRLSemantic Role Labeling 任务指的是围绕着谓词标记一句话的论元信息，识别出what，who，whom，when，where等信息。这是一项标记句子事件的浅层语义处理，不涉及句子的句法分析。比如对于“他昨天把书交给了张三”和“昨天书被他交给了张三”这两句话，它们在句法上不一样，但是在语义角色标注上是一样的。">
-<meta name="keywords" content="NLP,SRL,paper-reading">
+<meta name="keywords" content="SRL,paper-reading,NLP">
 <meta property="og:type" content="article">
 <meta property="og:title" content="论文阅读 | Deep Semantic Role Labeling:What Works and What’s Next">
 <meta property="og:url" content="http://shamy1997.github.io/passages/srl-paper-reading-md/index.html">
@@ -145,6 +145,21 @@
         <li class="menu-item menu-item-categories">
 
     <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-books">
+
+    <a href="/books/" rel="section"><i class="fa fa-fw fa-bookmark"></i>books</a>
+
+  </li>
+        <li class="menu-item menu-item-movies">
+
+    <a href="/movies" rel="section"><i class="fa fa-fw fa-movie"></i>movies</a>
+
+  </li>
+        <li class="menu-item menu-item-games">
+
+    <a href="/games" rel="section"><i class="fa fa-fw fa-game"></i>games</a>
 
   </li>
         <li class="menu-item menu-item-archives">
@@ -323,6 +338,20 @@
     
     
     
+      
+  <div class="popular-posts-header">Related Posts</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/passages/text-similarity-md/" rel="bookmark">文本相似度计算</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/passages/slot-filling/" rel="bookmark">Slot Filling with SimpleRNN</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/passages/颗粒度分词调研/" rel="bookmark">北大分词方案解读及颗粒度分词方案</a></div>
+    </li>
+  </ul>
+
         
 
   <div class="followme">
@@ -345,12 +374,17 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/NLP/" rel="tag"># NLP</a>
               <a href="/tags/SRL/" rel="tag"># SRL</a>
               <a href="/tags/paper-reading/" rel="tag"># paper-reading</a>
+              <a href="/tags/NLP/" rel="tag"># NLP</a>
           </div>
 
         
+  <div class="post-widgets">
+    <div class="wp_rating">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
 
 
         
@@ -451,7 +485,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-count">14</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -523,6 +557,26 @@
 
 
 
+  <script>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id    : 30425,
+      el    : 'wpac-rating',
+      color : 'fc6423'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
 
   <script src="/js/local-search.js"></script>
 

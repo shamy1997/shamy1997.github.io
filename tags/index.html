@@ -139,6 +139,21 @@
     <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
 
   </li>
+        <li class="menu-item menu-item-books">
+
+    <a href="/books/" rel="section"><i class="fa fa-fw fa-bookmark"></i>books</a>
+
+  </li>
+        <li class="menu-item menu-item-movies">
+
+    <a href="/movies" rel="section"><i class="fa fa-fw fa-movie"></i>movies</a>
+
+  </li>
+        <li class="menu-item menu-item-games">
+
+    <a href="/games" rel="section"><i class="fa fa-fw fa-game"></i>games</a>
+
+  </li>
         <li class="menu-item menu-item-archives">
 
     <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
@@ -213,7 +228,7 @@
       <div class="post-body">
           <div class="tag-cloud">
             <div class="tag-cloud-title">
-              13 tags in total
+              14 tags in total
             </div>
             <div class="tag-cloud-tags">
               <a href="/tags/NLP/" style="font-size: 30px; color: #111">NLP</a> <a href="/tags/RNN/" style="font-size: 12px; color: #ccc">RNN</a> <a href="/tags/SRL/" style="font-size: 12px; color: #ccc">SRL</a> <a href="/tags/Word-Embedding/" style="font-size: 12px; color: #ccc">Word Embedding</a> <a href="/tags/keras/" style="font-size: 12px; color: #ccc">keras</a> <a href="/tags/labeling/" style="font-size: 12px; color: #ccc">labeling</a> <a href="/tags/linux/" style="font-size: 12px; color: #ccc">linux</a> <a href="/tags/paper-reading/" style="font-size: 12px; color: #ccc">paper-reading</a> <a href="/tags/python/" style="font-size: 12px; color: #ccc">python</a> <a href="/tags/tensorflow/" style="font-size: 12px; color: #ccc">tensorflow</a> <a href="/tags/分词/" style="font-size: 12px; color: #ccc">分词</a> <a href="/tags/命令行/" style="font-size: 12px; color: #ccc">命令行</a> <a href="/tags/深度学习/" style="font-size: 12px; color: #ccc">深度学习</a>
@@ -309,7 +324,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-count">14</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -381,6 +396,26 @@
 
 
 
+  <script>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id    : 30425,
+      el    : 'wpac-rating',
+      color : 'fc6423'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
 
   <script src="/js/local-search.js"></script>
 
