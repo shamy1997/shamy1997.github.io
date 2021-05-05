@@ -18,7 +18,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"shamy1997.github.io","root":"/","scheme":"Mist","version":"7.7.1","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"shamy1997.github.io","root":"/","scheme":"Muse","version":"7.7.1","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="什么是Slot Filling？Slot Filling是自然语言理解中的一个基本问题，是对语言含义的简单化处理，它的思想类似于语言学中框架主义的一派，先设定好特定的语言类型槽，再将输入的单词一一填入槽内，而获取言语含义的时候即是根据语义槽的含义进行提取和检索。我们这里的任务就是将表示定购航班（ATIS数据集）这一言语行为的一系列语句填入各种类型的语义槽中。">
@@ -151,12 +151,12 @@
   </li>
         <li class="menu-item menu-item-movies">
 
-    <a href="/movies" rel="section"><i class="fa fa-fw fa-movie"></i>movies</a>
+    <a href="/movies" rel="section"><i class="fa fa-fw fa-film"></i>movies</a>
 
   </li>
         <li class="menu-item menu-item-games">
 
-    <a href="/games" rel="section"><i class="fa fa-fw fa-game"></i>games</a>
+    <a href="/games" rel="section"><i class="fa fa-fw fa-steam"></i>games</a>
 
   </li>
         <li class="menu-item menu-item-archives">
@@ -198,6 +198,7 @@
     <i class="fa fa-arrow-up"></i>
     <span>0%</span>
   </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
 
 
     <main class="main">
@@ -367,10 +368,11 @@ _________________________________________________________________
 
 
       <footer class="post-footer">
+          
           <div class="post-tags">
-              <a href="/tags/NLP/" rel="tag"># NLP</a>
-              <a href="/tags/keras/" rel="tag"># keras</a>
-              <a href="/tags/RNN/" rel="tag"># RNN</a>
+              <a href="/tags/NLP/" rel="tag"><i class="fa fa-tag"></i> NLP</a>
+              <a href="/tags/keras/" rel="tag"><i class="fa fa-tag"></i> keras</a>
+              <a href="/tags/RNN/" rel="tag"><i class="fa fa-tag"></i> RNN</a>
           </div>
 
         
@@ -491,6 +493,9 @@ _________________________________________________________________
       <span class="links-of-author-item">
         <a href="mailto:fdujyq@gmail.com" title="E-Mail → mailto:fdujyq@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
       </span>
+      <span class="links-of-author-item">
+        <a href="https://www.douban.com/people/45130547/" title="Douban → https://www.douban.com/people/45130547/" rel="noopener" target="_blank"><i class="fa fa-fw fa-leaf"></i>Douban</a>
+      </span>
   </div>
 
 
@@ -521,7 +526,7 @@ _________________________________________________________________
   <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0
   </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">Theme – <a href="https://mist.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.7.1
+  <div class="theme-info">Theme – <a href="https://muse.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.7.1
   </div>
 
         
@@ -543,7 +548,7 @@ _________________________________________________________________
   <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
 <script src="/js/utils.js"></script>
 <script src="/js/schemes/muse.js"></script>
-<script src="/js/next-boot.js"></script>
+<script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
 
 
 
