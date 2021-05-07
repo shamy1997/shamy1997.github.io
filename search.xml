@@ -4,11 +4,36 @@
   
     
     <entry>
+      <title>python set</title>
+      <link href="/passages/python-set/"/>
+      <url>/passages/python-set/</url>
+      
+        <content type="html"><![CDATA[<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">t = set()</span><br><span class="line">s = set()</span><br><span class="line"></span><br><span class="line">a = t | s          <span class="comment"># t 和 s的并集  </span></span><br><span class="line">b = t &amp; s          <span class="comment"># t 和 s的交集  </span></span><br><span class="line">c = t – s          <span class="comment"># 求差集（项在t中，但不在s中）  </span></span><br><span class="line">d = t ^ s          <span class="comment"># 对称差集（项在t或s中，但不会同时出现在二者中） </span></span><br><span class="line"></span><br><span class="line">t &lt;= s             <span class="comment"># 判断 t 是否是 s 的子集</span></span><br><span class="line">t &gt;= s             <span class="comment"># 判断 s 是否是 t 的子集</span></span><br><span class="line"></span><br><span class="line">s.discard(x)   <span class="comment"># 如果set s 中存在 x,则删除；</span></span><br><span class="line">s.remove(x)    <span class="comment"># 删除 x ，如果不存在，则报错；</span></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 一日一技 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> python </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>linux中快速统计单词词频.md</title>
       <link href="/passages/linux%E4%B8%8B%E6%9F%A5%E6%89%BE%E5%8D%95%E8%AF%8D/"/>
       <url>/passages/linux%E4%B8%8B%E6%9F%A5%E6%89%BE%E5%8D%95%E8%AF%8D/</url>
       
-        <content type="html"><![CDATA[<ol><li>使用vim统计</li></ol><p>用vim打开目标文件，在命令模式下，输入</p><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">%s/word//gn</span><br></pre></td></tr></table></figure><ol><li>使用grep：</li></ol><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep -o objStr  filename|wc -l</span><br></pre></td></tr></table></figure><p>统计多个字符串出现的次数：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep -o ‘objStr1\|objStr2<span class="string">'  filename|wc -l</span></span><br></pre></td></tr></table></figure>]]></content>
+        <content type="html"><![CDATA[<p>统计单个字符出现的次数：</p><ol><li>使用vim统计</li></ol><p>用vim打开目标文件，在命令模式下，输入</p><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">%s/word//gn</span><br></pre></td></tr></table></figure><ol><li>使用grep：</li></ol><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep -o objStr  filename|wc -l</span><br></pre></td></tr></table></figure><hr><p>统计多个字符串出现的次数：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep -o ‘objStr1\|objStr2<span class="string">'  filename|wc -l</span></span><br></pre></td></tr></table></figure>]]></content>
       
       
       <categories>
@@ -64,11 +89,11 @@
       
         <tags>
             
-            <tag> NLP </tag>
-            
             <tag> SRL </tag>
             
             <tag> paper-reading </tag>
+            
+            <tag> NLP </tag>
             
         </tags>
       
