@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.8.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"shamy1997.github.io","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="什么是Slot Filling？Slot Filling是自然语言理解中的一个基本问题，是对语言含义的简单化处理，它的思想类似于语言学中框架主义的一派，先设定好特定的语言类型槽，再将输入的单词一一填入槽内，而获取言语含义的时候即是根据语义槽的含义进行提取和检索。我们这里的任务就是将表示定购航班（ATIS数据集）这一言语行为的一系列语句填入各种类型的语义槽中。">
+<meta name="keywords" content="NLP,keras,RNN">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Slot Filling with SimpleRNN">
+<meta property="og:url" content="http://shamy1997.github.io/passages/slot-filling/index.html">
+<meta property="og:site_name" content="好乐无荒">
+<meta property="og:description" content="什么是Slot Filling？Slot Filling是自然语言理解中的一个基本问题，是对语言含义的简单化处理，它的思想类似于语言学中框架主义的一派，先设定好特定的语言类型槽，再将输入的单词一一填入槽内，而获取言语含义的时候即是根据语义槽的含义进行提取和检索。我们这里的任务就是将表示定购航班（ATIS数据集）这一言语行为的一系列语句填入各种类型的语义槽中。">
+<meta property="og:locale" content="zh">
+<meta property="og:image" content="http://ohj9e0ect.bkt.clouddn.com/blog/180911/5A7mAF88bL.png?imageslim">
+<meta property="og:updated_time" content="2020-02-22T03:33:58.223Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Slot Filling with SimpleRNN">
+<meta name="twitter:description" content="什么是Slot Filling？Slot Filling是自然语言理解中的一个基本问题，是对语言含义的简单化处理，它的思想类似于语言学中框架主义的一派，先设定好特定的语言类型槽，再将输入的单词一一填入槽内，而获取言语含义的时候即是根据语义槽的含义进行提取和检索。我们这里的任务就是将表示定购航班（ATIS数据集）这一言语行为的一系列语句填入各种类型的语义槽中。">
+<meta name="twitter:image" content="http://ohj9e0ect.bkt.clouddn.com/blog/180911/5A7mAF88bL.png?imageslim">
+
+<link rel="canonical" href="http://shamy1997.github.io/passages/slot-filling/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>Slot Filling with SimpleRNN | 好乐无荒</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?85a0d0b540a43cd777f993764568f6cf";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="好乐无荒" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">好乐无荒</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">好乐无荒，良士休休</p>
+  </div>
+
+  <div class="site-nav-right"></div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">12</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">4</span></a>
+
+  </li>
+        <li class="menu-item menu-item-books">
+
+    <a href="/books/" rel="section"><i class="fa fa-fw fa-bookmark"></i>books</a>
+
+  </li>
+        <li class="menu-item menu-item-movies">
+
+    <a href="/movies" rel="section"><i class="fa fa-fw fa-film"></i>movies</a>
+
+  </li>
+        <li class="menu-item menu-item-games">
+
+    <a href="/games" rel="section"><i class="fa fa-fw fa-steam"></i>games</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives<span class="badge">9</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off" placeholder="Searching..." spellcheck="false" type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope="" itemtype="http://schema.org/Article" class="post-block " lang="zh">
+    <link itemprop="mainEntityOfPage" href="http://shamy1997.github.io/passages/slot-filling/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.ax1x.com/2020/02/21/3uONi8.jpg">
+      <meta itemprop="name" content="Yuqiu Ji">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="好乐无荒">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Slot Filling with SimpleRNN
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-12-10 10:20:20" itemprop="dateCreated datePublished" datetime="2018-12-10T10:20:20+08:00">2018-12-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-02-22 11:33:58" itemprop="dateModified" datetime="2020-02-22T11:33:58+08:00">2020-02-22</time>
+              </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/passages/slot-filling/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/passages/slot-filling/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="什么是Slot-Filling？"><a href="#什么是Slot-Filling？" class="headerlink" title="什么是Slot Filling？"></a>什么是Slot Filling？</h1><p>Slot Filling是自然语言理解中的一个基本问题，是对语言含义的简单化处理，它的思想类似于语言学中框架主义的一派，先设定好特定的语言类型槽，再将输入的单词一一填入槽内，而获取言语含义的时候即是根据语义槽的含义进行提取和检索。我们这里的任务就是将表示定购航班（ATIS数据集）这一言语行为的一系列语句填入各种类型的语义槽中。</p>
+<a id="more"></a>
+<h1 id="为什么使用SimpleRNN"><a href="#为什么使用SimpleRNN" class="headerlink" title="为什么使用SimpleRNN?"></a>为什么使用SimpleRNN?</h1><p>Slot Filling属于RNN应用中一对一的应用，通过训练模型，每个词都能被填到合适的槽中。<br>RNN和一般的神经网络的不同在于，在RNN中，我们在时间t的输出不仅取决于当前的输入和权重，还取决于之前的输入，而对于其他神经网络模型，每个时刻的输入和输出都是独立而随机的，没有相关性。放到我们要处理语义理解的问题上看，语言作为一种基于时间的线性输出，显然会受到前词的影响，因此我们选取RNN模型来进行解决这个问题。<br>这里选取SimpleRNN,是因为这个RNN比较简单，能达到熟悉框架的练习效果，之后可以选取其他有效的RNN模型，如LSTMS进行优化。</p>
+<h1 id="构建思路一览："><a href="#构建思路一览：" class="headerlink" title="构建思路一览："></a>构建思路一览：</h1><ul>
+<li>载入数据，使用的是<a href="https://github.com/chsasank/ATIS.keras" target="_blank" rel="noopener">chsasank</a>修改的<a href="https://github.com/mesnilgr/is13" target="_blank" rel="noopener">mesnilgr</a>的load.py。</li>
+<li>定义模型。采取Keras中的序列模型搭建，首先使用一个100维的word embedding层将输入的单词转化为高维空间中的一个向量（在这个空间中，语义和语法位置越近的单词的距离越小），然后我们构建一个dropout层防止过拟合，设置SimpleRNN层，设置TimeDistributed层以完成基于时间的反向传播。最后我们将这些层组织在一起，并确定optimizer和loss function。我们选取的optimizer是rmsprop,这样在训练后期依然能找到较有项，而选取categorical_crossentropy作为损失函数，则是因为处理的问题性质适合于此。</li>
+<li>训练模型。出于对计算资源的考虑，我们一般使用minibtach的方法批量对模型进行训练。但是我们这里的数据是一句句话，如果按照一个固定的batch_size将其分裂，可能增加了不必要的联系（因为上下两句话是独立的），因此我们将一句话作为一个batch去进行训练、验证以及预测，并手动算出一个epoch的平均误差。</li>
+<li>评估和预测模型。我们通过观察验证误差和预测F1精度来对模型进行评估。预测F1精度使用的是<a href="https://github.com/sighsmile/conlleval" target="_blank" rel="noopener">signsmile</a>编写的conlleval.py。</li>
+<li>保存模型。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pickle</span><br><span class="line"><span class="keyword">from</span> keras.models <span class="keyword">import</span> Sequential</span><br><span class="line"><span class="keyword">from</span> keras.layers.embeddings <span class="keyword">import</span> Embedding</span><br><span class="line"><span class="keyword">from</span> keras.layers.recurrent <span class="keyword">import</span> SimpleRNN</span><br><span class="line"><span class="keyword">from</span> keras.layers.core <span class="keyword">import</span> Dense,Dropout</span><br><span class="line"><span class="keyword">from</span> keras.utils <span class="keyword">import</span> to_categorical</span><br><span class="line"><span class="keyword">from</span> keras.layers.wrappers <span class="keyword">import</span> TimeDistributed</span><br><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> data.load</span><br><span class="line"><span class="keyword">from</span> metrics.accuracy <span class="keyword">import</span> evaluate</span><br></pre></td></tr></table></figure>
+<pre><code>Using TensorFlow backend.
+</code></pre><h1 id="Load-Data"><a href="#Load-Data" class="headerlink" title="Load Data"></a>Load Data</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">train_set,valid_set,dicts = data.load.atisfull()</span><br><span class="line"><span class="comment"># print(train_set[:1])</span></span><br><span class="line"><span class="comment"># dicts = &#123;'label2idx':&#123;&#125;,'words2idx':&#123;&#125;,'table2idx':&#123;&#125;&#125;</span></span><br><span class="line">w2idx,labels2idx = dicts[<span class="string">'words2idx'</span>],dicts[<span class="string">'labels2idx'</span>]</span><br><span class="line">train_x,_,train_label = train_set</span><br><span class="line">val_x,_,val_label = valid_set</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">idx2w = &#123;w2idx[i]:i <span class="keyword">for</span> i <span class="keyword">in</span> w2idx&#125;</span><br><span class="line">idx2lab = &#123;labels2idx[i]:i <span class="keyword">for</span> i <span class="keyword">in</span> labels2idx&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">n_classes = len(idx2lab)</span><br><span class="line">n_vocab = len(idx2w)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">words_train = [[idx2w[i] <span class="keyword">for</span> i <span class="keyword">in</span> w[:]] <span class="keyword">for</span> w <span class="keyword">in</span> train_x]</span><br><span class="line">labels_train = [[idx2lab[i] <span class="keyword">for</span> i <span class="keyword">in</span> w[:]] <span class="keyword">for</span> w <span class="keyword">in</span> train_label]</span><br><span class="line"></span><br><span class="line">words_val = [[idx2w[i] <span class="keyword">for</span> i <span class="keyword">in</span> w[:]] <span class="keyword">for</span> w <span class="keyword">in</span> val_x]</span><br><span class="line"><span class="comment"># labels_val = [[idx2lab[i] for i in w[:]] for w in val_label]</span></span><br><span class="line">labels_val =[]</span><br><span class="line"><span class="keyword">for</span> w <span class="keyword">in</span> val_label:</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> w[:]:</span><br><span class="line">        labels_val.append(idx2lab[i])</span><br><span class="line"></span><br><span class="line">print(<span class="string">'Real Sentence : &#123;&#125;'</span>.format(words_train[<span class="number">0</span>]))</span><br><span class="line">print(<span class="string">'Encoded Form : &#123;&#125;'</span>.format(train_x[<span class="number">0</span>]))</span><br><span class="line">print(<span class="string">'='</span>*<span class="number">40</span>)</span><br><span class="line">print(<span class="string">'Real Label : &#123;&#125;'</span>.format(labels_train[<span class="number">0</span>]))</span><br><span class="line">print(<span class="string">'Encoded Form : &#123;&#125;'</span>.format(train_label[<span class="number">0</span>]))</span><br></pre></td></tr></table></figure>
+<pre><code>Real Sentence : [&#39;i&#39;, &#39;want&#39;, &#39;to&#39;, &#39;fly&#39;, &#39;from&#39;, &#39;boston&#39;, &#39;at&#39;, &#39;DIGITDIGITDIGIT&#39;, &#39;am&#39;, &#39;and&#39;, &#39;arrive&#39;, &#39;in&#39;, &#39;denver&#39;, &#39;at&#39;, &#39;DIGITDIGITDIGITDIGIT&#39;, &#39;in&#39;, &#39;the&#39;, &#39;morning&#39;]
+Encoded Form : [232 542 502 196 208  77  62  10  35  40  58 234 137  62  11 234 481 321]
+========================================
+Real Label : [&#39;O&#39;, &#39;O&#39;, &#39;O&#39;, &#39;O&#39;, &#39;O&#39;, &#39;B-fromloc.city_name&#39;, &#39;O&#39;, &#39;B-depart_time.time&#39;, &#39;I-depart_time.time&#39;, &#39;O&#39;, &#39;O&#39;, &#39;O&#39;, &#39;B-toloc.city_name&#39;, &#39;O&#39;, &#39;B-arrive_time.time&#39;, &#39;O&#39;, &#39;O&#39;, &#39;B-arrive_time.period_of_day&#39;]
+Encoded Form : [126 126 126 126 126  48 126  35  99 126 126 126  78 126  14 126 126  12]
+</code></pre><h1 id="Define-and-Compile-the-model"><a href="#Define-and-Compile-the-model" class="headerlink" title="Define and Compile the model"></a>Define and Compile the model</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">model = Sequential()</span><br><span class="line">model.add(Embedding(n_vocab,<span class="number">100</span>))</span><br><span class="line">model.add(Dropout(<span class="number">0.25</span>))</span><br><span class="line">model.add(SimpleRNN(<span class="number">100</span>,return_sequences=<span class="keyword">True</span>))</span><br><span class="line">model.add(TimeDistributed(Dense(n_classes,activation=<span class="string">'softmax'</span>)))</span><br><span class="line">model.compile(optimizer = <span class="string">'rmsprop'</span>,loss = <span class="string">'categorical_crossentropy'</span>)</span><br><span class="line">model.summary()</span><br></pre></td></tr></table></figure>
+<pre><code>_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+embedding_1 (Embedding)      (None, None, 100)         57200     
+_________________________________________________________________
+dropout_1 (Dropout)          (None, None, 100)         0         
+_________________________________________________________________
+simple_rnn_1 (SimpleRNN)     (None, None, 100)         20100     
+_________________________________________________________________
+time_distributed_1 (TimeDist (None, None, 127)         12827     
+=================================================================
+Total params: 90,127
+Trainable params: 90,127
+Non-trainable params: 0
+_________________________________________________________________
+</code></pre><h1 id="Train-the-model"><a href="#Train-the-model" class="headerlink" title="Train the model"></a>Train the model</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">train_the_model</span><span class="params">(n_epochs,train_x,train_label,val_x,val_label)</span>:</span></span><br><span class="line">    epoch,train_avgloss,val_avgloss,f1s = [],[],[],[]</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,n_epochs+<span class="number">1</span>):</span><br><span class="line">        epoch.append(i)</span><br><span class="line">        </span><br><span class="line">        <span class="comment">## training</span></span><br><span class="line">        train_avg_loss =<span class="number">0</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> n_batch,sent <span class="keyword">in</span> enumerate(train_x):</span><br><span class="line">            label = train_label[n_batch]</span><br><span class="line">            <span class="comment"># label to one-hot</span></span><br><span class="line">            label = to_categorical(label,num_classes=n_classes)[np.newaxis,:]</span><br><span class="line">            sent = sent[np.newaxis,:]</span><br><span class="line">            loss = model.train_on_batch(sent,label)</span><br><span class="line">            train_avg_loss += loss</span><br><span class="line">            </span><br><span class="line">        train_avg_loss = train_avg_loss/n_batch</span><br><span class="line">        train_avgloss.append(train_avg_loss)</span><br><span class="line">        </span><br><span class="line">        <span class="comment">## evaluate&amp;predict</span></span><br><span class="line">        val_pred_label,pred_label_val,val_avg_loss  = [],[],<span class="number">0</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> n_batch,sent <span class="keyword">in</span> enumerate(val_x):</span><br><span class="line">            label = val_label[n_batch]</span><br><span class="line">            label = to_categorical(label,num_classes=n_classes)[np.newaxis,:]</span><br><span class="line">            sent = sent[np.newaxis,:]</span><br><span class="line">            loss = model.test_on_batch(sent,label)</span><br><span class="line">            val_avg_loss += loss</span><br><span class="line">            </span><br><span class="line">            pred = model.predict_on_batch(sent)</span><br><span class="line">            pred = np.argmax(pred,<span class="number">-1</span>)[<span class="number">0</span>]</span><br><span class="line">            val_pred_label.append(pred)</span><br><span class="line">            </span><br><span class="line">        val_avg_loss = val_avg_loss/n_batch</span><br><span class="line">        val_avgloss.append(val_avg_loss)</span><br><span class="line">        </span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> w <span class="keyword">in</span> val_pred_label:</span><br><span class="line">            <span class="keyword">for</span> k <span class="keyword">in</span> w[:]:</span><br><span class="line">                pred_label_val.append(idx2lab[k])</span><br><span class="line">            </span><br><span class="line">        prec, rec, f1 = evaluate(labels_val,pred_label_val, verbose=<span class="keyword">False</span>)</span><br><span class="line">        print(<span class="string">'Training epoch &#123;&#125;\t train_avg_loss = &#123;&#125; \t val_avg_loss = &#123;&#125;'</span>.format(i,train_avg_loss,val_avg_loss))</span><br><span class="line">        print(<span class="string">'precision: &#123;:.2f&#125;% \t recall: &#123;:.2f&#125;% \t f1 :&#123;:.2f&#125;%'</span>.format(prec,rec,f1))</span><br><span class="line">        print(<span class="string">'-'</span>*<span class="number">60</span>)</span><br><span class="line">        f1s.append(f1)</span><br><span class="line"></span><br><span class="line">        </span><br><span class="line"><span class="comment">#     return epoch,pred_label_train,train_avgloss,pred_label_val,val_avgloss</span></span><br><span class="line">    <span class="keyword">return</span> epoch,f1s,val_avgloss,train_avgloss</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">epoch,f1s,val_avgloss,train_avgloss = train_the_model(<span class="number">40</span>,train_x,train_label,val_x,val_label)</span><br></pre></td></tr></table></figure>
+<p><strong>输出：</strong><br><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">  Training epoch <span class="number">1</span>	 train_avg_loss = <span class="number">0.5546463992293973</span> 	 val_avg_loss = <span class="number">0.4345020865901363</span></span><br><span class="line">  precision: <span class="number">84.79</span>% 	 recall: <span class="number">80.79</span>% 	 f1 :<span class="number">82.74</span>%</span><br><span class="line">  ------------------------------------------------------------</span><br><span class="line">  Training epoch <span class="number">2</span>	 train_avg_loss = <span class="number">0.2575569036037627</span> 	 val_avg_loss = <span class="number">0.36228470020366654</span></span><br><span class="line">  precision: <span class="number">86.64</span>% 	 recall: <span class="number">83.86</span>% 	 f1 :<span class="number">85.22</span>%</span><br><span class="line">  ------------------------------------------------------------</span><br><span class="line">  Training epoch <span class="number">3</span>	 train_avg_loss = <span class="number">0.2238766908014994</span> 	 val_avg_loss = <span class="number">0.33974187403771694</span></span><br><span class="line">  precision: <span class="number">88.03</span>% 	 recall: <span class="number">85.55</span>% 	 f1 :<span class="number">86.77</span>%</span><br><span class="line">  ------------------------------------------------------------</span><br><span class="line">……</span><br><span class="line">     ------------------------------------------------------------</span><br><span class="line">  Training epoch <span class="number">40</span>	 train_avg_loss = <span class="number">0.09190682124901069</span> 	 val_avg_loss = <span class="number">0.2697056618613356</span></span><br><span class="line">  precision: <span class="number">92.51</span>% 	 recall: <span class="number">91.47</span>% 	 f1 :<span class="number">91.99</span>%</span><br><span class="line">  ------------------------------------------------------------</span><br></pre></td></tr></table></figure></p>
+<h1 id="可视化"><a href="#可视化" class="headerlink" title="可视化"></a>可视化</h1><p>观察验证误差，选取合适的epoch。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">%matplotlib inline</span><br><span class="line">plt.xlabel=(<span class="string">'epoch'</span>)</span><br><span class="line">plt.ylabel=(<span class="string">'loss'</span>)</span><br><span class="line">plt.plot(epoch,train_avgloss,<span class="string">'b'</span>)</span><br><span class="line">plt.plot(epoch,val_avgloss,<span class="string">'r'</span>,label=(<span class="string">'validation error'</span>))</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="http://ohj9e0ect.bkt.clouddn.com/blog/180911/5A7mAF88bL.png?imageslim" alt="mark"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'最大f1值为 &#123;:.2f&#125;%'</span>.format(max(f1s)))</span><br></pre></td></tr></table></figure>
+<pre><code>最大f1值为 92.56%
+</code></pre><h1 id="保存模型"><a href="#保存模型" class="headerlink" title="保存模型"></a>保存模型</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">model.save(<span class="string">'slot_filling_with_simpleRNN.h5'</span>)</span><br></pre></td></tr></table></figure>
+<h1 id="结果分析"><a href="#结果分析" class="headerlink" title="结果分析"></a>结果分析</h1><p>使用SimpleRNN最终得到的F1值为92.56%，和师兄的95.47%相比确实还相差很多。这主要是和我们模型的选取有关，SimpleRNN只能将前词的影响带入到模型中，但是语言中后词对前词也会有一定的影响，因此可以通过选择更加复杂的模型或者增加能够捕捉到后词信息的层来进行优化。</p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
+<li><a href="https://chsasank.github.io/spoken-language-understanding.html" target="_blank" rel="noopener">Keras Tutorial - Spoken Language Understanding</a></li>
+<li><a href="https://github.com/czs0x55aa/pytorch-slot-filling/blob/master/evaluate.py" target="_blank" rel="noopener">pytorch-slot-filling</a></li>
+<li><a href="https://github.com/liu946/AtisSlotLabeling" target="_blank" rel="noopener">liu946 AtisSlotLabeling</a></li>
+<li><a href="https://blog.csdn.net/winteeena/article/details/78997053" target="_blank" rel="noopener">【Keras情感分类】训练过程中出现的问题汇总</a></li>
+<li><a href="https://keras.io/zh/layers/recurrent/" target="_blank" rel="noopener">keras-SimpleRNN</a></li>
+<li><a href="https://www.cnblogs.com/dapeng-bupt/p/7606111.html" target="_blank" rel="noopener">机器学习中过拟合的解决办法</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">Related Posts</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/passages/srl-paper-reading-md/" rel="bookmark">论文阅读 | Deep Semantic Role Labeling:What Works and What’s Next</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/passages/text-similarity-md/" rel="bookmark">文本相似度计算</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/passages/颗粒度分词调研/" rel="bookmark">北大分词方案解读及颗粒度分词方案</a></div>
+    </li>
+  </ul>
+
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+            <div class="social-item">
+              <a target="_blank" class="social-link" href="https://twitter.com/1067723814Shamy">
+                <span class="icon">
+                  <i class="fa fa-twitter"></i>
+                </span>
+
+                <span class="label">Twitter</span>
+              </a>
+            </div>
+
+            <div class="social-item">
+              <a target="_blank" class="social-link" href="/atom.xml">
+                <span class="icon">
+                  <i class="fa fa-rss"></i>
+                </span>
+
+                <span class="label">RSS</span>
+              </a>
+            </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/NLP/" rel="tag"><i class="fa fa-tag"></i> NLP</a>
+              <a href="/tags/keras/" rel="tag"><i class="fa fa-tag"></i> keras</a>
+              <a href="/tags/RNN/" rel="tag"><i class="fa fa-tag"></i> RNN</a>
+          </div>
+
+        
+  <div class="post-widgets">
+    <div class="wp_rating">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/passages/理解Word Embedding（1）：从Count Vector到word2vec/" rel="next" title="理解Word Embedding（1）：从Count Vector到word2vec">
+      理解Word Embedding（1）：从Count Vector到word2vec <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是Slot-Filling？"><span class="nav-number">1.</span> <span class="nav-text">什么是Slot Filling？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#为什么使用SimpleRNN"><span class="nav-number">2.</span> <span class="nav-text">为什么使用SimpleRNN?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#构建思路一览："><span class="nav-number">3.</span> <span class="nav-text">构建思路一览：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Load-Data"><span class="nav-number">4.</span> <span class="nav-text">Load Data</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Define-and-Compile-the-model"><span class="nav-number">5.</span> <span class="nav-text">Define and Compile the model</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Train-the-model"><span class="nav-number">6.</span> <span class="nav-text">Train the model</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#可视化"><span class="nav-number">7.</span> <span class="nav-text">可视化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#保存模型"><span class="nav-number">8.</span> <span class="nav-text">保存模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#结果分析"><span class="nav-number">9.</span> <span class="nav-text">结果分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考资料"><span class="nav-number">10.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Yuqiu Ji" src="https://s2.ax1x.com/2020/02/21/3uONi8.jpg">
+  <p class="site-author-name" itemprop="name">Yuqiu Ji</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/shamy1997" title="GitHub → https://github.com/shamy1997" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:fdujyq@gmail.com" title="E-Mail → mailto:fdujyq@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.douban.com/people/45130547/" title="Douban → https://www.douban.com/people/45130547/" rel="noopener" target="_blank"><i class="fa fa-fw fa-leaf"></i>Douban</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/1067723814Shamy" title="Twitter → https://twitter.com/1067723814Shamy" rel="noopener" target="_blank"><i class="fa fa-fw fa-twitter"></i>Twitter</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-好乐无荒"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">好乐无荒 ❤️</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://pisces.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.7.1
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+<script src="/js/utils.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+
+
+  
+
+
+
+  <script>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id    : 30425,
+      el    : 'wpac-rating',
+      color : 'fc6423'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/valine@1/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'GqgKOWYsq9ic42QAjcPaYffa-gzGzoHsz',
+      appKey     : 'dfrV8qBWczqyiVj0DPsAzucB',
+      placeholder: "快来成为第一个留言的人吧~",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

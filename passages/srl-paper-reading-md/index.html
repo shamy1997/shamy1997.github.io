@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.8.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"shamy1997.github.io","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="什么是SRLSemantic Role Labeling 任务指的是围绕着谓词标记一句话的论元信息，识别出what，who，whom，when，where等信息。这是一项标记句子事件的浅层语义处理，不涉及句子的句法分析。比如对于“他昨天把书交给了张三”和“昨天书被他交给了张三”这两句话，它们在句法上不一样，但是在语义角色标注上是一样的。">
+<meta name="keywords" content="SRL,paper-reading,NLP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="论文阅读 | Deep Semantic Role Labeling:What Works and What’s Next">
+<meta property="og:url" content="http://shamy1997.github.io/passages/srl-paper-reading-md/index.html">
+<meta property="og:site_name" content="好乐无荒">
+<meta property="og:description" content="什么是SRLSemantic Role Labeling 任务指的是围绕着谓词标记一句话的论元信息，识别出what，who，whom，when，where等信息。这是一项标记句子事件的浅层语义处理，不涉及句子的句法分析。比如对于“他昨天把书交给了张三”和“昨天书被他交给了张三”这两句话，它们在句法上不一样，但是在语义角色标注上是一样的。">
+<meta property="og:locale" content="zh">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/62751203ly1g1xhlrv9d4j20sa0mutca.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/62751203ly1g1xihhtogej213k0he10j.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/62751203ly1g1xjba5x79j20ok0n0jw0.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/62751203ly1g1xjeuagzzj20lm0nw43c.jpg">
+<meta property="og:updated_time" content="2020-02-22T03:30:32.708Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="论文阅读 | Deep Semantic Role Labeling:What Works and What’s Next">
+<meta name="twitter:description" content="什么是SRLSemantic Role Labeling 任务指的是围绕着谓词标记一句话的论元信息，识别出what，who，whom，when，where等信息。这是一项标记句子事件的浅层语义处理，不涉及句子的句法分析。比如对于“他昨天把书交给了张三”和“昨天书被他交给了张三”这两句话，它们在句法上不一样，但是在语义角色标注上是一样的。">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/62751203ly1g1xhlrv9d4j20sa0mutca.jpg">
+
+<link rel="canonical" href="http://shamy1997.github.io/passages/srl-paper-reading-md/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>论文阅读 | Deep Semantic Role Labeling:What Works and What’s Next | 好乐无荒</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?85a0d0b540a43cd777f993764568f6cf";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="好乐无荒" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">好乐无荒</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">好乐无荒，良士休休</p>
+  </div>
+
+  <div class="site-nav-right"></div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags<span class="badge">12</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories<span class="badge">4</span></a>
+
+  </li>
+        <li class="menu-item menu-item-books">
+
+    <a href="/books/" rel="section"><i class="fa fa-fw fa-bookmark"></i>books</a>
+
+  </li>
+        <li class="menu-item menu-item-movies">
+
+    <a href="/movies" rel="section"><i class="fa fa-fw fa-film"></i>movies</a>
+
+  </li>
+        <li class="menu-item menu-item-games">
+
+    <a href="/games" rel="section"><i class="fa fa-fw fa-steam"></i>games</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives<span class="badge">9</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off" placeholder="Searching..." spellcheck="false" type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope="" itemtype="http://schema.org/Article" class="post-block " lang="zh">
+    <link itemprop="mainEntityOfPage" href="http://shamy1997.github.io/passages/srl-paper-reading-md/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.ax1x.com/2020/02/21/3uONi8.jpg">
+      <meta itemprop="name" content="Yuqiu Ji">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="好乐无荒">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          论文阅读 | Deep Semantic Role Labeling:What Works and What’s Next
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-04-10 15:10:50" itemprop="dateCreated datePublished" datetime="2019-04-10T15:10:50+08:00">2019-04-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-02-22 11:30:32" itemprop="dateModified" datetime="2020-02-22T11:30:32+08:00">2020-02-22</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/SRL/" itemprop="url" rel="index">
+                    <span itemprop="name">SRL</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/passages/srl-paper-reading-md/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/passages/srl-paper-reading-md/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="什么是SRL"><a href="#什么是SRL" class="headerlink" title="什么是SRL"></a>什么是SRL</h2><p>Semantic Role Labeling 任务指的是围绕着谓词标记一句话的论元信息，识别出what，who，whom，when，where等信息。这是一项标记句子事件的浅层语义处理，不涉及句子的句法分析。比如对于“他昨天把书交给了张三”和“昨天书被他交给了张三”这两句话，它们在句法上不一样，但是在语义角色标注上是一样的。</p>
+<a id="more"></a>
+<p>语义角色标注是自然语言处理的底层任务，通过这项任务，我们可以直接获取到一句话事件性的信息，如果能够处理好，将对自动问答、自动文摘等任务产生直接而有力的帮助。</p>
+<h2 id="本文的模型"><a href="#本文的模型" class="headerlink" title="本文的模型"></a>本文的模型</h2><p>Lu的模型之所以能够比原有的系统有那么大的提升，她认为主要原因是两方面，一方面是使用了优化过的BiLSTM模型，另一方面是对输出进行了优化编码。</p>
+<p><img width="400" src="http://ww1.sinaimg.cn/large/62751203ly1g1xhlrv9d4j20sa0mutca.jpg"></p>
+<h3 id="优化过的BiLSTM模型"><a href="#优化过的BiLSTM模型" class="headerlink" title="优化过的BiLSTM模型"></a>优化过的BiLSTM模型</h3><h4 id="Input、Output-amp-Function"><a href="#Input、Output-amp-Function" class="headerlink" title="Input、Output &amp; Function"></a>Input、Output &amp; Function</h4><p><img width="400" src="http://ww1.sinaimg.cn/large/62751203ly1g1xihhtogej213k0he10j.jpg"></p>
+<ul>
+<li><p>训练输入$(w,v)$。</p>
+<ul>
+<li>$w$代表词向量，本文使用的是GLoVe embedding，然后$v$代表是否是predicate（谓词），若是，则为1，否为0，两个都是100 dim。</li>
+</ul>
+</li>
+<li><p>输出是y(BIO-tagger)</p>
+</li>
+<li>Scoring Function：<ul>
+<li>$f(\boldsymbol{w}, \boldsymbol{y})=\sum_{t=1}^{n} \log p\left(y_{t} | \boldsymbol{w}\right)-\sum_{c \in \mathcal{C}} c\left(\boldsymbol{w}, y_{1 : t}\right)$</li>
+<li>可能性减去惩罚值。因为输出的结果有一些限制，这些后面会讲。</li>
+</ul>
+</li>
+<li>为使目标函数最大进行前向反馈和反向反馈进行训练。</li>
+</ul>
+<h4 id="BiLSTM"><a href="#BiLSTM" class="headerlink" title="BiLSTM"></a>BiLSTM</h4><p>BiLSTM 的内部构造就是简单的LSTM只不过叠加了两层，即一个单元会收到前词信息也会收到后词信息。</p>
+<script type="math/tex; mode=display">\begin{aligned} \boldsymbol{i}_{l, t} &=\sigma\left(\mathbf{W}_{\mathrm{i}}^{l}\left[\boldsymbol{h}_{l, t+\delta_{l}}, \boldsymbol{x}_{l, t}\right]+\boldsymbol{b}_{\mathrm{i}}^{l}\right) \\ \boldsymbol{o}_{l, t} &=\sigma\left(\mathbf{W}_{\mathrm{o}}^{l}\left[\boldsymbol{h}_{l, t+\delta_{l}}, \boldsymbol{x}_{l, t}\right]+\boldsymbol{b}_{\mathrm{o}}^{l}\right) \\ \boldsymbol{f}_{l, t} &=\sigma\left(\mathbf{W}_{\mathrm{f}}^{l}\left[\boldsymbol{h}_{l, t+\delta_{l}}, \boldsymbol{x}_{l, t}\right]+\boldsymbol{b}_{\mathrm{f}}^{l}+1\right) \\ \tilde{\boldsymbol{c}}_{l, t} &=\tanh \left(\mathbf{W}_{\mathrm{c}}^{l}\left[\boldsymbol{h}_{l, t+\delta_{l}}, \boldsymbol{x}_{l, t}\right]+\boldsymbol{b}_{\mathrm{c}}^{l}\right) \end{aligned}</script><script type="math/tex; mode=display">\begin{aligned} \boldsymbol{c}_{l, t} &=\boldsymbol{i}_{l, t} \circ \tilde{\boldsymbol{c}}_{l, t}+\boldsymbol{f}_{l, t} \circ \boldsymbol{c}_{t+\delta_{l}} \\ \boldsymbol{h}_{l, t} &=\boldsymbol{o}_{l, t} \circ \tanh \left(\boldsymbol{c}_{l, t}\right) \end{aligned}</script><script type="math/tex; mode=display">\boldsymbol{x}_{l, t}=\left\{\begin{array}{ll}{\left[\mathbf{W}_{\mathrm{emb}}\left(w_{t}\right), \mathbf{W}_{\mathrm{mask}}(t=v)\right]} & {l=1} \\ {\boldsymbol{h}_{l-1, t}} & {l>1}\end{array}\right.</script><script type="math/tex; mode=display">\delta_{l}=\left\{\begin{array}{ll}{1} & {\text { if } l \text { is even }} \\ {-1} & {\text { otherwise }}\end{array}\right.</script><p><img width="400" src="http://ww1.sinaimg.cn/large/62751203ly1g1xjba5x79j20ok0n0jw0.jpg"></p>
+<h4 id="Recurrent-dropout"><a href="#Recurrent-dropout" class="headerlink" title="Recurrent dropout"></a>Recurrent dropout</h4><p>为了防止过拟合，我们会使用dropout的方法。过去的dropout我们大多使用随机生成，但是在这样复杂的网络中，如果采取之前的做法会让模型训练的噪声越来越大，为此，我们使用Recurrent dropout，这种dropout每层都是一样的（shared），因此可以减少噪声，达到防止过拟合的效果。</p>
+<script type="math/tex; mode=display">\begin{aligned} \widetilde{\boldsymbol{h}}_{l, t} &=\boldsymbol{r}_{l, t} \circ \boldsymbol{h}_{l, t}^{\prime}+\left(1-\boldsymbol{r}_{l, t}\right) \circ \mathbf{W}_{\mathrm{h}}^{l} \boldsymbol{x}_{l, t} \\ \boldsymbol{h}_{l, t} &=\boldsymbol{z}_{l} \circ \widetilde{\boldsymbol{h}}_{l, t} \end{aligned}</script><p><img width="400" src="http://ww1.sinaimg.cn/large/62751203ly1g1xjeuagzzj20lm0nw43c.jpg"></p>
+<h3 id="Constrained-A-decoding"><a href="#Constrained-A-decoding" class="headerlink" title="Constrained A* decoding"></a>Constrained A* decoding</h3><p>经过softmax层之后，我们会得到一个概率分布，但是并非选择概率最高的那个tag就是我们所要的tag，因为前词后词的tag选择并非独立，而是会相互影响的，换句话说，我们最后选择tag时会收到一些限制。</p>
+<p>作者主要讲了有三种限制：</p>
+<ul>
+<li>第一是BIO标签体系的限制，比如I-tag不能在B-前面；</li>
+<li>第二是语义角色上的限制，比如核心的语义角色AG0-AG5，在只有一个谓词的情况下，每个最多出现1次；</li>
+<li>第三是句法上的限制，比如句法上不同在一个父节点中的两个论元不能被标记为B-X，I-X（X指有同样的语义角色）。</li>
+</ul>
+<p>针对这一问题，作者给出了一个惩罚函数来控制最后的分数，她希望选出在考虑了这些限制之后概率最大的结果。</p>
+<h2 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h2><p>比以前的模型的F1提高了10%。并通过实验证明了：</p>
+<ul>
+<li>Deep-BiLSTM 可以很好地解决语义角色标注中长距离依存的问题；</li>
+<li>训练时对权重进行随机正交分解能够使训练更快开始；</li>
+<li>句法信息对语义角色标注是有用的，未来可以考虑在惩罚函数中优化，我觉得就是能将之前特征工程中所总结的一些条件规划到这个模型里来。</li>
+</ul>
+<h2 id="后续学习"><a href="#后续学习" class="headerlink" title="后续学习"></a>后续学习</h2><ul>
+<li>这个算法模型已经被整合到AllenNLP中，可以学习下如何在本地使用；</li>
+<li>如何迁移到中文任务中？</li>
+</ul>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><a href="https://www.aclweb.org/anthology/papers/P/P17/P17-1044/" target="_blank" rel="noopener">论文</a></li>
+<li><a href="https://www.youtube.com/watch?v=aptipHMTmmk" target="_blank" rel="noopener">Lu关于这个模型的talk</a>(油管)</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">Related Posts</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/passages/text-similarity-md/" rel="bookmark">文本相似度计算</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/passages/slot-filling/" rel="bookmark">Slot Filling with SimpleRNN</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/passages/颗粒度分词调研/" rel="bookmark">北大分词方案解读及颗粒度分词方案</a></div>
+    </li>
+  </ul>
+
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+            <div class="social-item">
+              <a target="_blank" class="social-link" href="https://twitter.com/1067723814Shamy">
+                <span class="icon">
+                  <i class="fa fa-twitter"></i>
+                </span>
+
+                <span class="label">Twitter</span>
+              </a>
+            </div>
+
+            <div class="social-item">
+              <a target="_blank" class="social-link" href="/atom.xml">
+                <span class="icon">
+                  <i class="fa fa-rss"></i>
+                </span>
+
+                <span class="label">RSS</span>
+              </a>
+            </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/SRL/" rel="tag"><i class="fa fa-tag"></i> SRL</a>
+              <a href="/tags/paper-reading/" rel="tag"><i class="fa fa-tag"></i> paper-reading</a>
+              <a href="/tags/NLP/" rel="tag"><i class="fa fa-tag"></i> NLP</a>
+          </div>
+
+        
+  <div class="post-widgets">
+    <div class="wp_rating">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/passages/py-oop/" rel="prev" title="python面向对象笔记">
+      <i class="fa fa-chevron-left"></i> python面向对象笔记
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/passages/text-similarity-md/" rel="next" title="文本相似度计算">
+      文本相似度计算 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是SRL"><span class="nav-number">1.</span> <span class="nav-text">什么是SRL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#本文的模型"><span class="nav-number">2.</span> <span class="nav-text">本文的模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#优化过的BiLSTM模型"><span class="nav-number">2.1.</span> <span class="nav-text">优化过的BiLSTM模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Input、Output-amp-Function"><span class="nav-number">2.1.1.</span> <span class="nav-text">Input、Output &amp; Function</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#BiLSTM"><span class="nav-number">2.1.2.</span> <span class="nav-text">BiLSTM</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Recurrent-dropout"><span class="nav-number">2.1.3.</span> <span class="nav-text">Recurrent dropout</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Constrained-A-decoding"><span class="nav-number">2.2.</span> <span class="nav-text">Constrained A* decoding</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结果"><span class="nav-number">3.</span> <span class="nav-text">结果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#后续学习"><span class="nav-number">4.</span> <span class="nav-text">后续学习</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">5.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Yuqiu Ji" src="https://s2.ax1x.com/2020/02/21/3uONi8.jpg">
+  <p class="site-author-name" itemprop="name">Yuqiu Ji</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/shamy1997" title="GitHub → https://github.com/shamy1997" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:fdujyq@gmail.com" title="E-Mail → mailto:fdujyq@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.douban.com/people/45130547/" title="Douban → https://www.douban.com/people/45130547/" rel="noopener" target="_blank"><i class="fa fa-fw fa-leaf"></i>Douban</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/1067723814Shamy" title="Twitter → https://twitter.com/1067723814Shamy" rel="noopener" target="_blank"><i class="fa fa-fw fa-twitter"></i>Twitter</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-好乐无荒"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">好乐无荒 ❤️</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://pisces.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.7.1
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+<script src="/js/utils.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+
+
+  
+
+
+
+  <script>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id    : 30425,
+      el    : 'wpac-rating',
+      color : 'fc6423'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/valine@1/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'GqgKOWYsq9ic42QAjcPaYffa-gzGzoHsz',
+      appKey     : 'dfrV8qBWczqyiVj0DPsAzucB',
+      placeholder: "快来成为第一个留言的人吧~",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
